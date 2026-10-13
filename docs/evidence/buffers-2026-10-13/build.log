@@ -1,0 +1,11 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-buffers'
+buffer_vsh.bin
+pinyon_sample.bin
+pinyon_solid.bin
+pinyon_vsh.bin
+buffer_probe.cpp
+built ... fhnx_pinyon_pipeline-buffers.nacp
+deko_backend.cpp
+linking fhnx_pinyon_pipeline-buffers.elf
+built ... fhnx_pinyon_pipeline-buffers.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-buffers'

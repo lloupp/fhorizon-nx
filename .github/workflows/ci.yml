@@ -61,6 +61,8 @@ jobs:
           python3 scripts/test_eden.py --nro .local/adapter-positive/fhnx_adapter_positive.nro --dry-run
           bash ./scripts/build_pinyon_pipeline.sh
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro --dry-run
+          FHNX_PIPELINE_VARIANT=buffers FHNX_PIPELINE_CLIENT=buffer_probe bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -72,4 +74,5 @@ jobs:
             .local/horizon-memory/fhnx_horizon_memory.nro
             .local/switch-vmx/fhnx_vmx.nro
             .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
+            .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro
           retention-days: 14

@@ -71,3 +71,57 @@ deko3d zlib notice is in [licenses/deko3d-zlib.txt](licenses/deko3d-zlib.txt).
 FHNX original code remains MIT; prior test GLSL is original/public-domain-adapted
 synthetic content. No commercial title or third-party Vulkan executor source
 is redistributed. CI compiles the new pipeline NRO; Eden execution is local.
+
+## B: buffers, shader lifecycle and per-draw descriptors
+
+The `Commands` boundary now accepts bounded vertex, uint16 index and uniform
+buffers; explicit float32 attribute layouts; samplers (nearest/linear,
+repeat/clamp); RGBA8 upload; indexed draws and shader destruction/reuse. Buffers
+use generation-checked handles and a separate 8 MiB padded allocation budget.
+The first backend remains synchronous: submit waits for the queue; CPU updates
+and resource destruction during recording are rejected. Uniform bindings snapshot
+their values with real `dkCmdBufPushConstants`. This is safe command/resource reuse,
+not an asynchronous fenced renderer. Vertex/index/uniform ranges and every index
+against the vertex count are checked before issuing an indexed draw.
+
+The descriptor arena holds sixteen unique texture/sampler pairs per batch, so
+later recorded draws cannot overwrite earlier descriptors. The batch's arena is
+reused only after submit/wait. Existing depth/stencil/color-write/shader draw state
+remains reusable pipeline state; no general pipeline cache or blend system is
+claimed. Programs accept pinned trusted UAM DKSH; SPIR-V is explicitly rejected.
+
+Original `switch/pinyon/buffer_vsh.glsl` consumes real vertex attributes and an
+80-byte std140 matrix/tint buffer. The synthetic test draws indexed quads with
+red and green procedural textures using different descriptors, samplers and
+constant buffers in the same batch. GPU readback verifies both quads, then an
+updated left tint produces RGBA `ff000080` while right remains `ff00ff00`.
+Captures verify A changes only the red quad, keeping green and background stable.
+Stale shader/buffer handles, generation reuse, CPU-update bounds, in-recording
+update/destruction and an index 99 outside a four-vertex buffer are rejected.
+All final boot/input/Plus/exit gates pass and buffer/image accounting returns zero.
+
+First attempts are preserved: the second readback returned zero pixels. Persistent
+readback storage and command-stream constant snapshots together produced correct
+updated pixels; these runs do not isolate which of those changes fixed that
+emulator behavior. No isolated root cause is claimed. An intermediate passing
+run before the added invalid-index/discard gates is retained separately.
+
+Final accounting: 20,480 padded buffer bytes (including the invalid-index control),
+5,578,752 image bytes and emulated process-used 68,526,080 bytes with a 64 MiB heap.
+Readback staging, code, descriptors and driver allocations are additional to the
+image/buffer counters and included only in process accounting. No hardware RAM
+or frame-rate claim.
+
+Shader investigation inspected upstream
+`include/rex/graphics/pipeline/shader/spirv_translator.h`: its actual
+`SpirvShaderTranslator` depends on SPIR-V builder, Xenos translator and Vulkan
+device configuration; this is not a standalone DKSH emitter. Installed UAM
+compiles GLSL to Maxwell/DKSH and has no documented SPIR-V input option in its
+help. The proven path is **original synthetic GLSL → UAM → DKSH → deko3d**.
+Xenos microcode → SPIR-V → validated cross-compilation/GLSL → UAM remains an
+unimplemented translation boundary; no general Forza shader support is asserted.
+
+Evidence: [buffers-2026-10-13](evidence/buffers-2026-10-13/).
+Reproduce with `FHNX_PIPELINE_VARIANT=buffers FHNX_PIPELINE_CLIENT=buffer_probe
+bash scripts/build_pinyon_pipeline.sh`, then run its NRO with the existing Eden
+input script. The A milestone CI passed both jobs (run 38452095125).
