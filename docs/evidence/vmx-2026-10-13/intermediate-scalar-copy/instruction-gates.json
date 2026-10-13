@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "vmx_permute": true,
+    "vmx_sat_unsigned": true,
+    "vmx_sat_signed": true,
+    "vmx_compare": true,
+    "vmx_convert_signed": true,
+    "vmx_convert_unsigned": true,
+    "vmx_uint_to_float": true,
+    "vmx_dot3": true,
+    "vmx_dot4": true,
+    "vmx_copy_unaligned": false,
+    "vmx_endian_shuffle": true,
+    "unaligned_vector_store": false,
+    "fpcr_read_write": true
+  },
+  "passed": false,
+  "note": "Object inspection supplements logged execution; not hardware evidence."
+}

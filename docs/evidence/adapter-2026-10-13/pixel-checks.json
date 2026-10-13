@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "a_background_changed": true,
+    "center_stable": true,
+    "rendered_blue_sampled": true,
+    "orange_clear_sampled": true,
+    "omitted_resolve_keeps_green": true,
+    "omitted_resolve_has_no_fixture": true,
+    "outside_mask_orange": true,
+    "outside_mask_blue_without_stencil": true,
+    "disabled_stencil_expands_blue": true,
+    "disabled_stencil_reduces_orange": true
+  },
+  "passed": true,
+  "physical_switch_verified": false
+}

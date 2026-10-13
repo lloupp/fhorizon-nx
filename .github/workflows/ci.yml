@@ -33,6 +33,10 @@ jobs:
           ./scripts/build_shiftglue_probe.sh
           git -C .local/upstream/pinyon-shift/thirdparty/shiftglue-sdk submodule update --init --depth 1 thirdparty/simde
           ./scripts/build_shiftglue_probe.sh context
+          bash ./scripts/build_horizon_memory.sh
+          bash ./scripts/build_shiftglue_probe.sh vmx
+          $DEVKITPRO/devkitA64/bin/aarch64-none-elf-objdump -d .local/switch-vmx/build/vmx_probe.o > .local/vmx-disassembly.txt
+          python3 tools/check_vmx_object.py .local/vmx-disassembly.txt
       - name: Validate NRO headers (no Eden execution)
         run: |
           python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --dry-run
@@ -40,6 +44,8 @@ jobs:
           python3 scripts/test_eden.py --nro .local/switch-graphics/fhnx_graphics.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-runtime/fhnx_runtime.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-context/fhnx_context.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/horizon-memory/fhnx_horizon_memory.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/switch-vmx/fhnx_vmx.nro --dry-run
       - name: Build pinned deko3d workaround and progressive GPU probes
         run: |
           apt-get update
@@ -51,6 +57,8 @@ jobs:
             ./scripts/build_gpu_probe.sh "$stage"
             python3 scripts/test_eden.py --nro ".local/gpu-probes/$stage/fhnx_gpu_$stage.nro" --dry-run
           done
+          bash ./scripts/build_deko_adapter.sh
+          python3 scripts/test_eden.py --nro .local/adapter-positive/fhnx_adapter_positive.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -58,4 +66,7 @@ jobs:
             .local/switch-graphics/fhnx_graphics.nro
             .local/gpu-probes/**/*.nro
             .local/switch-context/fhnx_context.nro
+            .local/adapter-positive/fhnx_adapter_positive.nro
+            .local/horizon-memory/fhnx_horizon_memory.nro
+            .local/switch-vmx/fhnx_vmx.nro
           retention-days: 14
