@@ -1,0 +1,22 @@
+{
+  "result": "BLOCKED_BEFORE_FIRST_VISIBLE_FRAME",
+  "nro_sha256": "a01664346cd57bba0246135128b97aa3d865c185859a7a57d7edf7cfdea346ce",
+  "nro_bytes": 276677,
+  "emulators_tested": [
+    "official v0.2.1 amd64 clang PGO",
+    "official v0.2.1 amd64 GCC standard"
+  ],
+  "exceptions_observed": [
+    "std::length_error: vector::_M_default_append",
+    "std::bad_alloc"
+  ],
+  "root_cause_confirmed": false,
+  "physical_switch_verified": false,
+  "gameplay_verified": false,
+  "experiments": [
+    "RomFS shader storage replaced with linked DKSH blobs; still aborted",
+    "Optional Zcull disabled; still aborted; default restored",
+    "Single-core and debug logging; still aborted",
+    "Official GCC standard package; still aborted"
+  ]
+}

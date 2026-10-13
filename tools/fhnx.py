@@ -27,13 +27,23 @@ def sha256_file(path: Path) -> str:
 def doctor() -> dict:
     tools = ['python3', 'cmake', 'ctest', 'c++', 'clang++', 'ninja', 'git', 'aarch64-none-elf-gcc', 'elf2nro', 'uam', 'spirv-cross', 'eden-cli', 'eden']
     devkit = os.getenv('DEVKITPRO')
+    def locate(name):
+        found = shutil.which(name)
+        if found or not devkit:
+            return found
+        for directory in ('devkitA64/bin', 'tools/bin'):
+            candidate = Path(devkit) / directory / name
+            if candidate.is_file() and os.access(candidate, os.X_OK):
+                return str(candidate)
+        return None
+    found_tools = {name: locate(name) for name in tools}
     return {
         'purpose': 'Host/build tool inventory; not a game compatibility verdict',
         'host_arch': platform.machine(),
         'host_system': platform.system(),
-        'tools': {t: shutil.which(t) for t in tools},
+        'tools': found_tools,
         'devkitpro': devkit if devkit else None,
-        'switch_toolchain_ready': bool(devkit and (Path(devkit) / 'libnx' / 'switch_rules').exists() and shutil.which('aarch64-none-elf-gcc')),
+        'switch_toolchain_ready': bool(devkit and (Path(devkit) / 'libnx' / 'switch_rules').exists() and found_tools['aarch64-none-elf-gcc'] and found_tools['elf2nro']),
     }
 
 

@@ -1,8 +1,10 @@
 # Forza Horizon NX — research and first reproducible smoke tests
 
-**Status: feasibility scaffold, NOT a port of Forza Horizon.** This repository's original code does not boot or run Forza Horizon. It does not contain executable XEXs, copyrighted game assets, translated guest instructions, screenshots, save files, console firmware or encryption keys. Do not distribute any of these.
+**Status: feasibility scaffold, NOT a port of Forza Horizon.** This repository's original code does not boot or run Forza Horizon. It does not contain executable XEXs, copyrighted game assets, translated guest instructions, commercial game media, save files, console firmware or encryption keys. Do not distribute any of these.
 
 Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** build of **Forza Horizon 2012 for Xbox 360**, using the ongoing community AOT recompilations as references. Xbox 360 game Title ID: `4D5309C9` (identifier, not a verification hash).
+
+**Executed on 2026-10-13:** independent libnx NRO boot, display, three A presses and Plus exit in Eden 0.2.1; a CPU framebuffer triangle with background changes; real ShiftGlue endian headers plus bounded guest memory on ARM64. **deko3d compiled but aborted in Eden before a visible frame. No Forza gameplay or hardware result.** [Screenshots and reports](docs/EDEN_RESULTS_2026-10-13.md).
 
 ## Upstream research (verified by reading public source docs on 2026-10-13)
 
@@ -24,7 +26,12 @@ Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** 
 5. `shaders/triangle.*` and `scripts/check_shaders.py` — independent example shaders to attempt offline UAM→DKSH translation if UAM is present; no game shaders.
 6. `switch/source/main.c` and `scripts/build_switch_smoke.sh` — standard libnx input/console smoke, built only when devkitPro's official application template is available; **not** a racing game.
 7. `scripts/test_eden.py` and `docs/EDEN_TESTING.md` — bounded local Eden Emulator CLI smoke workflow for a compiled NRO, with JSON report and private logs. The emulator does not execute an Xbox 360 XEX directly.
-8. Python and CMake/CTest automated checks. All can run without a Switch and without a game image, except optional Switch/Emulator/UAM test targets.
+8. `scripts/setup_eden_linux.sh` — pinned official Eden Linux download, checksum check and local CLI wrapper.
+9. `scripts/eden_input_smoke.sh` — isolated Linux/Xvfb integration test, captures and ordered guest events.
+10. `scripts/build_switch_framebuffer.sh` — original CPU triangle baseline (not a GPU renderer).
+11. `scripts/build_switch_graphics.sh` — deko3d triangle with offline UAM shaders; GPU execution remains blocked.
+12. `scripts/build_shiftglue_probe.sh` — pinned real upstream endian types and 1 MiB guest arena on ARM64, using a local Horizon OS header overlay; no full runtime integration.
+13. Python and CMake/CTest automated checks. All can run without a Switch and without a game image, except optional Switch/Emulator/UAM test targets.
 
 ## Validate on PC (no game required)
 
@@ -62,7 +69,7 @@ Do not copy upstream generated C++ or binaries into a public repo. The upstream 
 # Requires an installed devkitPro switch-dev group and its official template:
 export DEVKITPRO=/opt/devkitpro
 ./scripts/build_switch_smoke.sh
-# Expected local (unvalidated here): .local/switch-smoke/fhnx_smoke.nro
+# Built and emulator-tested: .local/switch-smoke/fhnx_smoke.nro
 ```
 
 Before testing on a real Switch, try the optional Eden Emulator PC flow:
@@ -78,4 +85,20 @@ These require a built local NRO, and the second requires an independently instal
 
 See [architecture](docs/ARCHITECTURE.md), [evidence and blockers](docs/EVIDENCE.md) and [prioritized milestones](docs/MILESTONES.md). The primary blocker is bridging the upstream Vulkan renderer to a suitable native Switch GPU backend; `deko3d` and experimental `switch-nvk` are alternatives requiring their own proofs. Runtime/threading, filesystem, audio, shader compilation and memory footprints are separate work. Switch performance is unknown; no FPS promise.
 
-This is not affiliated with Microsoft, Nintendo, Playground Games, Turn 10 or the upstream teams. The original code written in this scaffold is MIT-licensed (`LICENSE`); third-party projects have their own licenses. All game rights remain with the respective owners.
+For repeatable Linux input/display tests:
+
+```sh
+./scripts/setup_eden_linux.sh
+./scripts/eden_input_smoke.sh .local/switch-smoke/fhnx_smoke.nro .local/tools/eden-cli SMOKE
+./scripts/build_switch_framebuffer.sh
+./scripts/eden_input_smoke.sh .local/switch-framebuffer/fhnx_framebuffer.nro .local/tools/eden-cli GRAPHICS
+./scripts/clone_upstream.sh
+./scripts/build_shiftglue_probe.sh
+./scripts/eden_input_smoke.sh .local/switch-runtime/fhnx_runtime.nro .local/tools/eden-cli SMOKE
+./scripts/build_switch_graphics.sh
+# Compiles successfully; Eden 0.2.1 GPU execution is currently blocked.
+```
+
+Requires `Xvfb`, `xwininfo`, `xdotool`, ImageMagick `import` and a working Vulkan driver. See [test setup](docs/EDEN_TESTING.md) and [runtime integration gates](docs/RUNTIME_PORTABILITY.md).
+
+This is not affiliated with Microsoft, Nintendo, Playground Games, Turn 10 or the upstream teams. The original code written in this scaffold is MIT-licensed (`LICENSE`); deko3d diagnostic/shaders adapt public-domain switchbrew examples, and the locally used ShiftGlue headers retain their BSD notices. Third-party projects have their own licenses. All game rights remain with the respective owners.

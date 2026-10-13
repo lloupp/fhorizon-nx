@@ -14,3 +14,24 @@ jobs:
           ctest --test-dir .local/ci-build --output-on-failure
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
+  switch-homebrew-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container: devkitpro/devkita64:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install independent sample build dependencies
+        run: dkp-pacman -S --needed --noconfirm switch-examples deko3d uam
+      - name: Compile independent ARM64 NROs
+        run: |
+          ./scripts/build_switch_smoke.sh
+          ./scripts/build_switch_framebuffer.sh
+          ./scripts/build_switch_graphics.sh
+          ./scripts/clone_upstream.sh
+          ./scripts/build_shiftglue_probe.sh
+      - name: Validate NRO headers (no Eden execution)
+        run: |
+          python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/switch-framebuffer/fhnx_framebuffer.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/switch-graphics/fhnx_graphics.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/switch-runtime/fhnx_runtime.nro --dry-run

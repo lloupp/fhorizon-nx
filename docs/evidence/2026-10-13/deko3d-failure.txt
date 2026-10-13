@@ -1,0 +1,5 @@
+[   1.464677] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:220:AllocGPFIFOEx2: called, num_entries=800, flags=0, reserved1=0, reserved2=0, reserved3=0
+[   1.464921] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:263:AllocateObjectContext: called, class_num=0XB197, flags=0X0, obj_id=0XDEADBEEF
+[   1.465966] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:62:Ioctl1: called fd=6, ioctl=0xC010480B
+[   1.465969] Service.NVDRVterminate called after throwing an instance of 'std::length_error'
+  what():  vector::_M_default_append

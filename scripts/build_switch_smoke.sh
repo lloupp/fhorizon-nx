@@ -13,7 +13,6 @@ mkdir -p "$WORK/source"
 cp "$TEMPLATE/Makefile" "$WORK/Makefile"
 cp "$ROOT/switch/source/main.c" "$WORK/source/main.c"
 # Use project name so output is fhnx_smoke.nro.
-sed -i.bak 's/TARGET[[:space:]]*:=[[:space:]]*$(notdir $(CURDIR))/TARGET := fhnx_smoke/' "$WORK/Makefile"
-rm -f "$WORK/Makefile.bak"
-make -C "$WORK" -j2
+make -C "$WORK" -j"${FHNX_BUILD_JOBS:-2}" TARGET=fhnx_smoke APP_TITLE="FHNX platform smoke" APP_AUTHOR=FHNX
+test -s "$WORK/fhnx_smoke.nro"
 printf 'Built (not hardware-validated): %s\n' "$WORK/fhnx_smoke.nro"
