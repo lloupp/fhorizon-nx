@@ -6,12 +6,12 @@ SDK="$ROOT/.local/upstream/pinyon-shift/thirdparty/shiftglue-sdk"
 PIN=1e8968f712824b97d4f4330c5a22389c4c8be1b5
 [[ "$(git -C "$SDK" rev-parse HEAD)" == "$PIN" ]] || { echo "ShiftGlue must match pinned revision $PIN" >&2; exit 2; }
 MODE="${1:-headers}"
-case "$MODE" in headers|context) ;; *) exit 2;; esac
+case "$MODE" in headers|context|vmx) ;; *) exit 2;; esac
 WORK="$ROOT/.local/switch-runtime"
 TARGET=fhnx_runtime
-if [[ "$MODE" == context ]]; then
-    WORK="$ROOT/.local/switch-context"
-    TARGET=fhnx_context
+if [[ "$MODE" == context || "$MODE" == vmx ]]; then
+    WORK="$ROOT/.local/switch-$MODE"
+    TARGET="fhnx_$MODE"
     SIMDE="$SDK/thirdparty/simde"
     [[ "$(git -C "$SIMDE" rev-parse HEAD)" == 71fd833d9666141edcd1d3c109a80e228303d8d7 ]] || exit 2
 fi
@@ -19,7 +19,7 @@ mkdir -p "$WORK/source" "$WORK/include/rex"
 cp "$DEVKITPRO/examples/switch/templates/application/Makefile" "$WORK/Makefile"
 printf '\nCXXFLAGS += -std=gnu++23 -fexceptions\n' >> "$WORK/Makefile"
 cp "$ROOT/switch/source/main.c" "$WORK/source/main.c"
-if [[ "$MODE" == context ]]; then
+if [[ "$MODE" == context || "$MODE" == vmx ]]; then
     ln -sfn "$SIMDE/simde" "$WORK/include/simde"
     mkdir -p "$WORK/include/rex/ppc"
     # Pinned upstream shares the x86 rounding decode table with ARM64.
@@ -36,7 +36,9 @@ source = source.replace(old, 'static constexpr size_t HostToGuest[] = {kRoundNea
 (work / 'include/rex/ppc/context.h').write_text(source)
 PYCTX
 fi
-if [[ "$MODE" == context ]]; then
+if [[ "$MODE" == vmx ]]; then
+    cp "$ROOT/switch/runtime/vmx_probe.cpp" "$WORK/source/"
+elif [[ "$MODE" == context ]]; then
     cp "$ROOT/switch/runtime/context_probe.cpp" "$WORK/source/"
 else
     cp "$ROOT/switch/runtime/runtime_probe.cpp" "$WORK/source/"

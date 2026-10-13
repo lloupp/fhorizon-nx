@@ -163,3 +163,63 @@ Milestone A was published as `318bf4b6c3d4026e9b5c15ae034a920f5cd8d660` in
 API after local `git push` reported no HTTPS credentials. The published tree
 matches local tree `035a0b5b49ab1598d6514140fa92e0c431444be5` exactly; only
 commit author/time metadata differs. Subsequent publication preserves that parent.
+
+## C — Additional pinned ShiftGlue VMX/SIMDe operations executed on ARM64
+
+`switch/runtime/vmx_probe.cpp` includes the actual pinned `rex/ppc/context.h`
+and `rex/ppc/intrinsics.h`. Volatile input arrays are copied at runtime into
+vector operands. Named non-inlined operation wrappers prevent substituting
+constant answers. Fixed independent reference arrays encode expected bytes,
+saturated lanes, compare masks and float bit patterns. This adds component tests,
+not a title VMX interpreter or complete instruction coverage.
+
+| Executed operation | Reference / boundary |
+| --- | --- |
+| Upstream two-vector byte permutation | Guest-to-host reversed byte order, both source vectors, low-five-bit controls including 255/32/47/63 |
+| Unsigned byte saturation | Overflow to 255 and non-overflow lanes |
+| Signed halfword saturation | Both signed limits, normal positive/negative lanes |
+| Upstream unsigned byte comparison | Lane masks 0/255 including values above 127 |
+| Unaligned vector load/store | Actual non-inlined 128-bit transfer at displacements 1 through 15 |
+| Byte order | Four-byte word reversal via runtime vector shuffle |
+| Upstream signed/unsigned saturating conversions | Fractional truncation, signed overflow/underflow, negative-to-unsigned, UINT_MAX saturation, unsigned NaN-to-zero |
+| Upstream unsigned-int-to-float | Exact reference IEEE bits for 0, 1, 2^31 and UINT_MAX |
+| Upstream guest-order dot3/dot4 | Reversed guest lanes and independently computed broadcast values 170/184 |
+| Context/FPCR | Four rounding mode round trips, vector v14/v31 and GPR/FPR nonvolatile preservation |
+
+Official Eden PGO final execution passed all eight logged groups, booted,
+registered three A events and exited via Plus with code 0. Local Switch-only FPCR
+overlay remains in the build script; upstream headers are unchanged.
+
+Saved object disassembly shows `tbl`, `uqadd`, `sqadd`, `cmgt`, `fcvtzs`, `scvtf`,
+floating arithmetic, `ldr/str q` and FPCR MRS/MSR in the relevant operations.
+`tools/check_vmx_object.py` automatically verifies thirteen object-code gates,
+also added to CI. Object inspection is supplementary to runtime pass events;
+the test does not claim hardware execution or guest exception/saturation flags.
+The first object inspection correctly rejected the identity alignment copy:
+GCC had lowered it to paired scalar `ldp/stp`. A SIMD register constraint now
+forces vector `ldr/str q` without supplying any computed answer. The intermediate
+disassembly and failed instruction gate are preserved; the final NRO was rebuilt
+and executed again after this change.
+
+Evidence: [vmx-2026-10-13](evidence/vmx-2026-10-13/), with NRO/object hashes,
+build/run logs, capture, object disassembly and instruction gate results.
+Run `bash scripts/build_shiftglue_probe.sh vmx`, then execute the resulting
+`.local/switch-vmx/fhnx_vmx.nro` with `eden_input_smoke.sh ... SMOKE`.
+
+## D and next real blockers
+
+The 3D track/vehicle demonstration is deferred. B exposes actual memory semantic
+blockers, so these components cannot yet be called a solid complete runtime.
+No placeholder 3D demo or complete-renderer claim was added to conceal that gap.
+
+1. Select a genuine Horizon address-space/alias/protection strategy preserving
+   ShiftGlue's translated-code pointer ABI; test it on hardware in application mode.
+2. Connect a **bounded subset** of Pinyon's frontend draw/resolve operations to
+   `Commands`, derive surface identity from guest state, and reject unsupported
+   EDRAM/format/resolve semantics. The actual Pinyon executor still is not connected.
+3. Add reusable vertex/index/uniform buffer and descriptor arenas, DKSH shader
+   conversion and asynchronous fenced resource reuse before attempting a 3D client.
+4. Expand VMX tests to edge cases, status flags and guest exception behavior.
+   Current tests prove only the enumerated representative operations.
+5. Validate these new adapters with stock deko on modified Eden, then physical
+   Switch; this execution used official Eden plus the isolated workaround.

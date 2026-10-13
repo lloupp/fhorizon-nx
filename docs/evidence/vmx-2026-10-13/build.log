@@ -1,0 +1,8 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/switch-vmx'
+vmx_probe.cpp
+main.c
+built ... fhnx_vmx.nacp
+linking fhnx_vmx.elf
+built ... fhnx_vmx.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/switch-vmx'
+Built synthetic vmx probe (not full runtime or hardware-validated): /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/switch-vmx/fhnx_vmx.nro
