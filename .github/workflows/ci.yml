@@ -51,6 +51,8 @@ jobs:
             ./scripts/build_gpu_probe.sh "$stage"
             python3 scripts/test_eden.py --nro ".local/gpu-probes/$stage/fhnx_gpu_$stage.nro" --dry-run
           done
+          bash ./scripts/build_deko_adapter.sh
+          python3 scripts/test_eden.py --nro .local/adapter-positive/fhnx_adapter_positive.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -58,4 +60,5 @@ jobs:
             .local/switch-graphics/fhnx_graphics.nro
             .local/gpu-probes/**/*.nro
             .local/switch-context/fhnx_context.nro
+            .local/adapter-positive/fhnx_adapter_positive.nro
           retention-days: 14

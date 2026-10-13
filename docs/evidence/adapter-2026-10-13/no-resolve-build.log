@@ -1,0 +1,10 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/adapter-no-resolve'
+adapter_sample.bin
+adapter_solid.bin
+adapter_vsh.bin
+built ... fhnx_adapter_no-resolve.nacp
+deko_backend.cpp
+main.cpp
+linking fhnx_adapter_no-resolve.elf
+built ... fhnx_adapter_no-resolve.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/adapter-no-resolve'
