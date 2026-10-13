@@ -125,3 +125,51 @@ Evidence: [buffers-2026-10-13](evidence/buffers-2026-10-13/).
 Reproduce with `FHNX_PIPELINE_VARIANT=buffers FHNX_PIPELINE_CLIENT=buffer_probe
 bash scripts/build_pinyon_pipeline.sh`, then run its NRO with the existing Eden
 input script. The A milestone CI passed both jobs (run 38452095125).
+
+## C: broader Horizon layout and alternative mechanisms measured
+
+`switch/runtime/memory_layout_probe.cpp` queries actual process regions and
+performs bounded real SVC experiments. It leaves the ShiftGlue generated pointer
+ABI and previous stack-backed prototype unchanged.
+
+| Final official-Eden measurement | Observed result |
+| --- | --- |
+| ASLR region size | 549,621,596,160 bytes |
+| Alias region size | 68,719,476,736 bytes (64 GiB) |
+| Stack region size | 2,147,483,648 bytes (2 GiB) |
+| Heap virtual region size | 8,589,934,592 bytes (8 GiB) |
+| Reserve 4.5 GiB inside alias region | libnx bookkeeping reservation succeeds, no physical commit |
+| Map 4096 bytes with `svcMapPhysicalMemory` | Returns `0xFA01` in this process/profile |
+| Create 4096-byte shared memory handle | Returns `0x4201`; no duplicate buffers supplied as aliases |
+| Self-map heap page with `svcMapProcessMemory` | Returns `0xE401` |
+| Protect ordinary own heap page as read-only | Succeeds; kernel query confirms `Perm_R`; restored to `Perm_Rw` |
+| Move heap page with `svcMapMemory` into stack | Succeeds; source queried `Perm_None`, destination `Perm_Rw`, original data accessible at destination |
+| Unmap moved page | Source access/data restored, backing freed only after successful unmap |
+| Emulated process-used after cleanup | 34,873,344 bytes with 32 MiB libnx heap |
+
+All these SVCs were hinted available in Eden; returned errors show that availability
+hints do not prove successful allocation/mapping. Kernel Result codes are recorded
+without inventing their causes. Source-page permission changes work before moving
+it; this does not supply protections on the moved mapping (`0xD401` from the prior
+prototype remains valid). Read-only enforcement is established by kernel metadata;
+the probe does not intentionally execute an illegal write and recover an exception.
+
+The prior 2 GiB figure is a **stack mapping-region limit**, not the whole Horizon
+virtual address space. The measured alias region can accommodate the desktop arena
+as a reservation. It still lacks a verified usable commit/alias mechanism in this
+NRO profile. A bookkeeping reservation alone is not a mapped/protected guest arena.
+The implementation rejects or records unavailable operations instead of claiming
+success or duplicating writable aliases.
+
+Preservable now: bounded ordinary heap-page protection; verified MOVE/unmap access
+semantics; BE checked accesses in the existing prototype. Needs a different
+mechanism: simultaneous coherent physical aliases and protectable sparse pages
+inside a contiguous compatible arena. Needs hardware/application-mode validation:
+process capabilities/resource configuration, these Result codes and memory budget.
+Still incompatible with the current ShiftGlue arena contract: treating moved pages
+or scattered heap pages as virtual-base + guest-address and physical-base + 4 GiB.
+
+Evidence: [layout-2026-10-13](evidence/layout-2026-10-13/).
+Build with `bash scripts/build_horizon_memory.sh layout`, execute
+`.local/horizon-layout/fhnx_horizon_layout.nro` through the existing SMOKE runner.
+Final boot, A x3 and Plus exit 0 pass; intermediate narrower probe is preserved.

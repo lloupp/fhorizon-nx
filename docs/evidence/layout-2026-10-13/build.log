@@ -1,0 +1,8 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/horizon-layout'
+horizon_memory.cpp
+memory_layout_probe.cpp
+main.c
+built ... fhnx_horizon_layout.nacp
+linking fhnx_horizon_layout.elf
+built ... fhnx_horizon_layout.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/horizon-layout'
