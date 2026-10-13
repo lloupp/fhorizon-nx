@@ -25,7 +25,7 @@ def sha256_file(path: Path) -> str:
 
 
 def doctor() -> dict:
-    tools = ['python3', 'cmake', 'ctest', 'c++', 'clang++', 'ninja', 'git', 'aarch64-none-elf-gcc', 'elf2nro', 'uam', 'spirv-cross']
+    tools = ['python3', 'cmake', 'ctest', 'c++', 'clang++', 'ninja', 'git', 'aarch64-none-elf-gcc', 'elf2nro', 'uam', 'spirv-cross', 'eden-cli', 'eden']
     devkit = os.getenv('DEVKITPRO')
     return {
         'purpose': 'Host/build tool inventory; not a game compatibility verdict',
