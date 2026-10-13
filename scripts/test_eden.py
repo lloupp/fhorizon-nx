@@ -45,6 +45,7 @@ def inspect_nro(path: Path) -> dict:
 
 def parse_events(log: str, prefix: str) -> dict:
     # Match only the diagnostic protocol, not emulator startup messages.
+    prefix = "GRAPHICS" if prefix == "GPU_PROBE" else prefix
     events = re.findall(r"\bFHNX_" + re.escape(prefix) + r" ([a-z_]+)\b", log)
     def ordered(sequence):
         index = 0
@@ -57,7 +58,8 @@ def parse_events(log: str, prefix: str) -> dict:
             "frame_submission_verified": ordered(["boot", "frames_submitted"]),
             "a_press_count": events.count("a_pressed"),
             "input_exit_verified": ordered(["boot", "frames_submitted", "a_pressed", "plus_exit", "shutdown"]),
-            "runtime_probe_verified": "runtime_probe_passed" in events and "runtime_probe_failed" not in events}
+            "runtime_probe_verified": "runtime_probe_passed" in events and "runtime_probe_failed" not in events,
+            "gpu_probe_verified": ordered(["boot", "device_create_end", "device_destroy_end", "probe_passed", "shutdown"])}
 
 
 def select_binary(explicit: str | None) -> str | None:
@@ -128,8 +130,9 @@ def run(nro: Path, binary: str | None, timeout: int, report: Path, log: Path,
         if expect_events is not None:
             info.update(parse_events(log.read_text(encoding="utf-8", errors="replace"), expect_events))
             # Timeout or a clean emulator exit cannot pass the diagnostic gate.
-            if code == 0 and not info["input_exit_verified"]:
-                info["error"] = "Missing ordered homebrew boot/frame/input/exit events."
+            gate = "gpu_probe_verified" if expect_events == "GPU_PROBE" else "input_exit_verified"
+            if code == 0 and (not info[gate] or info["emulator_process_exit_code"] != 0):
+                info["error"] = "Missing ordered diagnostic events or clean emulator exit."
                 code = 5
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps(info, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -146,8 +149,8 @@ def main() -> int:
     parser.add_argument("--report", type=Path, default=root / ".local" / "reports" / "eden-smoke.json")
     parser.add_argument("--log", type=Path, default=root / ".local" / "reports" / "eden-smoke.log")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--expect-events", choices=("SMOKE", "GRAPHICS"),
-                        help="Require real diagnostic boot, frame, A, Plus and shutdown log events")
+    parser.add_argument("--expect-events", choices=("SMOKE", "GRAPHICS", "GPU_PROBE"),
+                        help="Require ordered diagnostic events and clean exit; GPU_PROBE checks create/destroy")
     parser.add_argument("--config", type=Path, help="Alternate Eden configuration file")
     args = parser.parse_args()
     if not 1 <= args.seconds <= 600:

@@ -4,7 +4,7 @@
 
 Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** build of **Forza Horizon 2012 for Xbox 360**, using the ongoing community AOT recompilations as references. Xbox 360 game Title ID: `4D5309C9` (identifier, not a verification hash).
 
-**Executed on 2026-10-13:** independent libnx NRO boot, display, three A presses and Plus exit in Eden 0.2.1; a CPU framebuffer triangle with background changes; real ShiftGlue endian headers plus bounded guest memory on ARM64. **deko3d compiled but aborted in Eden before a visible frame. No Forza gameplay or hardware result.** [Screenshots and reports](docs/EDEN_RESULTS_2026-10-13.md).
+**Executed on 2026-10-13:** independent console/input and CPU baseline, real ShiftGlue endian headers and bounded ARM64 guest memory, plus a **deko3d GPU triangle and texture/depth fixture on official Eden 0.2.1 PGO/GCC**, using a pinned macro-upload workaround. A changes color; Plus exits cleanly. **No Forza gameplay or hardware result.** [GPU evidence and reproduction](docs/GPU_RESULTS_2026-10-13.md); [earlier baseline](docs/EDEN_RESULTS_2026-10-13.md).
 
 ## Upstream research (verified by reading public source docs on 2026-10-13)
 
@@ -29,7 +29,7 @@ Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** 
 8. `scripts/setup_eden_linux.sh` — pinned official Eden Linux download, checksum check and local CLI wrapper.
 9. `scripts/eden_input_smoke.sh` — isolated Linux/Xvfb integration test, captures and ordered guest events.
 10. `scripts/build_switch_framebuffer.sh` — original CPU triangle baseline (not a GPU renderer).
-11. `scripts/build_switch_graphics.sh` — deko3d triangle with offline UAM shaders; GPU execution remains blocked.
+11. `scripts/build_switch_graphics.sh` — deko3d triangle with offline UAM shaders; official Eden 0.2.1 works with the opt-in macro-upload profile; see GPU results.
 12. `scripts/build_shiftglue_probe.sh` — pinned real upstream endian types and 1 MiB guest arena on ARM64, using a local Horizon OS header overlay; no full runtime integration.
 13. Python and CMake/CTest automated checks. All can run without a Switch and without a game image, except optional Switch/Emulator/UAM test targets.
 

@@ -1,0 +1,6 @@
+[   1.412180] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:62:Ioctl1: called fd=6, ioctl=0xC010480B
+[   1.412188] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:159:ZCullBind: called, gpu_va=500EF1000, mode=2
+[   1.413958] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+Script done on 2026-10-13 10:32:41-04:00 [COMMAND_EXIT_CODE="134"]

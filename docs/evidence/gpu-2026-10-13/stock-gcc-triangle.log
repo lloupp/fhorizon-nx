@@ -1,0 +1,6 @@
+[   1.508597] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:62:Ioctl1: called fd=6, ioctl=0xC010480B
+[   1.508609] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:158:ZCullBind: called, gpu_va=500EF1000, mode=2
+[   1.510808] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+terminate called after throwing an instance of 'std::length_error'
+  what():  vector::_M_default_append
+Script done on 2026-10-13 10:32:50-04:00 [COMMAND_EXIT_CODE="134"]

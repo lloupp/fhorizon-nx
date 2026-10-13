@@ -1,0 +1,17 @@
+[   1.393524] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:62:Ioctl1: called fd=6, ioctl=0xC010480B
+[   1.393548] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:158:ZCullBind: called, gpu_va=5000A1000, mode=2
+[   1.397344] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+[   1.398143] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+[   1.399945] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS device_create_begin
+FHNX_GRAPHICS device_create_end
+FHNX_GRAPHICS queue_create_begin
+FHNX_GRAPHICS queue_create_end
+FHNX_GRAPHICS queue_wait_begin
+FHNX_GRAPHICS queue_wait_end
+FHNX_GRAPHICS device_destroy_begin
+FHNX_GRAPHICS device_destroy_end
+FHNX_GRAPHICS probe_passed
+FHNX_GRAPHICS shutdown
+Script done on 2026-10-13 10:32:47-04:00 [COMMAND_EXIT_CODE="0"]

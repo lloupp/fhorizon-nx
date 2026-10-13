@@ -1,6 +1,6 @@
 # deko3d GPU initialization crash — reproducible isolation plan
 
-Date: 2026-10-13. **Investigation code, not a GPU fix or a passing GPU test.**
+Date: 2026-10-13. **Historical initial isolation plan. The investigation has now produced passing GPU tests; see [executed results and correction](GPU_RESULTS_2026-10-13.md).**
 
 Baseline: Forza Horizon NX PR #1 at `4ae77a3ddba94eb324cfa6c681c74ef653f63aca` compiles an independent `fhnx_graphics.nro`, but Eden 0.2.1 aborts before first visible deko3d frame with `std::length_error: vector::_M_default_append` or `std::bad_alloc`. CPU framebuffer, console/input, and ShiftGlue header/arena probes pass. No Switch hardware has been used.
 

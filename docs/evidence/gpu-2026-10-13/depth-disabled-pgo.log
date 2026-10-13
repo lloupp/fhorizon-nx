@@ -1,0 +1,44 @@
+[   0.428376] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:221:Report: Driver: llvmpipe 0.0.1
+[   0.428381] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:222:Report: Device: llvmpipe (LLVM 17.0.6, 256 bits)
+[   0.428383] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:223:Report: Vulkan: 1.3.274
+[   1.847606] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:719:CreateGraphicsPipeline: 0x15194969287fcf4d
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS device_create_begin
+FHNX_GRAPHICS device_create_end
+FHNX_GRAPHICS image_layout_begin
+FHNX_GRAPHICS image_layout_end
+FHNX_GRAPHICS framebuffer_block_create_begin
+FHNX_GRAPHICS framebuffer_block_create_end
+FHNX_GRAPHICS swapchain_create_begin
+FHNX_GRAPHICS swapchain_create_end
+FHNX_GRAPHICS depth_texture_create_begin
+FHNX_GRAPHICS depth_texture_create_end
+FHNX_GRAPHICS shader_block_create_begin
+FHNX_GRAPHICS shader_block_create_end
+FHNX_GRAPHICS shader_init_begin
+FHNX_GRAPHICS shader_init_end
+FHNX_GRAPHICS cmd_memory_create_begin
+FHNX_GRAPHICS cmd_memory_create_end
+FHNX_GRAPHICS cmd_buffer_create_begin
+FHNX_GRAPHICS cmd_buffer_create_end
+FHNX_GRAPHICS render_command_record_begin
+FHNX_GRAPHICS render_command_record_end
+FHNX_GRAPHICS queue_create_begin
+FHNX_GRAPHICS queue_create_end
+FHNX_GRAPHICS texture_upload_begin
+FHNX_GRAPHICS texture_upload_end
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS first_acquire_begin
+FHNX_GRAPHICS first_acquire_end
+FHNX_GRAPHICS first_bind_submit_begin
+FHNX_GRAPHICS first_bind_submit_end
+FHNX_GRAPHICS first_render_submit_begin
+FHNX_GRAPHICS first_render_submit_end
+FHNX_GRAPHICS first_present_begin
+FHNX_GRAPHICS first_present_end
+FHNX_GRAPHICS frames_submitted
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS plus_exit
+FHNX_GRAPHICS shutdown

@@ -1,0 +1,2 @@
+[   2.018704] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:719:CreateGraphicsPipeline: 0x0fe0bddd9535b486
+[   2.019042] Render.Vulkan <Error> video_core/renderer_vulkan/vk_pipeline_cache.cpp:823:CreateGraphicsPipeline: Instruction IMAD (reg) is not implemented is not implemented

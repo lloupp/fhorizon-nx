@@ -1,0 +1,17 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS device_create_begin
+FHNX_GRAPHICS device_create_end
+FHNX_GRAPHICS memory_create_begin
+FHNX_GRAPHICS memory_create_end
+FHNX_GRAPHICS memory_destroy_end
+FHNX_GRAPHICS memory_create_begin
+FHNX_GRAPHICS memory_create_end
+FHNX_GRAPHICS memory_destroy_end
+FHNX_GRAPHICS memory_create_begin
+FHNX_GRAPHICS memory_create_end
+FHNX_GRAPHICS memory_destroy_end
+FHNX_GRAPHICS device_destroy_begin
+FHNX_GRAPHICS device_destroy_end
+FHNX_GRAPHICS probe_passed
+FHNX_GRAPHICS shutdown
+Script done on 2026-10-13 10:32:36-04:00 [COMMAND_EXIT_CODE="0"]
