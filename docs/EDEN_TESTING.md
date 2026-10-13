@@ -68,4 +68,4 @@ The upstream handbook describes `--config` for a separate configuration, `--debu
 
 Our diagnostics send `FHNX_SMOKE` or `FHNX_GRAPHICS` messages with `svcOutputDebugString`, which Eden records as `Debug.Emulated`. The deko3d failure investigation used an isolated config with debug logging and single-core mode. No keys/firmware or changes to Eden source were needed.
 
-`./scripts/build_switch_graphics.sh` compiles UAM vertex/fragment shaders offline and links their DKSH blobs into an independent deko3d NRO. Its Eden execution remains blocked; preserve the failure. `./scripts/build_switch_framebuffer.sh` builds a separate CPU triangle that has passed, and does not bypass the GPU milestone.
+`./scripts/build_switch_graphics.sh` compiles UAM vertex/fragment shaders offline and links their DKSH blobs into an independent deko3d NRO. Stock deko3d still triggers the Eden 0.2.1 macro-rebase bug; the separate pinned upload workaround passes PGO/GCC, including texture/depth. See [GPU results](GPU_RESULTS_2026-10-13.md). `./scripts/build_switch_framebuffer.sh` builds a separate CPU triangle that has passed, and does not bypass the GPU milestone.

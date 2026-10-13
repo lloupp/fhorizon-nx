@@ -1,0 +1,11 @@
+diff --git a/src/core/CMakeLists.txt b/src/core/CMakeLists.txt
+index 39aebd5..f7369fe 100644
+--- a/src/core/CMakeLists.txt
++++ b/src/core/CMakeLists.txt
+@@ -1286,3 +1286,6 @@ target_link_libraries(core PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+ # endif()
+ 
+ create_target_directory_groups(core)
++
++# FHNX host GCC13 diagnostic build: keep warnings, allow known variant false positive.
++set_source_files_properties(memory/dmnt_cheat_vm.cpp PROPERTIES COMPILE_OPTIONS "-Wno-error=maybe-uninitialized")

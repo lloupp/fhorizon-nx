@@ -1,0 +1,6 @@
+[
+  {
+    "kind": "render-to-texture",
+    "identical_positive_as_negative_rejected": true
+  }
+]

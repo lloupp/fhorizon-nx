@@ -1,0 +1,27 @@
+{
+  "background_after": [
+    115,
+    20,
+    31
+  ],
+  "background_before": [
+    6,
+    15,
+    31
+  ],
+  "checks": {
+    "a_changes_background": true,
+    "center_remains_stable": true,
+    "depth_negative_control_hides_near_triangle": true,
+    "fixture_pixels_visible": true,
+    "near_textured_triangle_visible": true
+  },
+  "dimensions": [
+    1280,
+    720
+  ],
+  "kind": "texture-depth",
+  "non_background_fraction": 0.45715,
+  "passed": true,
+  "physical_switch_verified": false
+}

@@ -52,6 +52,28 @@ class EdenRunnerTests(unittest.TestCase):
         self.assertFalse(eden.parse_events(events, "GRAPHICS")["input_exit_verified"])
         self.assertFalse(eden.parse_events("FHNX_SMOKE shutdown\n" + events[:-len("FHNX_SMOKE shutdown")], "SMOKE")["input_exit_verified"])
 
+    def test_gpu_probe_needs_ordered_completion(self):
+        events = "\n".join("FHNX_GRAPHICS " + e for e in [
+            "boot", "device_create_end", "device_destroy_end", "probe_passed", "shutdown"])
+        self.assertTrue(eden.parse_events(events, "GPU_PROBE")["gpu_probe_verified"])
+        self.assertFalse(eden.parse_events(events.replace("device_destroy_end", "device_destroy_begin"),
+                                           "GPU_PROBE")["gpu_probe_verified"])
+
+    def test_timeout_cannot_pass_even_with_complete_events(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            nro = root / "smoke.nro"
+            nro.write_bytes(fixture_nro())
+            def timeout_with_events(*args, **kwargs):
+                kwargs["stdout"].write("\n".join("FHNX_SMOKE " + e for e in [
+                    "boot", "frames_submitted", "a_pressed", "plus_exit", "shutdown"]))
+                raise eden.subprocess.TimeoutExpired("eden-cli", 1)
+            with mock.patch.object(eden.subprocess, "run", side_effect=timeout_with_events):
+                status, details = eden.run(nro, "eden-cli", 1, root/"report.json", root/"log.txt",
+                                           expect_events="SMOKE")
+            self.assertEqual(status, 5)
+            self.assertTrue(details["emulator_process_timeout"])
+
     def test_dry_run_has_no_emulator(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

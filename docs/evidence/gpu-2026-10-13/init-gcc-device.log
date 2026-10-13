@@ -1,0 +1,8 @@
+[   0.504918] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:221:Report: Driver: llvmpipe 0.0.1
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS device_create_begin
+FHNX_GRAPHICS device_create_end
+FHNX_GRAPHICS device_destroy_begin
+FHNX_GRAPHICS device_destroy_end
+FHNX_GRAPHICS probe_passed
+FHNX_GRAPHICS shutdown

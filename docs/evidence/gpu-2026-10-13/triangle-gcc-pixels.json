@@ -1,0 +1,26 @@
+{
+  "background_after": [
+    115,
+    20,
+    31
+  ],
+  "background_before": [
+    6,
+    15,
+    31
+  ],
+  "checks": {
+    "a_changes_background": true,
+    "center_remains_stable": true,
+    "fixture_pixels_visible": true,
+    "interpolated_colors_visible": true
+  },
+  "dimensions": [
+    1280,
+    720
+  ],
+  "kind": "triangle",
+  "non_background_fraction": 0.504848,
+  "passed": true,
+  "physical_switch_verified": false
+}

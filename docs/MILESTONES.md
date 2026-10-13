@@ -8,7 +8,7 @@
 | M3 | ARM64 portability contract | Cross-build runtime/host stubs; guest endian, VMX, scheduler; no game | PARTIAL: real ShiftGlue endian headers + 1 MiB synthetic arena passed in Eden on ARM64; full runtime blocked |
 | M4 | Switch environment NRO | Compile under devkitPro; real hardware input/display; app-mode memory telemetry | NRO COMPILED; physical hardware not tested |
 | M4E | Eden emulator NRO smoke on PC | Test a locally built independent NRO with `scripts/test_eden.py`, record emulator version/process logs and manually observed UI/input; do not mark hardware test pass | PASS: console, A x3, Plus, clean exit; captures + ordered events |
-| M5 | Switch graphics triangle | deko3d+UAM or switch-nvk, real GPU capture & formats | BLOCKED: deko3d compiled, Eden aborted; CPU framebuffer triangle passed independently |
+| M5 | Switch graphics triangle | deko3d+UAM or switch-nvk, real GPU capture & formats | EMULATOR PASS: GPU triangle + texture/depth on official Eden PGO/GCC with macro-upload workaround; physical Switch untested |
 | M6 | Title-specific shader/texture sample | Golden frame replay compared to upstream reference | NOT RUN |
 | M7 | Boot to game menus | 3 stable runs, input/audio/logs + bounded memory | NOT RUN |
 | M8 | Real race | track/vehicle/physics, steady timings, saves, 15-min stability | NOT RUN |

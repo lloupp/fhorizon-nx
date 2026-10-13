@@ -1,0 +1,42 @@
+[
+  {
+    "path": ".local/switch-graphics/fhnx_graphics.nro",
+    "bytes": 276677,
+    "sha256": "6c64363ed7b63dc2b9554d55274c8b25d95f563db5f2d3567fad5ca012204024"
+  },
+  {
+    "path": ".local/gpu-probes/memory/fhnx_gpu_memory.nro",
+    "bytes": 207045,
+    "sha256": "eac9895b54141ef91603f66942bea1c7caf0a7b27a32aebfc17a51def8fb4f8d"
+  },
+  {
+    "path": ".local/gpu-probes/device/fhnx_gpu_device.nro",
+    "bytes": 207045,
+    "sha256": "385ece2b2ab7ad9cf37eeb31facfbf5764b8912345d251c68baa10f8919b7e0e"
+  },
+  {
+    "path": ".local/gpu-probes/copy/fhnx_gpu_copy.nro",
+    "bytes": 235717,
+    "sha256": "bdb5e87544e96c97be5b5edbbcdd04232da7358631124da19dc597c509907872"
+  },
+  {
+    "path": ".local/gpu-probes/swapchain/fhnx_gpu_swapchain.nro",
+    "bytes": 276677,
+    "sha256": "231f8c3150c239d928c316238381d98fd1ca6b386ba8983dd04456ecd98d370e"
+  },
+  {
+    "path": ".local/gpu-probes/texture-depth/fhnx_gpu_texture-depth.nro",
+    "bytes": 288965,
+    "sha256": "188420833a11d29b8b4a2f31910e1196a9acfb418317d34612d7d81a09d569b0"
+  },
+  {
+    "path": ".local/gpu-probes/queue/fhnx_gpu_queue.nro",
+    "bytes": 227525,
+    "sha256": "cb94238f2d2e037f3c279a2d7d7badbe169adf3e70f4411549783b6328fd9a75"
+  },
+  {
+    "path": ".local/gpu-probes/triangle/fhnx_gpu_triangle.nro",
+    "bytes": 280773,
+    "sha256": "d3bf94f9003575276870c18599a37fd915b798e1965220d0be2706b239ce857f"
+  }
+]

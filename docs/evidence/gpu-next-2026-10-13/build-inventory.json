@@ -1,0 +1,212 @@
+{
+  "base_commit": "bb0d9d83d53c476f92e6c079aaf6960e0783d0c5",
+  "eden_source_commit": "58c1e20ee58efa3900ba616207d460886214480b",
+  "eden_modified_sha256": "9ced7982c14905997d7b806c940a09784f4cd596592cf7c0987ee9c543f9ec32",
+  "source_patches": [
+    "patches/eden-0.2.1-macro-rebase.patch",
+    "patches/eden-0.2.1-gcc13-warning.patch"
+  ],
+  "compiler": "GCC 13; RelWithDebInfo -O1 -g1 -DNDEBUG",
+  "libva_source": "official Eden 0.2.1 PGO AppImage, libva 2.23; isolated .local/eden-build-va",
+  "host_renderer": "Mesa llvmpipe",
+  "physical_switch_verified": false,
+  "commercial_game_execution_verified": false,
+  "artifacts": [
+    {
+      "report": "context-gcc-initial.json",
+      "nro_sha256": "53810fd436782547d752c0544421070b6c4c81cc28532ec1003e576b250e18f4",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": true
+    },
+    {
+      "report": "context-gcc.json",
+      "nro_sha256": "068f642a7fddb3442f240f7b6819af6e234b832276807cd5bc26cc0119ec26e6",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": true
+    },
+    {
+      "report": "context-original-fpcr-failure.json",
+      "nro_sha256": "6c38aba957f56076a5dae2e6ceaf8137fe3943a9e8d14ad95e3f9be482ae8c90",
+      "exit_code": 0,
+      "input_exit_verified": false,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "context-pgo-initial.json",
+      "nro_sha256": "53810fd436782547d752c0544421070b6c4c81cc28532ec1003e576b250e18f4",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": true
+    },
+    {
+      "report": "context-pgo.json",
+      "nro_sha256": "068f642a7fddb3442f240f7b6819af6e234b832276807cd5bc26cc0119ec26e6",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": true
+    },
+    {
+      "report": "render-to-texture-gcc.json",
+      "nro_sha256": "4bcffadf8050f87406684eb129fd38ef93eb2d19f31f6fac72ca84f0af55d9f4",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "render-to-texture-modified.json",
+      "nro_sha256": "19ebddd2e017b8ede7c3e6c7da9bc7e1f8e7f2049e14668c1a2e2c4472c4e49c",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "render-to-texture-negative-modified.json",
+      "nro_sha256": "b49ce89a5e646fe1a8337755a715d1eabfe3f4e9a191a6b398810ff3f02b797f",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "render-to-texture-pgo-initial.json",
+      "nro_sha256": "f0a91fa971249218568ec3778f348b603020fbf84470c7b5ca79b87cfdef97ef",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "render-to-texture-pgo.json",
+      "nro_sha256": "4bcffadf8050f87406684eb129fd38ef93eb2d19f31f6fac72ca84f0af55d9f4",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-gcc.json",
+      "nro_sha256": "6fc9ecde5473a8e0b7cc310ead1fd1a1fa29950f3e79885bcb85cea6cc53c715",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-modified.json",
+      "nro_sha256": "2a7477f4412a8fcef4824e71e93e2ba965462f912391e9ca1ecf303e4393a168",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-negative-modified.json",
+      "nro_sha256": "6dccbb506f50353dbd39945ba4a310898f069a2fcc99df773fb3a274e302ab5f",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-pgo-initial.json",
+      "nro_sha256": "745c52066eb0d57cc842cc3d0fcd6c3a26aa8427b6b9813c4ca7aed8532a2b92",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-pgo.json",
+      "nro_sha256": "6fc9ecde5473a8e0b7cc310ead1fd1a1fa29950f3e79885bcb85cea6cc53c715",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-skipped-gcc.json",
+      "nro_sha256": "4544152638607630f9ef9720c5259b638babd28a1e82716fe6114f6906d71186",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "resolve-skipped-pgo.json",
+      "nro_sha256": "4544152638607630f9ef9720c5259b638babd28a1e82716fe6114f6906d71186",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "rtt-skipped-gcc.json",
+      "nro_sha256": "09eb12e2123e66aa54e2a07c826e534da0ee0b7eaeb3dfe2fc37937359b1b0cc",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "rtt-skipped-pgo.json",
+      "nro_sha256": "09eb12e2123e66aa54e2a07c826e534da0ee0b7eaeb3dfe2fc37937359b1b0cc",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-disabled-gcc.json",
+      "nro_sha256": "bc82271ae9ae0da292635653967aa122edf1bcffb86fe6d9d94b6740eda71b8a",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-disabled-pgo.json",
+      "nro_sha256": "bc82271ae9ae0da292635653967aa122edf1bcffb86fe6d9d94b6740eda71b8a",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-gcc.json",
+      "nro_sha256": "c3dbd3ca609d7973c8acb9d8531607b4dd781a8ff52f85f8ebfe93d8ad4697fe",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-modified.json",
+      "nro_sha256": "76f1ccc9075e45bf348907c93df1373ce03f0f6a3973f794480e9494456e7b06",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-negative-modified.json",
+      "nro_sha256": "e0b14739ce7b073592a2a8e2e3c546eaa1a8f141558c54b0f9e62e7fab043097",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-pgo-initial.json",
+      "nro_sha256": "1fec9d592fc7fad5089410b22d8a623957202b3ee49b00622568763d5e3265f1",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "stencil-pgo.json",
+      "nro_sha256": "c3dbd3ca609d7973c8acb9d8531607b4dd781a8ff52f85f8ebfe93d8ad4697fe",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "swapchain-modified.json",
+      "nro_sha256": "26a367852943bfdb7bc25b3043d069acccd2ff04e458e36219453d8b59087ede",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    },
+    {
+      "report": "triangle-modified.json",
+      "nro_sha256": "2caf977b27448f580026e60777d1585a59e2c43ce326fe344a971bce8cdee7c2",
+      "exit_code": 0,
+      "input_exit_verified": true,
+      "runtime_probe_verified": false
+    }
+  ]
+}

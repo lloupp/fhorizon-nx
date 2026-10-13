@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "a_changes_background": true,
+    "center_stable_after_a": true,
+    "disabled_stencil_expands_coverage": true,
+    "mask_has_visible_pixels": true,
+    "outside_mask_clipped": true
+  },
+  "dimensions": [
+    1280,
+    720
+  ],
+  "foreground_fractions": [
+    0.15648980034722226,
+    0.4571495225694444
+  ],
+  "kind": "stencil",
+  "passed": true,
+  "physical_switch_verified": false
+}

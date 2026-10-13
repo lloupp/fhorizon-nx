@@ -1,0 +1,25 @@
+[   1.337989] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:62:Ioctl1: called fd=6, ioctl=0xC010480B
+[   1.337994] Service.NVDRV <Debug> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:159:ZCullBind: called, gpu_va=500EF1000, mode=2
+[   1.340082] Service.NVDRV <Debug> core/hle/service/nvdrv/nvdrv_interface.cpp:88:Ioctl2: called fd=6, ioctl=0xC018481B
+[   1.340181] HW.GPU <Debug> video_core/engines/puller.cpp:35:ProcessBindMethod: Binding subchannel 0 to engine 45463
+[   1.340200] HW.GPU <Debug> video_core/engines/puller.cpp:35:ProcessBindMethod: Binding subchannel 1 to engine 45504
+[   1.340209] HW.GPU <Debug> video_core/engines/puller.cpp:35:ProcessBindMethod: Binding subchannel 4 to engine 45237
+[   1.340225] HW.GPU <Debug> video_core/engines/puller.cpp:35:ProcessBindMethod: Binding subchannel 2 to engine 41280
+[   1.340232] HW.GPU <Debug> video_core/engines/puller.cpp:35:ProcessBindMethod: Binding subchannel 3 to engine 36909
+FHNX_HOST_THROW type=St12length_error
+FHNX_HOST_FRAME 0 .local/gpu-diag/backtrace/throwtrace.so +0x120a __cxa_throw
+FHNX_HOST_FRAME 1 .local/eden/squashfs-root/shared/lib/libstdc++.so.6 +0x9f01e _ZSt20__throw_length_errorPKc
+FHNX_HOST_FRAME 2 .local/eden/squashfs-root/shared/bin/eden-cli +0xbc6f68 ?
+FHNX_HOST_FRAME 3 .local/eden/squashfs-root/shared/bin/eden-cli +0x9cedd2 ?
+FHNX_HOST_FRAME 4 .local/eden/squashfs-root/shared/bin/eden-cli +0x9cd54b ?
+FHNX_HOST_FRAME 5 .local/eden/squashfs-root/shared/bin/eden-cli +0xa41e5a ?
+FHNX_HOST_FRAME 6 .local/eden/squashfs-root/shared/bin/eden-cli +0x192f24a ?
+FHNX_HOST_FRAME 7 .local/eden/squashfs-root/shared/bin/eden-cli +0x194e648 ?
+FHNX_HOST_FRAME 8 .local/eden/squashfs-root/shared/lib/libstdc++.so.6 +0xeb919 ?
+FHNX_HOST_FRAME 9 .local/eden/squashfs-root/shared/lib/libc.so.6 +0x981b9 ?
+FHNX_HOST_FRAME 10 .local/eden/squashfs-root/shared/lib/libc.so.6 +0x11d21c ?
+terminate called after throwing an instance of 'std::length_error'
+  what():  vector::_M_default_append
+Aborted
+
+Script done on 2026-10-13 10:31:03-04:00 [COMMAND_EXIT_CODE="134"]

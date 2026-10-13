@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "a_changes_background": true,
+    "center_stable_after_a": true,
+    "negative_changes_fixture": true,
+    "offscreen_clear_sampled": true,
+    "offscreen_draw_sampled": true,
+    "skipped_pass_has_no_orange_or_white": true,
+    "skipped_pass_keeps_green_destination": true
+  },
+  "dimensions": [
+    1280,
+    720
+  ],
+  "foreground_fractions": [
+    0.45739583333333333,
+    0.45739583333333333
+  ],
+  "kind": "render-to-texture",
+  "passed": true,
+  "physical_switch_verified": false
+}

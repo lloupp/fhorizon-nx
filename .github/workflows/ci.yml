@@ -12,6 +12,8 @@ jobs:
           cmake -S . -B .local/ci-build -DCMAKE_BUILD_TYPE=Release
           cmake --build .local/ci-build --parallel 2
           ctest --test-dir .local/ci-build --output-on-failure
+      - name: Reproduce macro lifetime bug and verify correction (ASan)
+        run: ./scripts/test_macro_rebase.sh
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
   switch-homebrew-build:
@@ -29,9 +31,31 @@ jobs:
           ./scripts/build_switch_graphics.sh
           ./scripts/clone_upstream.sh
           ./scripts/build_shiftglue_probe.sh
+          git -C .local/upstream/pinyon-shift/thirdparty/shiftglue-sdk submodule update --init --depth 1 thirdparty/simde
+          ./scripts/build_shiftglue_probe.sh context
       - name: Validate NRO headers (no Eden execution)
         run: |
           python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-framebuffer/fhnx_framebuffer.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-graphics/fhnx_graphics.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-runtime/fhnx_runtime.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/switch-context/fhnx_context.nro --dry-run
+      - name: Build pinned deko3d workaround and progressive GPU probes
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends meson ninja-build bison flex g++
+          ./scripts/prepare_deko_eden_workaround.sh
+          export FHNX_DEKO_LIBRARY="$PWD/.local/deko-eden/deko3d/lib/libdeko3dd.a"
+          ./scripts/build_switch_graphics.sh
+          for stage in device queue memory copy swapchain triangle texture-depth stencil render-to-texture resolve; do
+            ./scripts/build_gpu_probe.sh "$stage"
+            python3 scripts/test_eden.py --nro ".local/gpu-probes/$stage/fhnx_gpu_$stage.nro" --dry-run
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: independent-deko3d-nros
+          path: |
+            .local/switch-graphics/fhnx_graphics.nro
+            .local/gpu-probes/**/*.nro
+            .local/switch-context/fhnx_context.nro
+          retention-days: 14
