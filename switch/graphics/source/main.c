@@ -68,7 +68,9 @@ static void graphicsInitialize(void)
     // Create the device, which is the root object
     DkDeviceMaker deviceMaker;
     dkDeviceMakerDefaults(&deviceMaker);
+    trace("device_create_begin");
     g_device = dkDeviceCreate(&deviceMaker);
+    trace("device_create_end");
 
     // Calculate layout for the framebuffers
     DkImageLayoutMaker imageLayoutMaker;
@@ -80,7 +82,9 @@ static void graphicsInitialize(void)
 
     // Calculate layout for the framebuffers
     DkImageLayout framebufferLayout;
+    trace("image_layout_begin");
     dkImageLayoutInitialize(&framebufferLayout, &imageLayoutMaker);
+    trace("image_layout_end");
 
     // Retrieve necessary size and alignment for the framebuffers
     uint32_t framebufferSize  = dkImageLayoutGetSize(&framebufferLayout);
@@ -91,7 +95,9 @@ static void graphicsInitialize(void)
     DkMemBlockMaker memBlockMaker;
     dkMemBlockMakerDefaults(&memBlockMaker, g_device, FB_NUM*framebufferSize);
     memBlockMaker.flags = DkMemBlockFlags_GpuCached | DkMemBlockFlags_Image;
+    trace("framebuffer_block_create_begin");
     g_framebufferMemBlock = dkMemBlockCreate(&memBlockMaker);
+    trace("framebuffer_block_create_end");
 
     // Initialize the framebuffers with the layout and backing memory we've just created
     DkImage const* swapchainImages[FB_NUM];
@@ -104,32 +110,43 @@ static void graphicsInitialize(void)
     // Create a swapchain out of the framebuffers we've just initialized
     DkSwapchainMaker swapchainMaker;
     dkSwapchainMakerDefaults(&swapchainMaker, g_device, nwindowGetDefault(), swapchainImages, FB_NUM);
+    trace("swapchain_create_begin");
     g_swapchain = dkSwapchainCreate(&swapchainMaker);
+    trace("swapchain_create_end");
 
     // Create a memory block onto which we will load shader code
     dkMemBlockMakerDefaults(&memBlockMaker, g_device, CODEMEMSIZE);
     memBlockMaker.flags = DkMemBlockFlags_CpuUncached | DkMemBlockFlags_GpuCached | DkMemBlockFlags_Code;
+    trace("shader_block_create_begin");
     g_codeMemBlock = dkMemBlockCreate(&memBlockMaker);
+    trace("shader_block_create_end");
     g_codeMemOffset = 0;
 
     // Load our shaders (both vertex and fragment)
+    trace("shader_init_begin");
     loadShader(&g_vertexShader, triangle_vsh_bin, triangle_vsh_bin_size);
     loadShader(&g_fragmentShader, color_fsh_bin, color_fsh_bin_size);
+    trace("shader_init_end");
 
     // Create a memory block which will be used for recording command lists using a command buffer
     dkMemBlockMakerDefaults(&memBlockMaker, g_device, CMDMEMSIZE);
     memBlockMaker.flags = DkMemBlockFlags_CpuUncached | DkMemBlockFlags_GpuCached;
+    trace("cmd_memory_create_begin");
     g_cmdbufMemBlock = dkMemBlockCreate(&memBlockMaker);
+    trace("cmd_memory_create_end");
 
     // Create a command buffer object
     DkCmdBufMaker cmdbufMaker;
     dkCmdBufMakerDefaults(&cmdbufMaker, g_device);
+    trace("cmd_buffer_create_begin");
     g_cmdbuf = dkCmdBufCreate(&cmdbufMaker);
+    trace("cmd_buffer_create_end");
 
     // Feed our memory to the command buffer so that we can start recording commands
     dkCmdBufAddMemory(g_cmdbuf, g_cmdbufMemBlock, 0, CMDMEMSIZE);
 
     // Generate a command list for each framebuffer, which will bind each of them as a render target
+    trace("render_command_record_begin");
     for (unsigned i = 0; i < FB_NUM; i ++)
     {
         DkImageView imageView;
@@ -165,27 +182,41 @@ static void graphicsInitialize(void)
     g_cmdsRender[palette] = dkCmdBufFinishList(g_cmdbuf);
     }
 
+    trace("render_command_record_end");
+
     // Create a queue, to which we will submit our command lists
     DkQueueMaker queueMaker;
     dkQueueMakerDefaults(&queueMaker, g_device);
     queueMaker.flags = DkQueueFlags_Graphics;
+    trace("queue_create_begin");
     g_renderQueue = dkQueueCreate(&queueMaker);
+    trace("queue_create_end");
 }
 
 // This function is to be called at each frame, and it is in charge of rendering.
 static void graphicsUpdate(void)
 {
     // Acquire a framebuffer from the swapchain (and wait for it to be available)
+    static int first_frame = 1;
+    if (first_frame) trace("first_acquire_begin");
     int slot = dkQueueAcquireImage(g_renderQueue, g_swapchain);
+    if (first_frame) trace("first_acquire_end");
 
     // Run the command list that binds said framebuffer as a render target
+    if (first_frame) trace("first_bind_submit_begin");
     dkQueueSubmitCommands(g_renderQueue, g_cmdsBindFramebuffer[slot]);
+    if (first_frame) trace("first_bind_submit_end");
 
     // Run the main rendering command list
+    if (first_frame) trace("first_render_submit_begin");
     dkQueueSubmitCommands(g_renderQueue, g_cmdsRender[g_color]);
+    if (first_frame) trace("first_render_submit_end");
 
     // Now that we are done rendering, present it to the screen
+    if (first_frame) trace("first_present_begin");
     dkQueuePresentImage(g_renderQueue, g_swapchain, slot);
+    if (first_frame) trace("first_present_end");
+    first_frame = 0;
 }
 
 // This function destroys the graphical resources created by graphicsInitialize.
