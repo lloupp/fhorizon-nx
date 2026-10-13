@@ -6,7 +6,7 @@
 
 namespace fhnx::gpu {
 enum class Format { rgba8, z24s8 };
-enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present };
+enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present, copy_source, copy_dest };
 enum class Stencil { disabled, replace, equal };
 struct ImageDesc {
     uint32_t width{}, height{}, samples{1};
@@ -89,6 +89,8 @@ public:
     virtual void sample(Image) = 0;
     virtual void draw(const Draw&) = 0;
     virtual void resolve(Image source, Image dest) = 0;
+    virtual void copy(Image source, Image dest) = 0;
+    virtual uint64_t imageBytes() const = 0;
     // Submit + wait before command storage/resource reuse in this first bounded backend.
     virtual void submit() = 0;
 };

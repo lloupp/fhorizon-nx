@@ -59,6 +59,8 @@ jobs:
           done
           bash ./scripts/build_deko_adapter.sh
           python3 scripts/test_eden.py --nro .local/adapter-positive/fhnx_adapter_positive.nro --dry-run
+          bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -69,4 +71,5 @@ jobs:
             .local/adapter-positive/fhnx_adapter_positive.nro
             .local/horizon-memory/fhnx_horizon_memory.nro
             .local/switch-vmx/fhnx_vmx.nro
+            .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
           retention-days: 14

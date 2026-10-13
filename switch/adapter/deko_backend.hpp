@@ -36,12 +36,13 @@ public:
     void sample(Image) override;
     void draw(const Draw&) override;
     void resolve(Image, Image) override;
+    void copy(Image, Image) override;
     void submit() override;
     std::vector<uint32_t> readback(Image);
     DkSwapchain swapchain(Image, Image);
     int acquire(DkSwapchain);
     void present(DkSwapchain, int, Image);
     void destroySwapchain(DkSwapchain);
-    uint64_t imageBytes() const { return images_.used; }
+    uint64_t imageBytes() const override { return images_.used; }
 };
 }

@@ -144,6 +144,14 @@ void DekoBackend::submit() {
     require(recording_,"submit without begin");
     dkQueueSubmitCommands(queue_,dkCmdBufFinishList(commands_)); dkQueueWaitIdle(queue_); recording_=false;
 }
+void DekoBackend::copy(Image s,Image d) {
+    recording(); auto& src=images_.get(s);auto& dst=images_.get(d);
+    require(src.usage==Usage::copy_source && dst.usage==Usage::copy_dest,"copy states");
+    require(src.desc.format==Format::rgba8 && dst.desc.format==Format::rgba8 && src.desc.samples==1 && dst.desc.samples==1,"copy format/samples");
+    require(src.desc.width==dst.desc.width && src.desc.height==dst.desc.height && s.slot!=d.slot,"copy dimensions/feedback");
+    auto sv=view(s),dv=view(d);DkImageRect rect={0,0,0,src.desc.width,src.desc.height,1};
+    dkCmdBufCopyImage(commands_,&sv,&rect,&dv,&rect,0);
+}
 std::vector<uint32_t> DekoBackend::readback(Image h) {
     require(!recording_ && images_.get(h).usage==Usage::readback,"readback state");
     auto d=images_.get(h).desc; std::vector<uint32_t> pixels(size_t(d.width)*d.height);
