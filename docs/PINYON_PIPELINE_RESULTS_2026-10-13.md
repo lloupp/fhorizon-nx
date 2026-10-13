@@ -173,3 +173,89 @@ Evidence: [layout-2026-10-13](evidence/layout-2026-10-13/).
 Build with `bash scripts/build_horizon_memory.sh layout`, execute
 `.local/horizon-layout/fhnx_horizon_layout.nro` through the existing SMOKE runner.
 Final boot, A x3 and Plus exit 0 pass; intermediate narrower probe is preserved.
+
+## D: integrated original 3D technical client
+
+`src/graphics/scene.hpp` provides bounded uint16 meshes, float vertex layouts,
+column-major matrices, perspective/look-at transforms and primitive construction.
+`switch/pinyon/demo.cpp` builds an original rectangular track, ground and a
+vehicle from boxes, with procedural checker textures. Actual vertex/index buffers,
+matrix/tint uniforms and DKSH shaders render through the real Pinyon surface
+frontend into 480x270 RGBA8/Z24S8 4x targets, resolve to a separate sampled image,
+then present through an indexed fullscreen quad. Ground uses depth; road replaces
+stencil; vehicle draws with stencil equality. Resources persist across frames and
+are explicitly destroyed after queue synchronization.
+
+A changes the camera distance; left stick rotates it; Plus exits. The input script
+now optionally tests the observed fresh SDL arrow-key mapping and captures a
+third image after analog input. Optional profile suffixes keep emulator data/logs
+for comparisons separate. The demo uses ordinary bounded CPU/GPU allocations,
+not a fabricated guest arena or altered ShiftGlue pointer ABI.
+
+Accepted executions use **official Eden 0.2.1 PGO (positive)** and **GCC Standard
+(omitted-vehicle control)**, the same isolated deko macro-upload archive and Mesa
+llvmpipe. The current positive build is byte-for-byte the accepted PGO NRO
+`17d74a5947eeba18ada9c2a6be161e8a262966b2393a2dbc60ec654775ef66c2`.
+The control is `a1f05184c528f11c1df286621e68b2ba9b217971a217520ef9baea7b07c4c569`:
+
+- Positive GPU readback finds 348 vehicle-blue pixels and 17,547 grass pixels at
+  internal resolution, with expected nonzero clear and center colors.
+- The separately compiled omitted-vehicle control renders ground/track, finds
+  zero vehicle-blue pixels and passes its own readback gate.
+- Both accepted runs boot, submit frames, register A x3 and analog movement,
+  exit via Plus with process code 0, and reclaim image/buffer accounting.
+- Captures verify visible vehicle/ground, camera changes through A and analog,
+  and absence of vehicle blue in the control while the rest of the scene remains.
+- Host Release tests verify matrix multiplication order, look-at, near/far depth,
+  mesh index bounds and upward ground winding. CI builds the scene NRO.
+
+Observed positive accounting: 49,152 buffer bytes, 10,604,544 image bytes,
+emulated process-used 68,534,272 bytes with a 64 MiB libnx heap. The accepted PGO positive
+sample measured roughly 16.7 ms mean and 50.4 ms maximum frame time. These are
+**emulator timings**, including synchronization/presentation; no Switch FPS or
+physical RAM claim is made. Individual final run telemetry is in the raw logs.
+
+![Original track and primitive vehicle](evidence/scene-2026-10-13/scene-boot.png)
+![Camera after analog movement](evidence/scene-2026-10-13/scene-after-analog.png)
+
+Failures were preserved. Initial ground winding faced away from the camera and
+was culled; correcting it produced actual geometry. Presentation V coordinates
+were subsequently corrected for render-target origin. Several PGO and a later GCC attempt
+reported host SIGSEGV or heap-corruption messages, sometimes after successful GPU
+readback as demonstrated by durable SDMC checkpoints. Their cause is unresolved;
+the asynchronous stdout log alone can omit earlier guest events. A file explicitly
+marked `STALE-durable-from-prior-run` is not evidence for its failed-startup report.
+
+Experimental same-NRO controls and a pooled-buffer allocation attempt did not
+resolve the PGO failures; their code snapshots/patch and logs are retained under
+`evidence/scene-2026-10-13`, and those changes are **not in the accepted backend**.
+The earlier complete PGO run matches the current rebuilt positive NRO exactly.
+A complete GCC run of the equivalent intermediate positive build is also retained,
+but later GCC failure means GCC is not claimed as a proven stability fix. The accepted PGO positive and GCC
+negative executions provide the evidence, rather than counting a black
+failed-boot capture as a successful negative control. The GCC package's SHA256
+and successful official zsync SHA1 verification are recorded in
+`eden-gcc-package.json`. No modified-Eden executable was rebuilt or tested here.
+
+Reproduce D with `FHNX_PIPELINE_VARIANT=scene FHNX_PIPELINE_CLIENT=demo bash
+scripts/build_pinyon_pipeline.sh`; build the separate control with variant
+`scene-no-car` and `FHNX_PIPELINE_DEFINES=-DFHNX_DEMO_SKIP_CAR`. Execute each NRO
+with `FHNX_TEST_ANALOG=1` and a distinct `FHNX_TEST_PROFILE` for each attempt.
+Both official packages are available through the setup scripts; reproduction
+still has an unresolved intermittent host-crash risk. `tools/check_scene_pixels.py` compares boot/after-A/after-analog/control
+captures. Evidence: [scene-2026-10-13](evidence/scene-2026-10-13/).
+`bash scripts/setup_eden_gcc.sh` installs the verified package under `.local`
+and creates `.local/tools/eden-gcc-cli`; the original PGO package stays untouched.
+
+## Next technical boundary
+
+The integrated subset now has real upstream surface identity, cache/state/resource
+translation, buffers, constants/descriptors, original shaders and a 3D client.
+Still missing: actual PM4/register/draw-info decoding into these operations,
+EDRAM ownership transfers, guest texture/fetch conversion, Xenos shader conversion
+and complete protected/coherent-alias ShiftGlue memory. Physical Switch validation
+and the unresolved PGO host crashes are separate follow-up gates. Do not call this
+a complete Pinyon executor or Forza runtime. Priorities: decode one bounded real
+draw/resolve frontend path and investigate Horizon process/resource settings for
+compatible sparse commit/aliases, while preserving the accepted graphics evidence and investigating the host
+crashes across both official emulator packages.
