@@ -33,6 +33,7 @@ jobs:
           ./scripts/build_shiftglue_probe.sh
           git -C .local/upstream/pinyon-shift/thirdparty/shiftglue-sdk submodule update --init --depth 1 thirdparty/simde
           ./scripts/build_shiftglue_probe.sh context
+          bash ./scripts/build_horizon_memory.sh
       - name: Validate NRO headers (no Eden execution)
         run: |
           python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --dry-run
@@ -40,6 +41,7 @@ jobs:
           python3 scripts/test_eden.py --nro .local/switch-graphics/fhnx_graphics.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-runtime/fhnx_runtime.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-context/fhnx_context.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/horizon-memory/fhnx_horizon_memory.nro --dry-run
       - name: Build pinned deko3d workaround and progressive GPU probes
         run: |
           apt-get update
@@ -61,4 +63,5 @@ jobs:
             .local/gpu-probes/**/*.nro
             .local/switch-context/fhnx_context.nro
             .local/adapter-positive/fhnx_adapter_positive.nro
+            .local/horizon-memory/fhnx_horizon_memory.nro
           retention-days: 14

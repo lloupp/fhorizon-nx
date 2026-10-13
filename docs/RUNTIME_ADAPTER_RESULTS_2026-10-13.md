@@ -99,3 +99,67 @@ execute Eden. Modified Eden and stock deko were not available in this fresh
 checkout; the official/workaround profile was sufficient for this milestone.
 Previously demonstrated modified-Eden behavior is not claimed as a new run.
 Physical Switch and Forza gameplay remain unvalidated.
+
+## B — Sparse Horizon mapping prototype; desktop semantics blocked
+
+`switch/runtime/horizon_memory.*` implements a bounded, sparse virtual reservation
+using actual libnx `virtmemFindStack`/`virtmemAddReservation`, one 4096-byte backing
+heap page per commit and `svcMapMemory`/`svcUnmapMemory`. Reservation is a libnx
+address-manager bookkeeping operation, not a kernel PROT_NONE mmap. Reserved
+addresses stay unmapped until commit. The abstraction is single-threaded, with
+no signals/MMIO/exception integration, and cannot replace upstream `Memory` yet.
+
+The upstream `src/system/xmemory.cpp` reserves `0x120000000` plus granularity,
+uses virtual-base + 4 GiB for physical memory, and shares file-backed views of
+the lower 512 MiB across multiple guest aliases. Those pointer arithmetic and
+coherent aliases are **not provided** by this prototype. Horizon `svcMapMemory`
+moves access from heap source into the stack region (source becomes inaccessible),
+so exposing it as a simultaneous writable alias would be incorrect. `alias()`
+returns unsupported rather than duplicating pages and losing coherence.
+
+Final execution: official Eden 0.2.1 PGO, ARM64 NRO with explicitly bounded
+32 MiB libnx heap, peak 8192 bytes of backing allocated by this adapter:
+
+| Gate | Result |
+| --- | --- |
+| Reserve 1 MiB, zero guest backing committed | PASS |
+| Commit two pages, zero initialization, unaligned BE value across page boundary | PASS |
+| Out-of-budget third page, misaligned/duplicate commit, uncommitted access | Rejected without increasing committed bytes |
+| Writable alias | Explicitly unsupported; tested rejection |
+| Change mapped page to read-only | Kernel rejects with `0x0000D401`; queried permission remains `Perm_Rw` |
+| Failed permission change | Return real Result code and retain prior metadata; never claim hardware protection |
+| Change mapped page to no access | Kernel rejects; no-access capability remains blocked |
+| Decommit, kernel query of unmapped page, zero-filled recommit | PASS |
+| Cross-page write into an uncommitted page | Rejected before any byte changes |
+| Explicit page reclamation, destructor reservation release, A x3 and Plus | PASS; process exit 0 |
+| Desktop 4.5 GiB reservation | Rejected before allocation; this profile's stack region is 2 GiB |
+
+The experiment queries process allowance 3,444,572,160 bytes and process-used
+34,885,632 bytes after reclamation. These are emulated kernel accounting,
+not host RSS or physical Switch measurements. The intermediate run with default
+libnx heap showed about 3.44 GiB of process-used accounting: that was the library's
+default heap sizing, not this adapter committing the guest arena. The final
+32 MiB cap avoids this ambiguity; both outputs are preserved.
+
+Evidence: [memory-2026-10-13](evidence/memory-2026-10-13/). The first test stopped
+on denied protection; that failure is preserved. The final test succeeds only
+as a **bounded prototype with explicit unsupported capabilities**, not as a
+complete ShiftGlue virtual-memory implementation. Raw pointer access protection,
+coherent physical aliases and a compatible contiguous full arena remain blockers.
+Do not continue into title execution with these missing semantics.
+
+Reproduce:
+
+```sh
+DEVKITPRO=/opt/devkitpro bash scripts/build_horizon_memory.sh
+VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json FHNX_SETTLE_SECONDS=10 \
+  bash scripts/eden_input_smoke.sh .local/horizon-memory/fhnx_horizon_memory.nro \
+  "$PWD/.local/tools/eden-cli" SMOKE
+```
+
+Milestone A was published as `318bf4b6c3d4026e9b5c15ae034a920f5cd8d660` in
+[PR #3](https://github.com/lloupp/fhorizon-nx/pull/3). Its two CI jobs passed
+(PR workflow run 38448049087). Publication used the connected GitHub Git-object
+API after local `git push` reported no HTTPS credentials. The published tree
+matches local tree `035a0b5b49ab1598d6514140fa92e0c431444be5` exactly; only
+commit author/time metadata differs. Subsequent publication preserves that parent.
