@@ -32,3 +32,10 @@ Record the output from `python3 -m unittest discover -s tests -v`, `ctest --test
 - `python3 tools/fhnx.py audit .`: **safe_for_review: true**, no issues.
 - `python3 tools/fhnx.py doctor`: devkitPro absent; `aarch64-none-elf-gcc`, `elf2nro`, `uam`, `spirv-cross` absent.
 - No game data, runtime Pinyon Shift, GPU backend, Nintendo console or emulator was run.
+
+## Added Eden emulator test infrastructure (2026-10-13)
+
+- Eden official project `https://eden-emu.dev/`; command line documented at `https://github.com/eden-emulator/mirror/blob/master/docs/user/CommandLine.md` (`eden-cli --game <path>`, GUI `-hlaunch` with hbloader requirements).
+- Added `scripts/test_eden.py` and synthetic `tests/test_eden.py` to run bounded subprocess smoke tests with private `.local/reports` output; `nro_boot_verified` and `physical_switch_verified` are always `false` unless separately validated by human observation/hardware.
+- **No Eden execution, NRO boot or gameplay test is claimed by these changes.** The new unit tests exercise only the wrapper's command selection and result formatting.
+- Next: run Python unit tests and GitHub CI; when devkitPro is available build a real homebrew NRO, then test Eden, then the physical Switch.
