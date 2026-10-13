@@ -1,0 +1,25 @@
+FHNX Eden process smoke (not a game-boot test)
+[1;31m[   0.000406] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000439] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000443] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000445] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000447] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[0;37m[   0.001131] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/config/eden/sdl2-config.ini[0m
+[0;37m[   0.002928] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/config/eden/sdl2-config.ini[0m
+[1;31m[   0.105344] Common.Filesystem <Error> common/fs/file.cpp:285:Open: Failed to open the file at path=/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat, ec_message=No such file or directory[0m
+[1;33m[   0.105367] Service.ACC <Warning> core/hle/service/acc/profile_manager.cpp:403:ParseUserSaveFile: Failed to load profile data from save data... Generating new user 'Eden' with random UUID.[0m
+[0;37m[   0.105406] Service.ACC <Info> core/hle/service/acc/profile_manager.cpp:462:WriteUserSaveFile: Writing profiles.dat to /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat[0m
+[1;31m[   0.106527] Input <Error> input_common/drivers/gc_adapter.cpp:87:GCAdapter: libusb could not be initialized. failed with error = -99[0m
+[0;37m[   0.106544] Input <Info> input_common/drivers/udp_client.cpp:140:UDPClient: Udp Initialization started[0m
+[0;37m[   0.106571] Input <Info> input_common/drivers/udp_client.cpp:332:StartCommunication: Starting communication with UDP input server on 127.0.0.1:26760[0m
+[0;37m[   0.111444] Input <Info> input_common/drivers/joycon.cpp:25:Joycons: Joycon driver Initialization started[0m
+[1;31m[   0.111502] Input <Error> input_common/drivers/joycon.cpp:30:Joycons: Hidapi could not be initialized. failed with error = -1[0m
+[0;37m[   0.130930] Frontend <Info> yuzu_cmd/emu_window/emu_window_sdl2_vk.cpp:90:EmuWindow_SDL2_VK: Eden Version: Eden | v0.2.1-v0.2.1 (Vulkan)[0m
+[1;33m[   0.545775] Service.FS <Warning> core/file_sys/romfs_factory.cpp:28:RomFSFactory: Unable to read base RomFS[0m
+[0;37m[   0.545951] Core <Info> core/core.cpp:327:Load: Loading FHNX Pinyon surfaces (0000000000000000) ...[0m
+[1;31m[   0.615158] Render.Vulkan <Error> video_core/renderer_vulkan/renderer_vulkan.cpp:169:RendererVulkan: Vulkan initialization failed with error: VK_ERROR_INITIALIZATION_FAILED[0m
+[1;31m[   0.615212] HW.GPU <Error> video_core/video_core.cpp:63:CreateGPU: Failed to initialize GPU: Vulkan initialization error VK_ERROR_INITIALIZATION_FAILED[0m
+[1;35m[   0.616024] Core <Critical> core/core.cpp:338:Load: Failed to initialize system (Error 5)![0m
+[1;35m[   0.621760] Frontend <Critical> yuzu_cmd/yuzu.cpp:398:main: Failed to initialize VideoCore![0m
+[0;37m[   0.867418] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/config/eden/sdl2-config.ini[0m
+[0;37m[   0.868893] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-scene-pm4-diag-02/config/eden/sdl2-config.ini[0m
