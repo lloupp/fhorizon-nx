@@ -1,5 +1,7 @@
 # GPU deko3d on Eden: executed results
 
+This is the preserved `bb0d9d83` result snapshot. See the [continuation](GPU_NEXT_RESULTS_2026-10-13.md) for the completed modified Eden build, stencil, render-to-texture, 4x resolve and ARM64 context results.
+
 The independent deko3d triangle renders on **official Eden 0.2.1 PGO and GCC**, with three A presses changing the background and Plus producing a clean emulator exit (0), without timeout or abort. The same triangle NRO was used for both final runs. A separate textured, depth-tested fixture also passes both versions. These are Switch NROs executed by a Switch emulator on host **Mesa llvmpipe**, not physical Switch or Forza gameplay evidence.
 
 ## Actual pixels and controls

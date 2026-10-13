@@ -1,0 +1,9 @@
+[0/2] Re-checking globbed directories...
+[1/5] Building CXX object src/common/CMakeFiles/common.dir/scm_rev.cpp.o
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-build/src/common/scm_rev.cpp:16: warning: "BUILD_ID" redefined
+   16 | #define BUILD_ID "HEAD"
+      | 
+<command-line>: note: this is the location of the previous definition
+[2/5] Linking CXX static library src/common/libcommon.a
+[3/5] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2.cpp.o
+[4/5] Linking CXX executable bin/eden-cli

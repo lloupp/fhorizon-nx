@@ -45,6 +45,14 @@ static DkMemBlock g_depthMemory, g_textureMemory, g_stagingMemory, g_descriptors
 static DkCmdList g_uploadTexture;
 #endif
 
+#ifdef FHNX_GPU_RTT
+#include "solid_fsh_bin.h"
+static DkShader g_solidShader;
+static DkImage g_offscreen;
+#ifdef FHNX_GPU_RESOLVE
+static DkMemBlock g_offscreenMemory;
+#endif
+#endif
 #ifdef FHNX_GPU_DURABLE_TRACE
 static FILE *g_traceFile;
 #endif
@@ -134,7 +142,11 @@ static void graphicsInitialize(void)
     DkImageLayout extraLayout;
     dkImageLayoutMakerDefaults(&extraMaker, g_device);
     extraMaker.flags = DkImageFlags_UsageRender;
+    #ifdef FHNX_GPU_STENCIL
+    extraMaker.format = DkImageFormat_Z24S8;
+#else
     extraMaker.format = DkImageFormat_ZF32;
+#endif
     extraMaker.dimensions[0] = FB_WIDTH;
     extraMaker.dimensions[1] = FB_HEIGHT;
     dkImageLayoutInitialize(&extraLayout, &extraMaker);
@@ -144,9 +156,17 @@ static void graphicsInitialize(void)
     dkImageInitialize(&g_depthImage, &extraLayout, g_depthMemory, 0);
     dkImageLayoutMakerDefaults(&extraMaker, g_device);
     extraMaker.flags = DkImageFlags_Usage2DEngine;
+#ifdef FHNX_GPU_RTT
+    extraMaker.flags |= DkImageFlags_UsageRender;
+#endif
     extraMaker.format = DkImageFormat_RGBA8_Unorm;
+    #ifdef FHNX_GPU_RTT
+    extraMaker.dimensions[0] = FB_WIDTH;
+    extraMaker.dimensions[1] = FB_HEIGHT;
+#else
     extraMaker.dimensions[0] = 16;
     extraMaker.dimensions[1] = 16;
+#endif
     dkImageLayoutInitialize(&extraLayout, &extraMaker);
     dkMemBlockMakerDefaults(&memBlockMaker, g_device, (dkImageLayoutGetSize(&extraLayout) + DK_MEMBLOCK_ALIGNMENT - 1) & ~(DK_MEMBLOCK_ALIGNMENT - 1));
     memBlockMaker.flags = DkMemBlockFlags_GpuCached | DkMemBlockFlags_Image;
@@ -166,6 +186,17 @@ static void graphicsInitialize(void)
     DkSampler sampler;
     dkSamplerDefaults(&sampler);
     dkSamplerDescriptorInitialize((DkSamplerDescriptor *)((uint8_t *)dkMemBlockGetCpuAddr(g_descriptors)+128), &sampler);
+    #ifdef FHNX_GPU_RESOLVE
+    extraMaker.type = DkImageType_2DMS;
+    extraMaker.msMode = DkMsMode_4x;
+    dkImageLayoutInitialize(&extraLayout, &extraMaker);
+    dkMemBlockMakerDefaults(&memBlockMaker, g_device, (dkImageLayoutGetSize(&extraLayout) + DK_MEMBLOCK_ALIGNMENT - 1) & ~(DK_MEMBLOCK_ALIGNMENT - 1));
+    memBlockMaker.flags = DkMemBlockFlags_GpuCached | DkMemBlockFlags_Image;
+    g_offscreenMemory = dkMemBlockCreate(&memBlockMaker);
+    dkImageInitialize(&g_offscreen, &extraLayout, g_offscreenMemory, 0);
+#elif defined(FHNX_GPU_RTT)
+    g_offscreen = g_textureImage;
+#endif
     trace("depth_texture_create_end");
 #endif
 
@@ -182,6 +213,9 @@ static void graphicsInitialize(void)
     trace("shader_init_begin");
     loadShader(&g_vertexShader, triangle_vsh_bin, triangle_vsh_bin_size);
     loadShader(&g_fragmentShader, color_fsh_bin, color_fsh_bin_size);
+    #ifdef FHNX_GPU_RTT
+    loadShader(&g_solidShader, solid_fsh_bin, solid_fsh_bin_size);
+#endif
     trace("shader_init_end");
 #endif
 
@@ -204,9 +238,51 @@ static void graphicsInitialize(void)
 #ifdef FHNX_GPU_TEXTURE_DEPTH
     DkImageView textureViewCopy;
     dkImageViewDefaults(&textureViewCopy, &g_textureImage);
+    #ifndef FHNX_GPU_RTT
     DkCopyBuf source = { dkMemBlockGetGpuAddr(g_stagingMemory), 0, 0 };
     DkImageRect destination = { 0, 0, 0, 16, 16, 1 };
     dkCmdBufCopyBufferToImage(g_cmdbuf, &source, &textureViewCopy, &destination, 0);
+#else
+    DkImageView offscreenView;
+    dkImageViewDefaults(&offscreenView, &g_offscreen);
+    DkViewport offViewport = {0, 0, FB_WIDTH, FB_HEIGHT, 0, 1};
+    DkScissor offScissor = {0, 0, FB_WIDTH, FB_HEIGHT};
+    DkDepthStencilState offDepth;
+    dkDepthStencilStateDefaults(&offDepth);
+    offDepth.depthTestEnable = offDepth.depthWriteEnable = false;
+    DkShader const *offShaders[] = { &g_vertexShader, &g_solidShader };
+    DkRasterizerState offRaster; dkRasterizerStateDefaults(&offRaster);
+    DkColorState offColor; dkColorStateDefaults(&offColor);
+    DkColorWriteState offWrite; dkColorWriteStateDefaults(&offWrite);
+    DkMultisampleState ms; dkMultisampleStateDefaults(&ms);
+#ifdef FHNX_GPU_RESOLVE
+    ms.mode = ms.rasterizerMode = DkMsMode_4x;
+#endif
+    // Initialize the sampled destination to green: skipped pass/resolve stays green.
+    dkCmdBufBindRenderTarget(g_cmdbuf, &textureViewCopy, NULL);
+    dkCmdBufClearColorFloat(g_cmdbuf, 0, DkColorMask_RGBA, 0, 0.7f, 0, 1);
+    dkCmdBufBindRenderTarget(g_cmdbuf, &offscreenView, NULL);
+    dkCmdBufBindMultisampleState(g_cmdbuf, &ms);
+    dkCmdBufSetViewports(g_cmdbuf, 0, &offViewport, 1);
+    dkCmdBufSetScissors(g_cmdbuf, 0, &offScissor, 1);
+    dkCmdBufBindShaders(g_cmdbuf, DkStageFlag_GraphicsMask, offShaders, 2);
+    dkCmdBufBindDepthStencilState(g_cmdbuf, &offDepth);
+    dkCmdBufBindRasterizerState(g_cmdbuf, &offRaster);
+    dkCmdBufBindColorState(g_cmdbuf, &offColor);
+    dkCmdBufBindColorWriteState(g_cmdbuf, &offWrite);
+#ifndef FHNX_GPU_SKIP_OFFSCREEN
+    dkCmdBufClearColorFloat(g_cmdbuf, 0, DkColorMask_RGBA, 1, 0.5f, 0, 1);
+    dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 0, 0);
+#endif
+    dkCmdBufBarrier(g_cmdbuf, DkBarrier_Full, 0);
+#ifdef FHNX_GPU_RESOLVE
+#ifndef FHNX_GPU_SKIP_RESOLVE
+    dkCmdBufResolveImage(g_cmdbuf, &offscreenView, &textureViewCopy);
+#endif
+#endif
+    dkMultisampleStateDefaults(&ms);
+    dkCmdBufBindMultisampleState(g_cmdbuf, &ms);
+#endif
     dkCmdBufBarrier(g_cmdbuf, DkBarrier_Full, DkInvalidateFlags_Image);
     g_uploadTexture = dkCmdBufFinishList(g_cmdbuf);
 #endif
@@ -261,14 +337,33 @@ static void graphicsInitialize(void)
     depthState.depthTestEnable = false;
 #endif
     dkCmdBufBindDepthStencilState(g_cmdbuf, &depthState);
-    dkCmdBufClearDepthStencil(g_cmdbuf, true, 1.0f, 0, 0);
+    dkCmdBufClearDepthStencil(g_cmdbuf, true, 1.0f, 0xff, 0);
     dkCmdBufBindImageDescriptorSet(g_cmdbuf, dkMemBlockGetGpuAddr(g_descriptors), 1);
     dkCmdBufBindSamplerDescriptorSet(g_cmdbuf, dkMemBlockGetGpuAddr(g_descriptors)+128, 1);
     DkResHandle texture = dkMakeTextureHandle(0, 0);
     dkCmdBufBindTextures(g_cmdbuf, DkStage_Fragment, 0, &texture, 1);
+    #ifdef FHNX_GPU_STENCIL
+    depthState.depthTestEnable = depthState.depthWriteEnable = false;
+    depthState.stencilTestEnable = true;
+    dkCmdBufBindDepthStencilState(g_cmdbuf, &depthState);
+    dkCmdBufSetStencil(g_cmdbuf, DkFace_FrontAndBack, 0xff, 1, 0xff);
+    DkColorWriteState maskWrite; dkColorWriteStateDefaults(&maskWrite);
+    dkColorWriteStateSetMask(&maskWrite, 0, 0);
+    dkCmdBufBindColorWriteState(g_cmdbuf, &maskWrite);
+    dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 0, 0);
+    dkCmdBufBindColorWriteState(g_cmdbuf, &colorWriteState);
+    depthState.stencilFrontCompareOp = depthState.stencilBackCompareOp = DkCompareOp_Equal;
+    depthState.stencilFrontPassOp = depthState.stencilBackPassOp = DkStencilOp_Keep;
+#ifdef FHNX_GPU_DISABLE_STENCIL
+    depthState.stencilTestEnable = false;
+#endif
+    dkCmdBufBindDepthStencilState(g_cmdbuf, &depthState);
+    dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 3, 0);
+#else
     // Near triangle first, far triangle second: the latter must not overwrite it.
     dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 0, 0);
     dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 3, 0);
+#endif
 #elif !defined(FHNX_GPU_CLEAR_ONLY)
     dkCmdBufDraw(g_cmdbuf, DkPrimitive_Triangles, 3, 1, 0, 0);
 #endif
@@ -290,6 +385,15 @@ static void graphicsInitialize(void)
     dkQueueSubmitCommands(g_renderQueue, g_uploadTexture);
     dkQueueWaitIdle(g_renderQueue);
     trace("texture_upload_end");
+#ifdef FHNX_GPU_STENCIL
+    trace("stencil_fixture_ready");
+#endif
+#ifdef FHNX_GPU_RTT
+    trace("offscreen_pass_complete");
+#endif
+#ifdef FHNX_GPU_RESOLVE
+    trace("resolve_fixture_ready");
+#endif
 #endif
 }
 
@@ -337,6 +441,9 @@ static void graphicsExit(void)
 #ifdef FHNX_GPU_TEXTURE_DEPTH
     dkMemBlockDestroy(g_descriptors);
     dkMemBlockDestroy(g_stagingMemory);
+    #ifdef FHNX_GPU_RESOLVE
+    dkMemBlockDestroy(g_offscreenMemory);
+#endif
     dkMemBlockDestroy(g_textureMemory);
     dkMemBlockDestroy(g_depthMemory);
 #endif

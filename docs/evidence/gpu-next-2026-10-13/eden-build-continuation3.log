@@ -1,0 +1,582 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- [DetectArchitecture] Target architecture: x86_64
+-- Could NOT find RenderDoc (missing: RenderDoc_INCLUDE_DIR) 
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found suitable version "3.0.13", minimum required is "3")
+-- Fetching needed dependencies with CPM
+-- Boost: RelWithDebInfo build, static libraries, MPI OFF, Python OFF, testing OFF
+-- Boost: libraries included: algorithm;icl;pool;container;heap;asio;headers;process;filesystem;crc;variant
+-- Boost.Context: architecture x86_64, binary format elf, ABI sysv, assembler gas, suffix .S, implementation fcontext
+-- CPM: Adding package Boost@1.57 (1.57 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/boost/1.90.0)
+-- {fmt} version: 12.1.0
+-- Build type: RelWithDebInfo
+-- CPM: Adding package fmt@8 (8 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/fmt/12.1.0)
+CMake Warning (deprecated) at .cache/cpm/lz4/ebb3/build/cmake/CMakeLists.txt:11 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- Creating build script for LZ4 version: 1.10.0
+-- CPM: Adding package lz4@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/lz4/ebb3)
+-- ZSTD VERSION: 1.5.8
+-- CMAKE_INSTALL_PREFIX: /usr/local
+-- CMAKE_INSTALL_LIBDIR: lib
+-- ZSTD_LEGACY_SUPPORT enabled
+-- Multi-threading support enabled
+-- CPM: Adding package zstd@1.5 (1.5 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/zstd/b8d6)
+-- Using the multi-header code from /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/nlohmann_json/3.12.0/include/
+-- CPM: Adding package nlohmann_json@3.8 (3.8 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/nlohmann_json/3.12.0)
+-- CPM: Using local package ZLIB@1.3
+CMake Warning at .cache/cpm/opus/a3f0/cmake/OpusPackageVersion.cmake:61 (message):
+  Could not get package version.
+Call Stack (most recent call first):
+  .cache/cpm/opus/a3f0/CMakeLists.txt:5 (get_package_version)
+
+
+-- Opus project version: 0
+-- Performing Test VLA_SUPPORTED -- success
+-- Check CPU arch: CMAKE_GENERATOR_PLATFORM= CMAKE_SYSTEM_PROCESSOR=x86_64
+-- Performing Test CPU_INFO_BY_ASM_SUPPORTED -- success
+-- Performing Test CPU_INFO_BY_C_SUPPORTED -- success
+-- Check SIMD support by compiler
+-- The following features have been enabled:
+
+ * OPUS_ENABLE_FLOAT_API, compile with the floating point API (for machines with float library).
+ * OPUS_HARDENING, run-time checks that are cheap and safe for use in production.
+ * OPUS_VAR_ARRAYS, use variable length arrays for stack arrays.
+ * OPUS_STACK_PROTECTOR, use stack protection.
+ * OPUS_FORTIFY_SOURCE, add protection against buffer overflows.
+ * OPUS_X86_MAY_HAVE_SSE, does runtime check for SSE1 support.
+ * OPUS_X86_MAY_HAVE_SSE2, does runtime check for SSE2 support.
+ * OPUS_X86_MAY_HAVE_SSE4_1, does runtime check for SSE4.1 support.
+ * OPUS_X86_MAY_HAVE_AVX2, does runtime check for AVX FMA AVX2 support.
+ * OPUS_X86_PRESUME_SSE, assume target CPU has SSE1 support (override runtime check).
+ * OPUS_X86_PRESUME_SSE2, assume target CPU has SSE2 support (override runtime check).
+
+-- The following OPTIONAL packages have been found:
+
+ * Git
+
+-- The following REQUIRED packages have been found:
+
+ * OpenSSL (required version >= 3)
+ * Threads
+
+-- The following features have been disabled:
+
+ * OPUS_BUILD_SHARED_LIBRARY, build shared library.
+ * OPUS_BUILD_TESTING, build tests.
+ * OPUS_CUSTOM_MODES, enable non-Opus modes, e.g. 44.1 kHz & 2^n frames.
+ * OPUS_BUILD_PROGRAMS, build programs.
+ * OPUS_DISABLE_INTRINSICS, disable all intrinsics optimizations.
+ * OPUS_FIXED_POINT, compile as fixed-point (for machines without a fast enough FPU).
+ * OPUS_FLOAT_APPROX, enable floating point approximations (Ensure your platform supports IEEE 754 before enabling).
+ * OPUS_ASSERTIONS, additional software error checking.
+ * OPUS_FUZZING, causes the encoder to make random decisions (do not use in production).
+ * OPUS_CHECK_ASM, enable bit-exactness checks between optimized and c implementations.
+ * OPUS_DNN_FLOAT_DEBUG, Run DNN computations as float for debugging purposes.
+ * OPUS_INSTALL, Install Opus targets
+ * OPUS_INSTALL_PKG_CONFIG_MODULE, install pkg-config module.
+ * OPUS_INSTALL_CMAKE_CONFIG_MODULE, install CMake package config module.
+ * OPUS_DRED, enable DRED.
+ * OPUS_OSCE, enable OSCE.
+ * OPUS_FIXED_POINT_DEBUG, debug fixed-point implementation.
+ * OPUS_USE_ALLOCA, use alloca for stack arrays (on non-C99 compilers).
+ * OPUS_NONTHREADSAFE_PSEUDOSTACK, use a non threadsafe pseudostack when neither variable length arrays or alloca is supported.
+ * OPUS_FAST_MATH, enable fast math (unsupported and discouraged use, as code is not well tested with this build option).
+ * OPUS_X86_PRESUME_SSE4_1, assume target CPU has SSE4.1 support (override runtime check).
+ * OPUS_X86_PRESUME_AVX2, assume target CPU has AVX FMA AVX2 support (override runtime check).
+
+-- The following OPTIONAL packages have not been found:
+
+ * RenderDoc
+
+-- CPM: Adding package Opus@1.3 (1.3 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/opus/a3f0)
+-- Platform Libraries: rt
+-- CPM: Adding package xbyak@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/xbyak/7.35.2)
+-- CPM: Adding package enet@1.3 (1.3 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/enet/1.3.18)
+-- CPM: Adding package unordered_dense@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/unordered_dense/7b55)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found suitable version "3.0.13", minimum required is "3.0.0") found components: Crypto SSL
+-- CPM: Adding package httplib@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/httplib/0.37.0)
+-- CPM: Adding package VulkanHeaders@1.4.317 (1.4.317 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/vulkanheaders/1.4.345)
+-- CPM: Adding package VulkanUtilityLibraries@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/vulkanutilitylibraries/1.4.345)
+-- CPM: Adding package frozen@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/frozen/61dc)
+-- CPM: Adding package SimpleIni@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/simpleini/4.25)
+-- Using bundled SDL2
+-- CPM: Adding package SDL2@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/sdl2/linux-amd64-2.32.10-3c28e8ecc0)
+-- CPM: Adding package SPIRV-Headers@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/spirv-headers/04f1)
+CMake Warning (policy) at .cache/cpm/sirit/1.0.4/CMakeLists.txt:37 (set):
+  Policy CMP0218 is not set: The CMAKE_WARN_DEPRECATED and
+  CMAKE_ERROR_DEPRECATED variables are ignored.  Run "cmake --help-policy
+  CMP0218" for policy details.  Use the cmake_policy command to set the
+  policy and suppress this warning.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+-- CPM: Adding package sirit@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/sirit/1.0.4)
+-- CPM: Adding package VulkanMemoryAllocator@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/vulkanmemoryallocator/3.3.0)
+-- Checking for module 'libva'
+--   Package 'libva', required by 'virtual:world', not found
+-- Checking for module 'cuda'
+--   Package 'cuda', required by 'virtual:world', not found
+-- Checking for module 'ffnvcodec'
+--   Package 'ffnvcodec', required by 'virtual:world', not found
+-- Checking for module 'vdpau'
+--   Package 'vdpau', required by 'virtual:world', not found
+-- Checking for module 'libdrm'
+--   Found libdrm, version 2.4.125
+CMake Warning at externals/ffmpeg/CMakeLists.txt:108 (message):
+  ffmpeg: libva-dev not found, disabling Video Acceleration API (VA-API)...
+
+
+CMake Warning at externals/ffmpeg/CMakeLists.txt:152 (message):
+  ffmpeg: libvdpau-dev not found, disabling Video Decode and Presentation API
+  for Unix (VDPAU)...
+
+
+-- CPM: Adding package FFmpeg@ ( at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d)
+-- FFmpeg Libraries: FFmpeg::FFmpeg;drm
+-- Downloading time zone data...
+-- CPM: Adding package nx_tzdb@121125 (121125 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/nx_tzdb/230326)
+-- CPM: Adding package gamemode@1.7 (1.7 at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/gamemode/ce6f)
+-- Could NOT find libusb (missing: LIBUSB_LINK_LIBRARIES) (found version "")
+-- [GetSCMRev] Git commit: 58c1e20ee58efa3900ba616207d460886214480b
+-- [GetSCMRev] Git tag: v0.2.1
+-- [GetSCMRev] Git refspec: HEAD
+-- Configuring done (1.2s)
+-- Generating done (0.4s)
+-- Build files have been written to: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-build
+[0/4] Re-checking globbed directories...
+[1/191] Building CXX object src/common/CMakeFiles/common.dir/scm_rev.cpp.o
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-build/src/common/scm_rev.cpp:16: warning: "BUILD_ID" redefined
+   16 | #define BUILD_ID "HEAD"
+      | 
+<command-line>: note: this is the location of the previous definition
+[2/191] Linking CXX static library src/common/libcommon.a
+[3/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/cdma_pusher.cpp.o
+[4/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/buffer_cache/buffer_cache.cpp.o
+[5/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/compatible_formats.cpp.o
+[6/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/control/channel_state.cpp.o
+[7/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/control/channel_state_cache.cpp.o
+[8/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/control/scheduler.cpp.o
+[9/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/dirty_flags.cpp.o
+[10/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/sw_blitter/blitter.cpp.o
+[11/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/dma_pusher.cpp.o
+[12/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/draw_manager.cpp.o
+[13/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/sw_blitter/converter.cpp.o
+[14/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/engine_upload.cpp.o
+[15/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/fermi_2d.cpp.o
+[16/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/kepler_compute.cpp.o
+[17/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/kepler_memory.cpp.o
+[18/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/maxwell_dma.cpp.o
+[19/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/maxwell_3d.cpp.o
+[20/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/framebuffer_config.cpp.o
+[21/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/fsr.cpp.o
+[22/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/engines/puller.cpp.o
+[23/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/codecs/decoder.cpp.o
+[24/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/codecs/vp8.cpp.o
+[25/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/codecs/h264.cpp.o
+[26/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/codecs/vp9.cpp.o
+[27/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/ffmpeg.cpp.o
+[28/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/control.cpp.o
+[29/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/host1x.cpp.o
+[30/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/gpu_device_memory_manager.cpp.o
+[31/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/syncpoint_manager.cpp.o
+[32/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/nvdec.cpp.o
+[33/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/host1x/vic.cpp.o
+[34/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/macro.cpp.o
+[35/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/gpu.cpp.o
+[36/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/gpu_thread.cpp.o
+[37/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/memory_manager.cpp.o
+[38/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_base.cpp.o
+[39/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_null/renderer_null.cpp.o
+[40/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_null/null_rasterizer.cpp.o
+[41/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/filters.cpp.o
+[42/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/fsr.cpp.o
+[43/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/fxaa.cpp.o
+[44/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/smaa.cpp.o
+[45/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/layer.cpp.o
+[46/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/util.cpp.o
+[47/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/present/window_adapt_pass.cpp.o
+[48/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/fixed_pipeline_state.cpp.o
+[49/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/blit_image.cpp.o
+[50/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/maxwell_to_vk.cpp.o
+[51/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/pipeline_statistics.cpp.o
+[52/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_blit_screen.cpp.o
+[53/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/renderer_vulkan.cpp.o
+[54/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_buffer_cache_base.cpp.o
+[55/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_buffer_cache.cpp.o
+[56/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_command_pool.cpp.o
+[57/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_compute_pass.cpp.o
+[58/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_compute_pipeline.cpp.o
+[59/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_descriptor_pool.cpp.o
+[60/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_fence_manager.cpp.o
+[61/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_master_semaphore.cpp.o
+[62/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_graphics_pipeline.cpp.o
+[63/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_present_manager.cpp.o
+[64/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_pipeline_cache.cpp.o
+[65/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_query_cache.cpp.o
+[66/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_render_pass_cache.cpp.o
+[67/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_resource_pool.cpp.o
+[68/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_rasterizer.cpp.o
+[69/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_shader_util.cpp.o
+[70/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_scheduler.cpp.o
+[71/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_staging_buffer_pool.cpp.o
+[72/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_state_tracker.cpp.o
+[73/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_swapchain.cpp.o
+[74/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_texture_cache.cpp.o
+[75/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_texture_cache_base.cpp.o
+[76/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_turbo_mode.cpp.o
+[77/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_vulkan/vk_update_descriptor.cpp.o
+[78/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_debug_callback.cpp.o
+[79/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_instance.cpp.o
+[80/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_library.cpp.o
+[81/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_device.cpp.o
+[82/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_surface.cpp.o
+[83/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_memory_allocator.cpp.o
+[84/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/nsight_aftermath_tracker.cpp.o
+[85/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/vulkan_common/vulkan_wrapper.cpp.o
+[86/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/shader_cache.cpp.o
+[87/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/shader_environment.cpp.o
+[88/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/shader_notify.cpp.o
+[89/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/accelerated_swizzle.cpp.o
+[90/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/surface.cpp.o
+[91/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/decode_bc.cpp.o
+[92/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/formatter.cpp.o
+[93/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/format_lookup_table.cpp.o
+[94/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/image_base.cpp.o
+[95/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/image_info.cpp.o
+[96/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/image_view_base.cpp.o
+[97/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/image_view_info.cpp.o
+[98/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/texture_cache.cpp.o
+[99/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/textures/astc.cpp.o
+[100/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/texture_cache/util.cpp.o
+[101/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/textures/bcn.cpp.o
+[102/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/textures/decoders.cpp.o
+[103/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/textures/texture.cpp.o
+[104/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/textures/workers.cpp.o
+[105/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/transform_feedback.cpp.o
+[106/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/filters.cpp.o
+[107/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/video_core.cpp.o
+[108/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/fsr.cpp.o
+[109/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/fxaa.cpp.o
+[110/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/smaa.cpp.o
+[111/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/layer.cpp.o
+[112/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/window_adapt_pass.cpp.o
+[113/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/blit_image.cpp.o
+[114/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_blit_screen.cpp.o
+[115/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_buffer_cache.cpp.o
+[116/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_buffer_cache_base.cpp.o
+[117/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_device.cpp.o
+[118/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_compute_pipeline.cpp.o
+[119/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_fence_manager.cpp.o
+[120/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_graphics_pipeline.cpp.o
+[121/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_resource_manager.cpp.o
+[122/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_rasterizer.cpp.o
+[123/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_shader_manager.cpp.o
+[124/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_shader_util.cpp.o
+[125/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_state_tracker.cpp.o
+[126/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_staging_buffer_pool.cpp.o
+[127/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_shader_cache.cpp.o
+[128/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_texture_cache.cpp.o
+[129/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_texture_cache_base.cpp.o
+[130/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_query_cache.cpp.o
+[131/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o
+[132/191] Building CXX object src/video_core/CMakeFiles/video_core.dir/renderer_opengl/renderer_opengl.cpp.o
+[133/191] Linking CXX static library src/video_core/libvideo_core.a
+[134/191] Building CXX object src/core/CMakeFiles/core.dir/memory/dmnt_cheat_vm.cpp.o
+In file included from /usr/include/c++/13/format:47,
+                 from /usr/include/c++/13/bits/chrono_io.h:39,
+                 from /usr/include/c++/13/chrono:3370,
+                 from /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/./common/logging.h:9,
+                 from /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/./common/assert.h:10,
+                 from /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:4:
+In member function ‘constexpr std::enable_if_t<((__exactly_once<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type> > && is_constructible_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>, _Tp>) && is_assignable_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>&, _Tp>), std::variant<_Types>&> std::variant<_Types>::operator=(_Tp&&) [with _Tp = Core::Memory::StoreStaticOpcode; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}]’,
+    inlined from ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’ at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:307:9:
+/usr/include/c++/13/variant:1500:13: warning: ‘<anonymous>’ may be used uninitialized [-Wmaybe-uninitialized]
+ 1500 |             std::get<__index>(*this) = std::forward<_Tp>(__rhs);
+      |             ^~~
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp: In member function ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’:
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:307:9: note: ‘<anonymous>’ declared here
+  307 |         };
+      |         ^
+In constructor ‘constexpr std::__detail::__variant::_Uninitialized<_Type, true>::_Uninitialized(std::in_place_index_t<0>, _Args&& ...) [with _Args = {Core::Memory::BeginConditionalOpcode}; _Type = Core::Memory::BeginConditionalOpcode]’,
+    inlined from ‘constexpr void std::_Construct(_Tp*, _Args&& ...) [with _Tp = __detail::__variant::_Uninitialized<Core::Memory::BeginConditionalOpcode, true>; _Args = {const in_place_index_t<0>&, Core::Memory::BeginConditionalOpcode}]’ at /usr/include/c++/13/bits/stl_construct.h:119:7,
+    inlined from ‘constexpr void std::__detail::__variant::__emplace(_Variant_storage<_Triv, _Types ...>&, _Args&& ...) [with long unsigned int _Np = 1; bool _Triv = true; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}; _Args = {Core::Memory::BeginConditionalOpcode}]’ at /usr/include/c++/13/variant:567:22,
+    inlined from ‘constexpr std::enable_if_t<is_constructible_v<std::variant<_Types>::__to_type<_Np, typename std::enable_if<(_Np < sizeof... (_Types)), void>::type>, _Args ...>, std::variant<_Types>::__to_type<_Np>&> std::variant<_Types>::emplace(_Args&& ...) [with long unsigned int _Np = 1; _Args = {Core::Memory::BeginConditionalOpcode}; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}]’ at /usr/include/c++/13/variant:1548:33,
+    inlined from ‘constexpr std::enable_if_t<((__exactly_once<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type> > && is_constructible_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>, _Tp>) && is_assignable_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>&, _Tp>), std::variant<_Types>&> std::variant<_Types>::operator=(_Tp&&) [with _Tp = Core::Memory::BeginConditionalOpcode; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}]’ at /usr/include/c++/13/variant:1506:25,
+    inlined from ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’ at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:321:9:
+/usr/include/c++/13/variant:224:11: warning: ‘<anonymous>’ may be used uninitialized [-Wmaybe-uninitialized]
+  224 |         : _M_storage(std::forward<_Args>(__args)...)
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp: In member function ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’:
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:321:9: note: ‘<anonymous>’ declared here
+  321 |         };
+      |         ^
+In constructor ‘constexpr std::__detail::__variant::_Uninitialized<_Type, true>::_Uninitialized(std::in_place_index_t<0>, _Args&& ...) [with _Args = {Core::Memory::LoadRegisterStaticOpcode}; _Type = Core::Memory::LoadRegisterStaticOpcode]’,
+    inlined from ‘constexpr void std::_Construct(_Tp*, _Args&& ...) [with _Tp = __detail::__variant::_Uninitialized<Core::Memory::LoadRegisterStaticOpcode, true>; _Args = {const in_place_index_t<0>&, Core::Memory::LoadRegisterStaticOpcode}]’ at /usr/include/c++/13/bits/stl_construct.h:119:7,
+    inlined from ‘constexpr void std::__detail::__variant::__emplace(_Variant_storage<_Triv, _Types ...>&, _Args&& ...) [with long unsigned int _Np = 4; bool _Triv = true; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}; _Args = {Core::Memory::LoadRegisterStaticOpcode}]’ at /usr/include/c++/13/variant:567:22,
+    inlined from ‘constexpr std::enable_if_t<is_constructible_v<std::variant<_Types>::__to_type<_Np, typename std::enable_if<(_Np < sizeof... (_Types)), void>::type>, _Args ...>, std::variant<_Types>::__to_type<_Np>&> std::variant<_Types>::emplace(_Args&& ...) [with long unsigned int _Np = 4; _Args = {Core::Memory::LoadRegisterStaticOpcode}; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}]’ at /usr/include/c++/13/variant:1548:33,
+    inlined from ‘constexpr std::enable_if_t<((__exactly_once<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type> > && is_constructible_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>, _Tp>) && is_assignable_v<std::variant<_Types>::__accepted_type<_Tp&&, typename std::enable_if<__not_self<_Tp&&>, void>::type>&, _Tp>), std::variant<_Types>&> std::variant<_Types>::operator=(_Tp&&) [with _Tp = Core::Memory::LoadRegisterStaticOpcode; _Types = {Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction}]’ at /usr/include/c++/13/variant:1506:25,
+    inlined from ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’ at /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:351:9:
+/usr/include/c++/13/variant:224:11: warning: ‘((u32*)((char*)&opcode + offsetof(Core::Memory::CheatVmOpcode, Core::Memory::CheatVmOpcode::opcode.std::variant<Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Variant_base<Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Move_assign_base<true, Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Copy_assign_base<true, Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Move_ctor_base<true, Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Copy_ctor_base<true, Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::<unnamed>.std::__detail::__variant::_Variant_storage<true, Core::Memory::StoreStaticOpcode, Core::Memory::BeginConditionalOpcode, Core::Memory::EndConditionalOpcode, Core::Memory::ControlLoopOpcode, Core::Memory::LoadRegisterStaticOpcode, Core::Memory::LoadRegisterMemoryOpcode, Core::Memory::StoreStaticToAddressOpcode, Core::Memory::PerformArithmeticStaticOpcode, Core::Memory::BeginKeypressConditionalOpcode, Core::Memory::PerformArithmeticRegisterOpcode, Core::Memory::StoreRegisterToAddressOpcode, Core::Memory::BeginRegisterConditionalOpcode, Core::Memory::SaveRestoreRegisterOpcode, Core::Memory::SaveRestoreRegisterMaskOpcode, Core::Memory::ReadWriteStaticRegisterOpcode, Core::Memory::PauseProcessOpcode, Core::Memory::ResumeProcessOpcode, Core::Memory::DebugLogOpcode, Core::Memory::UnrecognizedInstruction>::_M_u)))[1]’ may be used uninitialized [-Wmaybe-uninitialized]
+  224 |         : _M_storage(std::forward<_Args>(__args)...)
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp: In member function ‘bool Core::Memory::DmntCheatVm::DecodeNextOpcode(Core::Memory::CheatVmOpcode&)’:
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/core/memory/dmnt_cheat_vm.cpp:226:19: note: ‘opcode’ declared here
+  226 |     CheatVmOpcode opcode = {};
+      |                   ^~~~~~
+[135/191] Building CXX object src/core/CMakeFiles/core.dir/tools/renderdoc.cpp.o
+[136/191] Building CXX object src/core/CMakeFiles/core.dir/tools/freezer.cpp.o
+[137/191] Building CXX object src/core/CMakeFiles/core.dir/internal_network/wifi_scanner_dummy.cpp.o
+[138/191] Building CXX object src/core/CMakeFiles/core.dir/arm/dynarmic/arm_dynarmic_64.cpp.o
+[139/191] Building CXX object src/core/CMakeFiles/core.dir/arm/dynarmic/arm_dynarmic_32.cpp.o
+[140/191] Building CXX object src/core/CMakeFiles/core.dir/arm/dynarmic/dynarmic_cp15.cpp.o
+[141/191] Building CXX object src/core/CMakeFiles/core.dir/arm/dynarmic/dynarmic_exclusive_monitor.cpp.o
+[142/191] Building CXX object src/core/CMakeFiles/core.dir/hle/service/jit/jit_code_memory.cpp.o
+[143/191] Building CXX object src/core/CMakeFiles/core.dir/hle/service/jit/jit_context.cpp.o
+[144/191] Building CXX object src/core/CMakeFiles/core.dir/hle/service/ssl/ssl_backend_openssl.cpp.o
+[145/191] Linking CXX static library src/audio_core/libaudio_core.a
+[146/191] Building CXX object src/core/CMakeFiles/core.dir/hle/service/jit/jit.cpp.o
+[147/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/camera.cpp.o
+[148/191] Linking CXX static library src/core/libcore.a
+[149/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/keyboard.cpp.o
+[150/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/mouse.cpp.o
+[151/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/touch_screen.cpp.o
+[152/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/tas_input.cpp.o
+[153/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/virtual_amiibo.cpp.o
+[154/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/virtual_gamepad.cpp.o
+[155/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/udp_client.cpp.o
+[156/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/stick_from_buttons.cpp.o
+[157/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/udp_protocol.cpp.o
+[158/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/touch_from_buttons.cpp.o
+[159/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/input_engine.cpp.o
+[160/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/input_mapping.cpp.o
+[161/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/input_poller.cpp.o
+[162/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/main.cpp.o
+[163/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/joycon.cpp.o
+[164/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_driver.cpp.o
+[165/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/drivers/sdl_driver.cpp.o
+[166/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/calibration.cpp.o
+[167/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/common_protocol.cpp.o
+[168/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/generic_functions.cpp.o
+[169/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/irs.cpp.o
+[170/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/nfc.cpp.o
+[171/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/poller.cpp.o
+[172/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/ringcon.cpp.o
+[173/191] Building CXX object src/input_common/CMakeFiles/input_common.dir/helpers/joycon_protocol/rumble.cpp.o
+[174/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/firmware_manager.cpp.o
+[175/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/config.cpp.o
+[176/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/data_manager.cpp.o
+[177/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/settings_generator.cpp.o
+[178/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/play_time_manager.cpp.o
+[179/191] Linking CXX static library src/input_common/libinput_common.a
+[180/191] Building CXX object src/frontend_common/CMakeFiles/frontend_common.dir/mod_manager.cpp.o
+[181/191] Linking CXX static library src/frontend_common/libfrontend_common.a
+[182/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2.cpp.o
+[183/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_null.cpp.o
+[184/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/sdl_config.cpp.o
+[185/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_vk.cpp.o
+[186/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_gl.cpp.o
+[187/191] Building CXX object src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/yuzu.cpp.o
+[188/191] Linking CXX executable bin/eden-cli
+FAILED: [code=1] bin/eden-cli 
+: && /usr/bin/c++ -O1 -g1 -DNDEBUG -Wl,--dependency-file=src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/link.d src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2.cpp.o src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_null.cpp.o src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_vk.cpp.o src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/sdl_config.cpp.o src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/yuzu.cpp.o src/yuzu_cmd/CMakeFiles/yuzu-cmd.dir/emu_window/emu_window_sdl2_gl.cpp.o -o bin/eden-cli  src/common/libcommon.a  src/core/libcore.a  src/input_common/libinput_common.a  src/frontend_common/libfrontend_common.a  src/video_core/libvideo_core.a  externals/glad/libglad.a  -lrt  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/sdl2/linux-amd64-2.32.10-3c28e8ecc0/lib/libSDL2.a  src/core/libcore.a  src/audio_core/libaudio_core.a  src/hid_core/libhid_core.a  src/core/libcore.a  src/video_core/libvideo_core.a  src/audio_core/libaudio_core.a  src/hid_core/libhid_core.a  src/network/libnetwork.a  _deps/enet-build/libenet.a  externals/libtz.a  _deps/boost-build/libs/process/libboost_process.a  externals/glad/libglad.a  -ldl  src/dynarmic/src/dynarmic/libdynarmic.a  -lrt  src/shader_recompiler/libshader_recompiler.a  externals/libbc_decoder.a  src/video_core/gpu_logging/libgpu_logging.a  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libswscale.a  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavfilter.a  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a  -ldrm  _deps/sirit-build/src/libsirit.a  src/common/libcommon.a  _deps/boost-build/libs/date_time/libboost_date_time.a  _deps/boost-build/libs/container/libboost_container.a  _deps/boost-build/libs/filesystem/libboost_filesystem.a  _deps/boost-build/libs/context/libboost_context.a  /usr/lib/x86_64-linux-gnu/libz.so  /usr/lib/x86_64-linux-gnu/libssl.so  /usr/lib/x86_64-linux-gnu/libcrypto.so  _deps/fmt-build/libfmt.a  externals/libstb.a  _deps/lz4-build/liblz4.a  externals/libdemangle.a  _deps/zstd-build/lib/libzstd.a  /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/sdl2/linux-amd64-2.32.10-3c28e8ecc0/lib/libSDL2.a  _deps/opus-build/libopus.a  -lm && :
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/renderer_opengl.cpp.o: in function `OpenGL::RendererOpenGL::RendererOpenGL(Core::Frontend::EmuWindow&, Core::DeviceMemoryManager<Tegra::MaxwellDeviceTraits>&, Tegra::GPU&, std::unique_ptr<Core::Frontend::GraphicsContext, std::default_delete<Core::Frontend::GraphicsContext> >)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/renderer_opengl.cpp:98:(.text+0xb33): undefined reference to `OpenGL::ProgramManager::ProgramManager(OpenGL::Device const&)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_rasterizer.cpp.o: in function `OpenGL::RasterizerOpenGL::DispatchCompute()':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_rasterizer.cpp:404:(.text+0x4a2): undefined reference to `OpenGL::ProgramManager::LocalMemoryWarmup()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_rasterizer.cpp.o: in function `OpenGL::RasterizerOpenGL::Draw(bool, unsigned int)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_rasterizer.cpp:240:(.text+0x40ca): undefined reference to `OpenGL::ProgramManager::LocalMemoryWarmup()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_rasterizer.cpp.o: in function `OpenGL::RasterizerOpenGL::DrawIndirect()':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_rasterizer.cpp:240:(.text+0x4467): undefined reference to `OpenGL::ProgramManager::LocalMemoryWarmup()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::ASTCDecode(OpenGL::Image&, OpenGL::StagingBufferMap const&, std::span<VideoCommon::SwizzleParameters const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:71:(.text+0x5e8): undefined reference to `OpenGL::ProgramManager::LocalMemoryWarmup()'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:77:(.text+0x60e): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:113:(.text+0x78c): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::BlockLinearUpload2D(OpenGL::Image&, OpenGL::StagingBufferMap const&, std::span<VideoCommon::SwizzleParameters const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:123:(.text+0x7f0): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:150:(.text+0x98f): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::BlockLinearUpload3D(OpenGL::Image&, OpenGL::StagingBufferMap const&, std::span<VideoCommon::SwizzleParameters const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:162:(.text+0xa04): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:191:(.text+0xbc0): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::PitchUpload(OpenGL::Image&, OpenGL::StagingBufferMap const&, std::span<VideoCommon::SwizzleParameters const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:211:(.text+0xcac): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:230:(.text+0xda9): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::CopyBC4(OpenGL::Image&, OpenGL::Image&, std::span<VideoCommon::ImageCopy const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:239:(.text+0xf5d): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:255:(.text+0x1075): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::ConvertS8D24(OpenGL::Image&, std::span<VideoCommon::ImageCopy const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:262:(.text+0x1225): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:275:(.text+0x12fc): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/util_shaders.cpp.o: in function `OpenGL::UtilShaders::CopyMSAA(OpenGL::Image&, OpenGL::Image&, std::span<VideoCommon::ImageCopy const, 18446744073709551615ul>)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:283:(.text+0x14c9): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/util_shaders.cpp:302:(.text+0x15c5): undefined reference to `OpenGL::ProgramManager::RestoreGuestCompute()'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/smaa.cpp.o: in function `OpenGL::SMAA::Draw(OpenGL::ProgramManager&, unsigned int)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/smaa.cpp:78:(.text+0x1b3): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/smaa.cpp:86:(.text+0x221): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/smaa.cpp:93:(.text+0x276): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/window_adapt_pass.cpp.o: in function `OpenGL::WindowAdaptPass::DrawToFramebuffer(OpenGL::ProgramManager&, std::__cxx11::list<OpenGL::Layer, std::allocator<OpenGL::Layer> >&, std::span<Tegra::FramebufferConfig const, 18446744073709551615ul>, Layout::FramebufferLayout const&, bool)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/window_adapt_pass.cpp:67:(.text+0x441): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/blit_image.cpp.o: in function `OpenGL::BlitImageHelper::BlitColor(unsigned int, unsigned int, unsigned int, VideoCommon::Region2D const&, VideoCommon::Region2D const&, VideoCommon::Extent3D const&)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/blit_image.cpp:41:(.text+0x1a0): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_compute_pipeline.cpp.o: in function `OpenGL::ComputePipeline::Configure()':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_compute_pipeline.cpp:164:(.text+0xb4d): undefined reference to `OpenGL::ProgramManager::BindComputeAssemblyProgram(unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_compute_pipeline.cpp:166:(.text+0xf53): undefined reference to `OpenGL::ProgramManager::BindComputeProgram(unsigned int)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_graphics_pipeline.cpp.o: in function `bool OpenGL::GraphicsPipeline::ConfigureImpl<OpenGL::(anonymous namespace)::DefaultSpec>(bool)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:446:(.text+0x4158): undefined reference to `OpenGL::ProgramManager::BindAssemblyPrograms(std::span<OpenGL::OGLAssemblyProgram const, 5ul>, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:448:(.text+0x42dd): undefined reference to `OpenGL::ProgramManager::BindSourcePrograms(std::span<OpenGL::OGLProgram const, 5ul>)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_graphics_pipeline.cpp.o: in function `bool OpenGL::GraphicsPipeline::ConfigureImpl<OpenGL::(anonymous namespace)::SimpleVertexFragmentSpec>(bool)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:446:(.text+0x45d5): undefined reference to `OpenGL::ProgramManager::BindAssemblyPrograms(std::span<OpenGL::OGLAssemblyProgram const, 5ul>, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:448:(.text+0x472a): undefined reference to `OpenGL::ProgramManager::BindSourcePrograms(std::span<OpenGL::OGLProgram const, 5ul>)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/gl_graphics_pipeline.cpp.o: in function `bool OpenGL::GraphicsPipeline::ConfigureImpl<OpenGL::(anonymous namespace)::SimpleVertexSpec>(bool)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:446:(.text+0x4b9b): undefined reference to `OpenGL::ProgramManager::BindAssemblyPrograms(std::span<OpenGL::OGLAssemblyProgram const, 5ul>, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/gl_graphics_pipeline.cpp:448:(.text+0x4c73): undefined reference to `OpenGL::ProgramManager::BindSourcePrograms(std::span<OpenGL::OGLProgram const, 5ul>)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/fsr.cpp.o: in function `OpenGL::FSR::Draw(OpenGL::ProgramManager&, unsigned int, unsigned int, unsigned int, Common::Rectangle<float> const&)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/fsr.cpp:81:(.text+0x270): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/fsr.cpp:87:(.text+0x2c5): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: src/video_core/CMakeFiles/video_core.dir/renderer_opengl/present/fxaa.cpp.o: in function `OpenGL::FXAA::Draw(OpenGL::ProgramManager&, unsigned int)':
+/workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/src/video_core/renderer_opengl/present/fxaa.cpp:31:(.text+0x282): undefined reference to `OpenGL::ProgramManager::BindPresentPrograms(unsigned int, unsigned int)'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_destroy_buffers':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:146:(.text+0x2c): undefined reference to `vaDestroyBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:149:(.text+0x3a): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:156:(.text+0x80): undefined reference to `vaDestroyBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:159:(.text+0x8e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `vaapi_decode_make_config':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:500:(.text+0x12c): undefined reference to `vaMaxNumProfiles'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:508:(.text+0x160): undefined reference to `vaQueryConfigProfiles'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:511:(.text+0x16e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:572:(.text+0x2e0): undefined reference to `vaCreateConfig'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:576:(.text+0x2ed): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `vaapi_decode_find_best_format':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:332:(.text+0x42f): undefined reference to `vaQuerySurfaceAttributes'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:335:(.text+0x43e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:344:(.text+0x499): undefined reference to `vaQuerySurfaceAttributes'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:347:(.text+0x4ab): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `vaapi_decode_make_config':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:661:(.text+0x66b): undefined reference to `vaDestroyConfig'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_make_param_buffer':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:57:(.text+0x76e): undefined reference to `vaCreateBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:61:(.text+0x77e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_make_slice_buffer':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:103:(.text+0x8d7): undefined reference to `vaCreateBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:108:(.text+0x8e9): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:117:(.text+0x963): undefined reference to `vaCreateBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:122:(.text+0x973): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:125:(.text+0x9a8): undefined reference to `vaDestroyBuffer'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_issue':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:181:(.text+0xa40): undefined reference to `vaBeginPicture'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:184:(.text+0xa4e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:190:(.text+0xa73): undefined reference to `vaRenderPicture'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:193:(.text+0xa81): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:199:(.text+0xaa9): undefined reference to `vaRenderPicture'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:202:(.text+0xab7): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:228:(.text+0xae2): undefined reference to `vaEndPicture'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:208:(.text+0xaf9): undefined reference to `vaEndPicture'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:210:(.text+0xb06): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:230:(.text+0xb1b): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_common_frame_params':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:687:(.text+0xbfd): undefined reference to `vaDestroyConfig'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_uninit':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:744:(.text+0xc3e): undefined reference to `vaDestroyContext'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:746:(.text+0xc4c): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:752:(.text+0xc7e): undefined reference to `vaDestroyConfig'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:754:(.text+0xc8c): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavcodec.a(vaapi_decode.o): in function `ff_vaapi_decode_init':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:715:(.text+0xd4f): undefined reference to `vaCreateContext'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavcodec/vaapi_decode.c:722:(.text+0xd5e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_map_to_drm_esh':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1377:(.text+0xae): undefined reference to `vaSyncSurface'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1379:(.text+0xc5): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1388:(.text+0xf7): undefined reference to `vaExportSurfaceHandle'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1394:(.text+0x10d): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_unmap_to_drm_abh':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1469:(.text+0x348): undefined reference to `vaReleaseBufferHandle'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1471:(.text+0x356): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1477:(.text+0x383): undefined reference to `vaDestroyImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1479:(.text+0x391): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_unmap_frame':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:798:(.text+0x403): undefined reference to `vaUnmapBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:800:(.text+0x411): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:806:(.text+0x45f): undefined reference to `vaPutImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:810:(.text+0x471): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:815:(.text+0x49c): undefined reference to `vaDestroyImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:817:(.text+0x4aa): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_unmap_from_drm':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1106:(.text+0x5f5): undefined reference to `vaDestroySurfaces'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_buffer_free':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:524:(.text+0x645): undefined reference to `vaDestroySurfaces'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:526:(.text+0x652): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_pool_alloc':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:545:(.text+0x72b): undefined reference to `vaCreateSurfaces'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:550:(.text+0x73b): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:560:(.text+0x7ae): undefined reference to `vaDestroySurfaces'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_device_free':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1657:(.text+0x847): undefined reference to `vaTerminate'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1661:(.text+0x858): undefined reference to `XCloseDisplay'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_device_connect':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1694:(.text+0x8bc): undefined reference to `vaSetErrorCallback'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1695:(.text+0x8ce): undefined reference to `vaSetInfoCallback'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1700:(.text+0x8e2): undefined reference to `vaInitialize'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1702:(.text+0x8ef): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_device_derive':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:2065:(.text+0xa6e): undefined reference to `vaGetDisplayDRM'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_device_create':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1867:(.text+0xe96): undefined reference to `vaGetDisplayDRM'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1880:(.text+0xee4): undefined reference to `XOpenDisplay'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1882:(.text+0xef5): undefined reference to `XDisplayName'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1885:(.text+0xf18): undefined reference to `vaGetDisplay'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1887:(.text+0xf28): undefined reference to `XDisplayName'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1892:(.text+0xf50): undefined reference to `XDisplayName'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1974:(.text+0xfd9): undefined reference to `vaSetDriverName'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1976:(.text+0xfe6): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1978:(.text+0x100f): undefined reference to `vaTerminate'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_map_from_drm':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1237:(.text+0x138e): undefined reference to `vaCreateSurfaces'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1288:(.text+0x145f): undefined reference to `vaCreateSurfaces'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1325:(.text+0x1471): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_frames_init':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:696:(.text+0x188b): undefined reference to `vaDeriveImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:707:(.text+0x18e1): undefined reference to `vaDestroyImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:709:(.text+0x18ea): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_map_frame':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:866:(.text+0x1a6f): undefined reference to `vaSyncSurface'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:868:(.text+0x1a7e): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:883:(.text+0x1ac8): undefined reference to `vaDeriveImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:885:(.text+0x1ad7): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:900:(.text+0x1b4a): undefined reference to `vaCreateImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:903:(.text+0x1b59): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:910:(.text+0x1b92): undefined reference to `vaGetImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:913:(.text+0x1ba3): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:928:(.text+0x1bdb): undefined reference to `vaMapBuffer2'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:933:(.text+0x1bea): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:963:(.text+0x1ca1): undefined reference to `vaUnmapBuffer'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:965:(.text+0x1cb0): undefined reference to `vaDestroyImage'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_map_to_drm_abh':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1504:(.text+0x1d8d): undefined reference to `vaDeriveImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1507:(.text+0x1d9b): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1601:(.text+0x1e17): undefined reference to `vaDestroyImage'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1564:(.text+0x1f17): undefined reference to `vaAcquireBufferHandle'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1567:(.text+0x1f25): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:1599:(.text+0x201d): undefined reference to `vaReleaseBufferHandle'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_device_init':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:428:(.text+0x21e6): undefined reference to `vaMaxNumImageFormats'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:438:(.text+0x2219): undefined reference to `vaQueryImageFormats'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:466:(.text+0x22fb): undefined reference to `vaQueryVendorString'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vaapi.o): in function `vaapi_frames_get_constraints':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:271:(.text+0x247e): undefined reference to `vaQuerySurfaceAttributes'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:274:(.text+0x248c): undefined reference to `vaErrorStr'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:286:(.text+0x24ca): undefined reference to `vaQuerySurfaceAttributes'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vaapi.c:289:(.text+0x24f4): undefined reference to `vaErrorStr'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vulkan.o): in function `vulkan_device_derive':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vulkan.c:2185:(.text+0x5364): undefined reference to `vaGetDisplayAttributes'
+/usr/bin/ld: /__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vulkan.c:2191:(.text+0x538b): undefined reference to `vaQueryVendorString'
+/usr/bin/ld: /workspace/scratch/66d13e74c105/fhorizon-nx/.local/eden-stable-source/.cache/cpm/ffmpeg/linux-amd64-8.0.1-c7b5f1537d/lib/libavutil.a(hwcontext_vulkan.o): in function `vulkan_map_from_vaapi':
+/__w/FFmpeg/FFmpeg/build/FFmpeg-c7b5f1537d9c52efa50fd10d106ca015ddde1818/libavutil/hwcontext_vulkan.c:3723:(.text+0x75da): undefined reference to `vaSyncSurface'
+collect2: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.

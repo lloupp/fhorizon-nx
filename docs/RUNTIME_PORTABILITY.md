@@ -8,7 +8,23 @@ Pinned references: Pinyon Shift `a72a92a5f215a32875386b824b8b6f0f34e1caf9`, its 
 
 Upstream `rex/platform.h` supports Windows, macOS and GNU/Linux/Android; its default branch rejects Horizon. Our script generates a **local** overlay that adds Switch OS detection without setting Linux. The original header retains its BSD copyright/license text. No upstream repository file is edited and no vendor headers or proprietary translated game code are committed here.
 
-This is a header/component integration proof only. It does not initialize ShiftGlue's kernel, translator, VMX executor, scheduler, audio or graphics runtime.
+A second mode, `scripts/build_shiftglue_probe.sh context`, now compiles the real
+`rex/ppc/context.h`, `PPCFunc`/`PPCFuncMapping`, and pinned SIMDe
+`71fd833d9666141edcd1d3c109a80e228303d8d7` into an ARM64 NRO. Synthetic functions
+exercise bounded BE memory, fail-closed indirect dispatch, CR comparison, four
+integer SIMD lanes including wraparound, all four FPCR rounding modes, and the
+upstream nonvolatile save/restore methods. Volatile SIMD inputs prevent constant
+folding; disassembly records a native `add v31.4s` and FPCR MRS/MSR. The final
+same NRO passed official Eden 0.2.1 PGO and GCC with A x3 and Plus exit 0.
+
+The first full-context run failed the FPCR round trip. Upstream's `HostToGuest`
+array decodes x86 rounding order, while its ARM64 `GuestToHost` array encodes ARM
+FPCR order. The context build generates a second **Switch-only overlay** with
+`nearest, up, down, toward-zero` decode order. Upstream is unchanged; the original
+failure and passing final logs are preserved in
+[evidence/gpu-next-2026-10-13](evidence/gpu-next-2026-10-13/).
+
+This remains a bounded component integration proof. It does not initialize ShiftGlue's kernel, translator, VMX executor, scheduler, audio or graphics runtime.
 
 ## Remaining concrete adapters
 
@@ -18,7 +34,7 @@ This is a header/component integration proof only. It does not initialize ShiftG
 | OS and build | OS detection excludes Switch; desktop/Android CMake configuration and libraries | Explicit Horizon toolchain configuration; audit every platform conditional rather than pretending Switch is Linux |
 | CPU / VMX | ARM64 source paths exist; title-generated code remains separate | Cross-build actual representative operations, compare synthetic golden vectors and scheduling behavior |
 | Input | Host input abstractions and SDL pathways | Translate normalized libnx PadState inputs to runtime state, with reconnect/disconnect tests |
-| GPU | Vulkan path and desktop assumptions | Basic deko3d queue/triangle first; shader/resource translation is independent of host Vulkan support |
+| GPU | Vulkan path and desktop assumptions | Triangle, RGBA8/depth, stencil, offscreen sampling and 4x MSAA resolve have emulator fixtures; full Pinyon resource/shader/EDRAM translation still requires a target backend |
 | Audio | SDL audio/XMA processing code | libnx sink, generated PCM fixture, completion/underrun counters; then private game decoding tests |
 | Storage | Host-backed files, mapped file behavior and save/profile trees | Read-only private game root, bounded loading, path normalization, isolated writable save root |
 | Dynamic libraries | Desktop plugin loading assumptions | Static linkage for Horizon; no forwarding a desktop plugin into an NRO |

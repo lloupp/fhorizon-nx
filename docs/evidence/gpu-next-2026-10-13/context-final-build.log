@@ -1,0 +1,8 @@
+make: Entering directory '/workspace/scratch/66d13e74c105/fhorizon-nx/.local/switch-context'
+main.c
+context_probe.cpp
+built ... fhnx_context.nacp
+linking fhnx_context.elf
+built ... fhnx_context.nro
+make: Leaving directory '/workspace/scratch/66d13e74c105/fhorizon-nx/.local/switch-context'
+Built synthetic context probe (not full runtime or hardware-validated): /workspace/scratch/66d13e74c105/fhorizon-nx/.local/switch-context/fhnx_context.nro

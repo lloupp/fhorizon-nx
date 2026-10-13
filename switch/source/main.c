@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     trace("boot");
 #ifdef FHNX_RUNTIME_PROBE
     int result = fhnx_runtime_probe();
-    printf("ShiftGlue endian + 1 MiB guest arena: %s (%d)\n", result ? "FAIL" : "PASS", result);
+    printf("ShiftGlue synthetic runtime probe: %s (%d)\n", result ? "FAIL" : "PASS", result);
     trace(result ? "runtime_probe_failed" : "runtime_probe_passed");
     if (result) { consoleExit(NULL); return result; }
 #endif

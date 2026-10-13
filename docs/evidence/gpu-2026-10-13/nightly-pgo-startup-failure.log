@@ -1,0 +1,11 @@
+FHNX_HOST_SIGNAL 11
+FHNX_HOST_FRAME 0 .local/gpu-diag/backtrace/throwtrace.so +0x120c ?
+FHNX_HOST_FRAME 1 .local/eden-nightly/squashfs-root/shared/bin/eden-cli +0x21aca2b ?
+FHNX_HOST_FRAME 2 .local/eden-nightly/squashfs-root/shared/lib/libc.so.6 +0x3e6f0 ?
+FHNX_HOST_FRAME 3 .local/eden-nightly/squashfs-root/shared/bin/eden-cli +0x17edfd6 ?
+FHNX_HOST_FRAME 4 .local/eden-nightly/squashfs-root/shared/bin/eden-cli +0xf675d4 ?
+FHNX_HOST_FRAME 5 .local/eden-nightly/squashfs-root/shared/bin/eden-cli +0x11b62a2 ?
+FHNX_HOST_FRAME 6 .local/eden-nightly/squashfs-root/shared/lib/libc.so.6 +0x27781 ?
+FHNX_HOST_FRAME 7 .local/eden-nightly/squashfs-root/shared/lib/libc.so.6 +0x278b9 __libc_start_main
+FHNX_HOST_FRAME 8 .local/eden-nightly/squashfs-root/shared/bin/eden-cli +0xf050f5 ?
+Script done on 2026-10-13 10:41:24-04:00 [COMMAND_EXIT_CODE="139"]
