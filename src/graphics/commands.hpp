@@ -6,7 +6,7 @@
 
 namespace fhnx::gpu {
 enum class Format { rgba8, z24s8 };
-enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present };
+enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present, copy_source, copy_dest };
 enum class Stencil { disabled, replace, equal };
 struct ImageDesc {
     uint32_t width{}, height{}, samples{1};
@@ -14,13 +14,22 @@ struct ImageDesc {
     bool present{};
 };
 struct Image { uint32_t slot{UINT32_MAX}, generation{}; };
-struct Shader { uint32_t slot{UINT32_MAX}; };
+struct Shader { uint32_t slot{UINT32_MAX}, generation{1}; };
+enum class BufferKind {vertex, index16, uniform};
+struct Buffer {uint32_t slot{UINT32_MAX},generation{};};
+struct Attribute {uint32_t offset{},components{};};
+struct VertexLayout {uint32_t stride{},count{};std::array<Attribute,8> attributes{};};
+enum class Filter {nearest,linear};
+enum class Wrap {repeat,clamp};
+struct Sampler {Filter filter{Filter::nearest};Wrap wrap{Wrap::repeat};};
 struct Draw {
     Shader vertex, fragment;
     uint32_t first{}, count{3};
     bool depth_test{}, depth_write{}, color_write{true};
     Stencil stencil{Stencil::disabled};
     uint8_t reference{1};
+    Buffer indices{};
+    int32_t vertex_offset{};
 };
 inline void require(bool ok, const char* why) { if (!ok) throw std::runtime_error(why); }
 
@@ -86,9 +95,18 @@ public:
     virtual void transition(Image, Usage before, Usage after) = 0;
     virtual void target(Image color, Image depth = {}) = 0;
     virtual void clear(float r, float g, float b, float a, bool depth = false, float z = 1, uint8_t stencil = 0) = 0;
-    virtual void sample(Image) = 0;
+    virtual void sample(Image,Sampler = {}) = 0;
+    virtual Buffer buffer(BufferKind,uint32_t,const void*) = 0;
+    virtual void update(Buffer,uint32_t offset,uint32_t bytes,const void*) = 0;
+    virtual void destroy(Buffer) = 0;
+    virtual void destroy(Shader) = 0;
+    virtual void vertex(Buffer,const VertexLayout&) = 0;
+    virtual void uniform(Buffer,uint32_t binding = 0) = 0;
+    virtual void uploadRGBA8(Image,const void*,uint32_t bytes) = 0;
     virtual void draw(const Draw&) = 0;
     virtual void resolve(Image source, Image dest) = 0;
+    virtual void copy(Image source, Image dest) = 0;
+    virtual uint64_t imageBytes() const = 0;
     // Submit + wait before command storage/resource reuse in this first bounded backend.
     virtual void submit() = 0;
 };

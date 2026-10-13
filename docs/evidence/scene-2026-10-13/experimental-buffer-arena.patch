@@ -1,0 +1,110 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 67eb7b5..f6aae9b 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -31,7 +31,7 @@ DekoBackend::~DekoBackend() {
+     if(swap_) dkSwapchainDestroy(swap_);
+     dkCmdBufDestroy(commands_);
+     for(auto& p:programs_) if(p.memory) dkMemBlockDestroy(p.memory);
+-    for(auto& b:buffers_) if(b.memory) dkMemBlockDestroy(b.memory);
++    if(buffer_arena_)dkMemBlockDestroy(buffer_arena_);
+     if(readback_memory_)dkMemBlockDestroy(readback_memory_);
+     for(auto& r:resources_) if(r.memory) dkMemBlockDestroy(r.memory);
+     dkMemBlockDestroy(descriptors_); dkMemBlockDestroy(command_memory_);
+@@ -149,9 +149,9 @@ void DekoBackend::draw(const Draw& d) {
+     if(d.indices.slot!=UINT32_MAX) {
+         auto& ib=storage(d.indices);require(ib.kind==BufferKind::index16 && vertex_buffer_.slot!=UINT32_MAX,"indexed buffer kind/vertex binding");
+         require(d.first<=ib.size/2 && d.count<=ib.size/2-d.first,"index range");
+-        auto* values=static_cast<uint16_t*>(dkMemBlockGetCpuAddr(ib.memory));
++        auto* values=reinterpret_cast<uint16_t*>(static_cast<uint8_t*>(dkMemBlockGetCpuAddr(ib.memory))+ib.offset);
+         for(uint32_t i=0;i<d.count;++i){int64_t index=int64_t(values[d.first+i])+d.vertex_offset;require(index>=0 && index<vertex_count_,"index exceeds vertex buffer");}
+-        dkCmdBufBindIdxBuffer(commands_,DkIdxFormat_Uint16,dkMemBlockGetGpuAddr(ib.memory));
++        dkCmdBufBindIdxBuffer(commands_,DkIdxFormat_Uint16,dkMemBlockGetGpuAddr(ib.memory)+ib.offset);
+         dkCmdBufDrawIndexed(commands_,DkPrimitive_Triangles,d.count,1,d.first,d.vertex_offset,0);
+     } else {
+         if(vertex_buffer_.slot!=UINT32_MAX)require(d.first<=vertex_count_ && d.count<=vertex_count_-d.first,"vertex range");
+@@ -208,12 +208,17 @@ Buffer DekoBackend::buffer(BufferKind kind,uint32_t size,const void* data) {
+     require(kind==BufferKind::vertex || kind==BufferKind::index16 || kind==BufferKind::uniform,"buffer kind");
+     require(kind!=BufferKind::index16 || size%2==0,"index alignment");
+     require(kind!=BufferKind::uniform || size<=65536,"uniform size");
+-    uint32_t padded=align(size,DK_MEMBLOCK_ALIGNMENT);
++    uint32_t padded=align(size,DK_UNIFORM_BUF_ALIGNMENT);
+     require(padded<=8*1024*1024-buffer_bytes_,"buffer budget exceeded");
++    uint32_t offset=0;
++    for(unsigned attempt=0;attempt<32;++attempt){bool collision=false;for(auto& b:buffers_)if(b.memory && offset<b.offset+b.allocation && uint64_t(offset)+padded>b.offset){offset=b.offset+b.allocation;collision=true;break;}if(!collision)break;}
++    require(uint64_t(offset)+padded<=8*1024*1024,"buffer arena fragmented/exhausted");
+     for(uint32_t i=0;i<buffers_.size();++i)if(!buffers_[i].memory){
+-        auto& b=buffers_[i];b.memory=block(device_,padded,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);b.size=size;b.kind=kind;
+-        std::memset(dkMemBlockGetCpuAddr(b.memory),0,padded);
+-        if(data)std::memcpy(dkMemBlockGetCpuAddr(b.memory),data,size);
++        if(!buffer_arena_)buffer_arena_=block(device_,8*1024*1024,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);
++        auto& b=buffers_[i];b.memory=buffer_arena_;b.size=size;b.kind=kind;b.offset=offset;b.allocation=padded;
++        auto* cpu=static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+offset;
++        std::memset(cpu,0,padded);
++        if(data)std::memcpy(cpu,data,size);
+         buffer_bytes_+=padded;return {i,b.generation};
+     }
+     throw std::runtime_error("buffer slots exhausted");
+@@ -221,11 +226,11 @@ Buffer DekoBackend::buffer(BufferKind kind,uint32_t size,const void* data) {
+ void DekoBackend::update(Buffer h,uint32_t offset,uint32_t bytes,const void* data) {
+     require(!recording_ && data,"buffer update during recording/null source");auto& b=storage(h);
+     require(offset<=b.size && bytes<=b.size-offset,"buffer update bounds");
+-    dkQueueWaitIdle(queue_);std::memcpy(static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+offset,data,bytes);
++    dkQueueWaitIdle(queue_);std::memcpy(static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+b.offset+offset,data,bytes);
+ }
+ void DekoBackend::destroy(Buffer h) {
+     require(!recording_,"buffer destroy during recording");auto& b=storage(h);dkQueueWaitIdle(queue_);
+-    dkMemBlockDestroy(b.memory);buffer_bytes_-=align(b.size,DK_MEMBLOCK_ALIGNMENT);b.memory=nullptr;++b.generation;
++    buffer_bytes_-=b.allocation;b.memory=nullptr;++b.generation;
+ }
+ void DekoBackend::destroy(Shader h) {
+     require(!recording_ && h.slot<programs_.size(),"shader destroy state");auto& p=programs_[h.slot];
+@@ -238,7 +243,7 @@ void DekoBackend::vertex(Buffer h,const VertexLayout& layout) {
+     std::array<DkVtxAttribState,8> attributes{};
+     const DkVtxAttribSize sizes[]={DkVtxAttribSize_1x32,DkVtxAttribSize_2x32,DkVtxAttribSize_3x32,DkVtxAttribSize_4x32};
+     for(uint32_t i=0;i<layout.count;++i){auto a=layout.attributes[i];require(a.components>=1 && a.components<=4 && a.offset%4==0 && a.offset<=layout.stride && a.components*4<=layout.stride-a.offset,"vertex attribute");attributes[i].bufferId=0;attributes[i].offset=a.offset;attributes[i].size=sizes[a.components-1];attributes[i].type=DkVtxAttribType_Float;}
+-    DkVtxBufferState state={layout.stride,0};DkBufExtents ext={dkMemBlockGetGpuAddr(b.memory),b.size};
++    DkVtxBufferState state={layout.stride,0};DkBufExtents ext={dkMemBlockGetGpuAddr(b.memory)+b.offset,b.size};
+     dkCmdBufBindVtxAttribState(commands_,attributes.data(),layout.count);dkCmdBufBindVtxBufferState(commands_,&state,1);dkCmdBufBindVtxBuffers(commands_,0,&ext,1);
+     vertex_buffer_=h;vertex_count_=b.size/layout.stride;
+ }
+@@ -246,10 +251,10 @@ void DekoBackend::uniform(Buffer h,uint32_t binding) {
+     recording();auto& b=storage(h);require(b.kind==BufferKind::uniform && binding<8,"uniform binding");
+     // Snapshot constants into the GPU command stream. Their backing allocation
+     // is reused only after submit/wait, and each bind records its own values.
+-    dkCmdBufPushConstants(commands_,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT),0,b.size,dkMemBlockGetCpuAddr(b.memory));
++    dkCmdBufPushConstants(commands_,dkMemBlockGetGpuAddr(b.memory)+b.offset,align(b.size,DK_UNIFORM_BUF_ALIGNMENT),0,b.size,static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+b.offset);
+     dkCmdBufBarrier(commands_,DkBarrier_Full,DkInvalidateFlags_Shader);
+-    dkCmdBufBindUniformBuffer(commands_,DkStage_Vertex,binding,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
+-    dkCmdBufBindUniformBuffer(commands_,DkStage_Fragment,binding,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
++    dkCmdBufBindUniformBuffer(commands_,DkStage_Vertex,binding,dkMemBlockGetGpuAddr(b.memory)+b.offset,align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
++    dkCmdBufBindUniformBuffer(commands_,DkStage_Fragment,binding,dkMemBlockGetGpuAddr(b.memory)+b.offset,align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
+ }
+ void DekoBackend::uploadRGBA8(Image h,const void* data,uint32_t bytes) {
+     require(!recording_ && data,"upload state/data");auto d=images_.get(h).desc;
+diff --git a/switch/adapter/deko_backend.hpp b/switch/adapter/deko_backend.hpp
+index 77d0228..4da06e9 100644
+--- a/switch/adapter/deko_backend.hpp
++++ b/switch/adapter/deko_backend.hpp
+@@ -7,12 +7,13 @@ namespace fhnx::gpu {
+ class DekoBackend final : public Commands {
+     struct Resource { DkImage image{}; DkMemBlock memory{}; };
+     struct Program { DkShader shader{}; DkMemBlock memory{}; DkStage stage{}; uint32_t generation{1}; };
+-    struct Storage {DkMemBlock memory{};uint32_t size{},generation{1};BufferKind kind{};};
++    struct Storage {DkMemBlock memory{};uint32_t size{},generation{1},offset{},allocation{};BufferKind kind{};};
+     Images images_;
+     std::array<Resource, Images::capacity> resources_{};
+     std::vector<Program> programs_;
+     std::array<Storage,32> buffers_{};
+     uint64_t buffer_bytes_{};
++    DkMemBlock buffer_arena_{};
+     Buffer vertex_buffer_{};
+     uint32_t vertex_count_{},descriptor_cursor_{};
+     DkDevice device_{};
+@@ -60,5 +61,6 @@ public:
+     void destroySwapchain(DkSwapchain);
+     uint64_t imageBytes() const override { return images_.used; }
+     uint64_t bufferBytes() const{return buffer_bytes_;}
++    uint64_t bufferArenaBytes() const{return buffer_arena_?8*1024*1024:0;}
+ };
+ }

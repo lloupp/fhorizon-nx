@@ -34,6 +34,7 @@ jobs:
           git -C .local/upstream/pinyon-shift/thirdparty/shiftglue-sdk submodule update --init --depth 1 thirdparty/simde
           ./scripts/build_shiftglue_probe.sh context
           bash ./scripts/build_horizon_memory.sh
+          bash ./scripts/build_horizon_memory.sh layout
           bash ./scripts/build_shiftglue_probe.sh vmx
           $DEVKITPRO/devkitA64/bin/aarch64-none-elf-objdump -d .local/switch-vmx/build/vmx_probe.o > .local/vmx-disassembly.txt
           python3 tools/check_vmx_object.py .local/vmx-disassembly.txt
@@ -45,6 +46,7 @@ jobs:
           python3 scripts/test_eden.py --nro .local/switch-runtime/fhnx_runtime.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-context/fhnx_context.nro --dry-run
           python3 scripts/test_eden.py --nro .local/horizon-memory/fhnx_horizon_memory.nro --dry-run
+          python3 scripts/test_eden.py --nro .local/horizon-layout/fhnx_horizon_layout.nro --dry-run
           python3 scripts/test_eden.py --nro .local/switch-vmx/fhnx_vmx.nro --dry-run
       - name: Build pinned deko3d workaround and progressive GPU probes
         run: |
@@ -59,6 +61,12 @@ jobs:
           done
           bash ./scripts/build_deko_adapter.sh
           python3 scripts/test_eden.py --nro .local/adapter-positive/fhnx_adapter_positive.nro --dry-run
+          bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro --dry-run
+          FHNX_PIPELINE_VARIANT=buffers FHNX_PIPELINE_CLIENT=buffer_probe bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro --dry-run
+          FHNX_PIPELINE_VARIANT=scene FHNX_PIPELINE_CLIENT=demo bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -68,5 +76,9 @@ jobs:
             .local/switch-context/fhnx_context.nro
             .local/adapter-positive/fhnx_adapter_positive.nro
             .local/horizon-memory/fhnx_horizon_memory.nro
+            .local/horizon-layout/fhnx_horizon_layout.nro
             .local/switch-vmx/fhnx_vmx.nro
+            .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
+            .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro
+            .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro
           retention-days: 14

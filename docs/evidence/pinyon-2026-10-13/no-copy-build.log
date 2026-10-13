@@ -1,0 +1,10 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-no-copy'
+pinyon_sample.bin
+pinyon_solid.bin
+pinyon_vsh.bin
+built ... fhnx_pinyon_pipeline-no-copy.nacp
+deko_backend.cpp
+main.cpp
+linking fhnx_pinyon_pipeline-no-copy.elf
+built ... fhnx_pinyon_pipeline-no-copy.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-no-copy'

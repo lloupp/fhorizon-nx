@@ -8,6 +8,13 @@ Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** 
 
 ## Upstream research (verified by reading public source docs on 2026-10-13)
 
+The continuation integrates actual upstream `Fh1SurfaceKey`/pitch helpers into a
+bounded deko3d surface frontend, plus indexed buffers, constants, descriptor
+arenas and an original 3D technical client. See the
+[Pinyon pipeline report](docs/PINYON_PIPELINE_RESULTS_2026-10-13.md) for executed
+scope, captures and memory limitations. The PM4/register frontend, Xenos shader
+translation and complete ShiftGlue memory arena remain unimplemented.
+
 - [Pinyon Shift](https://github.com/arcanite24/pinyon-shift) — most mature base: ShiftGlue/ReXGlue recompilation, Vulkan renderer, Windows/Linux/macOS, and experimental Android ARM64. Upstream already lists Nintendo Switch as mid-term feasibility work. Game files must come from a user's own verified copy.
 - [ShiftGlue](https://github.com/arcanite24/shiftglue-sdk) — upstream's runtime and codegen fork.
 - [ForzaRecomp](https://github.com/NerunSmarts/ForzaRecomp) — independent macOS ARM64 proof points; does not yet qualify sustained gameplay.

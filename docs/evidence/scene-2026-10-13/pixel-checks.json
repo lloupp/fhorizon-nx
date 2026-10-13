@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "vehicle_blue_visible": true,
+    "ground_visible": true,
+    "a_camera_changes_scene": true,
+    "analog_camera_changes_scene": true,
+    "omitted_vehicle_no_blue": true,
+    "negative_ground_still_visible": true,
+    "negative_preserves_scene_except_vehicle": true
+  },
+  "blue_pixels": [
+    2447,
+    5135,
+    2258,
+    0
+  ],
+  "camera_changed_fractions": [
+    0.33010416666666664,
+    0.17887803819444445
+  ],
+  "passed": true,
+  "negative_control_included": true,
+  "physical_switch_verified": false
+}

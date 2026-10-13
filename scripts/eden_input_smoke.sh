@@ -9,7 +9,9 @@ PREFIX="${3:-SMOKE}"
 for tool in Xvfb xwininfo xdotool import python3; do command -v "$tool" >/dev/null; done
 test -f "$NRO"
 NAME="$(basename "$NRO" .nro)"
-WORK="$ROOT/.local/eden-tests/$NAME"
+PROFILE="${FHNX_TEST_PROFILE:-}"
+[[ -z "$PROFILE" || "$PROFILE" =~ ^[a-zA-Z0-9_-]+$ ]] || exit 2
+WORK="$ROOT/.local/eden-tests/$NAME${PROFILE:+-$PROFILE}"
 mkdir -p "$WORK/config/eden" "$WORK/data/eden" "$WORK/runtime" "$WORK/captures"
 for directory in nand sdmc log load dump keys play_time; do mkdir -p "$WORK/data/eden/$directory"; done
 export XDG_CONFIG_HOME="$WORK/config" XDG_DATA_HOME="$WORK/data" XDG_RUNTIME_DIR="$WORK/runtime"
@@ -41,6 +43,11 @@ for attempt in 1 2 3; do
     xdotool keydown a; sleep 0.6; xdotool keyup a; sleep 0.6
 done
 import -window root "$WORK/captures/after-a.png"
+if [[ "${FHNX_TEST_ANALOG:-0}" == 1 ]];then
+    # The observed fresh SDL config maps arrow keys to left-stick directions.
+    xdotool keydown Right; sleep 1; xdotool keyup Right; sleep 1
+    import -window root "$WORK/captures/after-analog.png"
+fi
 xdotool keydown m; sleep 0.6; xdotool keyup m
 wait "$RUNPID"
 RUNPID=
