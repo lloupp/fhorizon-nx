@@ -13,6 +13,7 @@ Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** 
 - [deko3d](https://github.com/devkitPro/deko3d) and [UAM](https://github.com/devkitPro/uam) — established homebrew GPU API and offline shader compiler.
 - [switch-nvk](https://github.com/HayatoG/switch-nvk) — experimental Mesa NVK on libnx; do not assume compatibility or feature completeness without testing it.
 - [Xenia Canary](https://github.com/xenia-canary/xenia-canary) — PC behavior baseline when a strong PC and lawfully obtained game copy are available; **not** the Switch runtime.
+- [Eden Emulator](https://eden-emu.dev/) — optional Nintendo Switch emulator, CLI/Qt available; useful to smoke-test built Switch NROs on PC before testing real hardware. Not an Xbox 360 emulator.
 
 ## What is already implemented HERE
 
@@ -22,7 +23,8 @@ Goal: research a native **Nintendo Switch (original Tegra X1, libnx/homebrew)** 
 4. `src/common/guest_memory.hpp` — platform-neutral big-endian PowerPC guest memory access, with explicit bounds checking; used by host unit tests and a PC smoke binary.
 5. `shaders/triangle.*` and `scripts/check_shaders.py` — independent example shaders to attempt offline UAM→DKSH translation if UAM is present; no game shaders.
 6. `switch/source/main.c` and `scripts/build_switch_smoke.sh` — standard libnx input/console smoke, built only when devkitPro's official application template is available; **not** a racing game.
-7. Python and CMake/CTest automated checks. All can be run without a Switch and without a game image, except the optional Switch build and UAM shader compilation.
+7. `scripts/test_eden.py` and `docs/EDEN_TESTING.md` — bounded local Eden Emulator CLI smoke workflow for a compiled NRO, with JSON report and private logs. The emulator does not execute an Xbox 360 XEX directly.
+8. Python and CMake/CTest automated checks. All can run without a Switch and without a game image, except optional Switch/Emulator/UAM test targets.
 
 ## Validate on PC (no game required)
 
@@ -63,7 +65,14 @@ export DEVKITPRO=/opt/devkitpro
 # Expected local (unvalidated here): .local/switch-smoke/fhnx_smoke.nro
 ```
 
-Only a real Switch with homebrew may validate that NRO's display, gamepad and exit behavior. It does not use any game content. Compile UAM shader example with `python3 scripts/check_shaders.py` when `uam` is installed. UAM is a host tool and shaders are offline-compiled.
+Before testing on a real Switch, try the optional Eden Emulator PC flow:
+
+```sh
+python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --dry-run
+python3 scripts/test_eden.py --nro .local/switch-smoke/fhnx_smoke.nro --seconds 90
+```
+
+These require a built local NRO, and the second requires an independently installed Eden. See [Eden testing](docs/EDEN_TESTING.md) for setup, Qt hbloader caveats, and evidence. Emulator results do not establish a working real Switch. Only a real Switch with homebrew can validate that NRO's actual device behavior. It does not use any game content. Compile UAM shader example with `python3 scripts/check_shaders.py` when `uam` is installed. UAM is a host tool and shaders are offline-compiled.
 
 ## Feasibility conditions and roadmap
 
