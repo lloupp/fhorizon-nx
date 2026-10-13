@@ -14,6 +14,10 @@ jobs:
           ctest --test-dir .local/ci-build --output-on-failure
       - name: Reproduce macro lifetime bug and verify correction (ASan)
         run: ./scripts/test_macro_rebase.sh
+      - name: Pinned PM4 wire contract (ASan and UBSan)
+        run: |
+          bash scripts/clone_upstream.sh
+          bash scripts/test_pm4_frontend.sh
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
   switch-homebrew-build:
@@ -67,6 +71,8 @@ jobs:
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro --dry-run
           FHNX_PIPELINE_VARIANT=scene FHNX_PIPELINE_CLIENT=demo bash ./scripts/build_pinyon_pipeline.sh
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro --dry-run
+          FHNX_PIPELINE_VARIANT=pm4 FHNX_PIPELINE_CLIENT=pm4_probe bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro --dry-run
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -78,6 +84,7 @@ jobs:
             .local/horizon-memory/fhnx_horizon_memory.nro
             .local/horizon-layout/fhnx_horizon_layout.nro
             .local/switch-vmx/fhnx_vmx.nro
+            .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro
             .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
             .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro
             .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro
