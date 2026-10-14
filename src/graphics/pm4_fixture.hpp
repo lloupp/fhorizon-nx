@@ -12,7 +12,9 @@ inline std::vector<uint8_t> indexedPm4Fixture(uint32_t width,uint32_t height,
     auto reg=[&](uint32_t r,uint32_t v){word(xenos::MakePacketType0(r,1));word(v);};
     reg(XE_GPU_REG_RB_SURFACE_INFO,width|(msaa<<16));
     reg(XE_GPU_REG_RB_COLOR_INFO,0);reg(XE_GPU_REG_RB_DEPTH_INFO,512);
-    reg(XE_GPU_REG_RB_COLOR_MASK,15);reg(XE_GPU_REG_RB_DEPTHCONTROL,0x26);
+    reg::RB_DEPTHCONTROL depth_control{};depth_control.z_enable=1;depth_control.z_write_enable=1;
+    depth_control.zfunc=xenos::CompareFunction::kLess;
+    reg(XE_GPU_REG_RB_COLOR_MASK,15);reg(XE_GPU_REG_RB_DEPTHCONTROL,depth_control.value);
     reg(XE_GPU_REG_RB_MODECONTROL,uint32_t(xenos::EdramMode::kColorDepth));
     reg(XE_GPU_REG_PA_SC_WINDOW_SCISSOR_TL,0x80000000u);
     reg(XE_GPU_REG_PA_SC_WINDOW_SCISSOR_BR,width|(height<<16));

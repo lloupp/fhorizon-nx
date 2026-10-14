@@ -18,6 +18,10 @@ int main(){
  check(d.depth.Pack()==(512u | 8u<<11 | 2u<<19 | 1u<<21));
  check(d.width==320 && d.height==180 && d.address==0x1000 && d.count==6 && d.index_bytes==12);
  check(uint32_t(d.endian)==1 && d.depth_test && d.depth_write);
+ check(b[36]==0 && b[37]==0 && b[38]==0 && b[39]==0x16);
+ rex::graphics::reg::RB_DEPTHCONTROL depth_state{0x16};
+ check(depth_state.zfunc==rex::graphics::xenos::CompareFunction::kLess);
+ depth_state.value=0x26;check(depth_state.zfunc==rex::graphics::xenos::CompareFunction::kEqual);
  for(size_t n=1;n<20;++n){auto c=b;c.resize(c.size()-n);rejects([&]{decoder.decode(c);});}
  auto negative=[&](size_t offset,uint32_t value){auto c=b;put(c,offset,value);rejects([&]{decoder.decode(c);});};
  negative(b.size()-20,0xc0037f00); // unknown Type 3 opcode
@@ -28,6 +32,8 @@ int main(){
  negative(12,0x10000); // unsupported color format
  negative(4,320u|(1u<<16)); // 2x MSAA
  negative(44,6); // COPY mode is not silently treated as a normal draw
+ negative(36,0x26); // EQUAL must never be silently mapped to LESS
+ negative(36,0x17); // Stencil unsupported
  negative(60,319u|(180u<<16)); // partial scissor
  negative(0,0x7fff); // unknown register
  std::vector<uint8_t> type1={0x40,0,0,0,0,0,0,0,0,0,0,0};rejects([&]{decoder.decode(type1);});
@@ -35,6 +41,7 @@ int main(){
  auto c=b;put(c,12,0x10000);put(c,c.size()-20,0xc0037f00);rejects([&]{decoder.decode(c);});
  std::vector<uint8_t> onlyDraw(b.end()-20,b.end());check(decoder.decode(onlyDraw)[0].color.format==0);
  Pm4Frontend empty;rejects([&]{empty.decode(onlyDraw);});
+ auto no_depth=b;put(no_depth,36,0);auto disabled=decoder.decode(no_depth)[0];check(!disabled.depth_test && !disabled.depth_write);
  // Type 0 write-one-register consumes all values; only the final value applies.
  auto repeat=b;put(repeat,0,0x00018000u|0x2000);repeat.insert(repeat.begin()+8,4,0);put(repeat,8,320u|(2u<<16));check(decoder.decode(repeat).size()==1);
  std::puts("PM4 PASS: BE wire, real register unions, indexed DMA, transactional rejection");

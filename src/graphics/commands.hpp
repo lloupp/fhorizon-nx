@@ -8,6 +8,7 @@ namespace fhnx::gpu {
 enum class Format { rgba8, z24s8 };
 enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present, copy_source, copy_dest };
 enum class Stencil { disabled, replace, equal };
+enum class DepthCompare { native_default, less };
 struct ImageDesc {
     uint32_t width{}, height{}, samples{1};
     Format format{Format::rgba8};
@@ -30,6 +31,7 @@ struct Draw {
     uint8_t reference{1};
     Buffer indices{};
     int32_t vertex_offset{};
+    DepthCompare depth_compare{DepthCompare::native_default};
 };
 inline void require(bool ok, const char* why) { if (!ok) throw std::runtime_error(why); }
 

@@ -59,7 +59,10 @@ private:
         reg::RB_COLOR_INFO color{read(XE_GPU_REG_RB_COLOR_INFO)};
         reg::RB_DEPTH_INFO depth{read(XE_GPU_REG_RB_DEPTH_INFO)};
         uint32_t z = read(XE_GPU_REG_RB_DEPTHCONTROL);
-        require(z == 0 || z == 0x26, "PM4 depth/stencil state unsupported"); // LESS, test + write
+        reg::RB_DEPTHCONTROL supported_depth{};
+        supported_depth.z_enable=1;supported_depth.z_write_enable=1;
+        supported_depth.zfunc=xenos::CompareFunction::kLess;
+        require(z == 0 || z == supported_depth.value, "PM4 depth/stencil state unsupported");
         reg::PA_SC_WINDOW_SCISSOR_BR br{read(XE_GPU_REG_PA_SC_WINDOW_SCISSOR_BR)};
         require(read(XE_GPU_REG_PA_SC_WINDOW_SCISSOR_TL) == 0x80000000u &&
                 !(br.value & 0xc000c000u) && br.br_x == surface.surface_pitch && br.br_y,

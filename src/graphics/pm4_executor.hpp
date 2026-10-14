@@ -46,6 +46,7 @@ public:
         surfaces_.bind(d.color,&d.depth);
         pipeline.count=d.count;pipeline.indices=indices_.at(d.address).buffer;
         pipeline.depth_test=d.depth_test;pipeline.depth_write=d.depth_write;
+        pipeline.depth_compare=DepthCompare::less;
         surfaces_.draw(pipeline);
     }
 };

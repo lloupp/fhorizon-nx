@@ -138,6 +138,8 @@ void DekoBackend::draw(const Draw& d) {
     DkColorWriteState write; dkColorWriteStateDefaults(&write); if(!d.color_write) dkColorWriteStateSetMask(&write,0,0);
     dkCmdBufBindColorWriteState(commands_,&write);
     DkDepthStencilState ds; dkDepthStencilStateDefaults(&ds);
+    require(d.depth_compare==DepthCompare::native_default || d.depth_compare==DepthCompare::less,"unsupported depth compare");
+    if(d.depth_compare==DepthCompare::less)ds.depthCompareOp=DkCompareOp_Less;
     ds.depthTestEnable=d.depth_test; ds.depthWriteEnable=d.depth_write;
     ds.stencilTestEnable=d.stencil!=Stencil::disabled;
     if(d.stencil==Stencil::equal) {
