@@ -102,6 +102,25 @@ No new SIGSEGV/SIGABRT was observed in these completed probes; one exact-be
 GCC attempt timed out. No crash root cause or long-duration stability is claimed.
 The prior 3D one-in-five result is unchanged and separate from this PM4 cohort.
 
+Two additional sequential GCC runs used the exact final COPY hash and isolated
+profiles. Repeat 01 passed completely. Repeat 02 has fresh durable boot, every
+pixel/tiled pass, A x3, Plus and shutdown, but eden.log has no diagnostic events;
+the runner returned 5 / input_exit_verified=false. It is preserved as a collection
+classification failure, not an automatic approval. Final COPY cohort: 3/4 runner
+approvals, 4/4 durable guest pixel passes, 0 observed signals/timeouts. This is a
+short cohort, not proof of general stability. Legacy scene-specific false fields
+in the battery summary do not describe the COPY workload.
+
+Upstream files actually inspected (under pinned shiftglue-sdk):
+- src/graphics/command_processor.cpp: PM4 register/draw dispatch.
+- src/graphics/fh1_edram_resolve.cpp: Fh1ResolveRectangle/Fh1PlanResolve.
+- src/graphics/util/draw.cpp: general resolve helper (where applicable).
+- src/graphics/vulkan/command_processor.cpp and render_target_cache.cpp.
+- include/rex/graphics/fh1_edram_surfaces.h: key/pitch identity.
+- src/graphics/pipeline/texture/util.cpp: actual tiled addressing.
+The COPY adapter implements a strict representable subset rather than linking
+the desktop memory-dependent planner or copying the Vulkan executor.
+
 ## Validation and remaining blockers
 
 28 Python tests passed. PM4 and COPY contracts passed ASan+UBSan. Constants and
