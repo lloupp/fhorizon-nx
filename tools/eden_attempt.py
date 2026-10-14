@@ -29,7 +29,7 @@ def summarize(work, *, eden_build="unknown", eden_version="unknown", script_exit
         count = sum(max(p) > 8 for p in data)
         captures[f.name] = dict(sha256=hashlib.sha256(f.read_bytes()).hexdigest(),
                                nonblack=count > image.width * image.height // 100)
-    full_pixels = any(e in events for e in ("constants_atlas_12_frames_verified", "constants_64_frames_verified", "constants_96_frames_verified", "readback_clear_96_frames_verified", "xenos_copy_all_4096_gpu_pixels_pass"))
+    full_pixels = any(e in events for e in ("xenos_shader_32_frames_verified", "constants_atlas_12_frames_verified", "constants_64_frames_verified", "constants_96_frames_verified", "readback_clear_96_frames_verified", "xenos_copy_all_4096_gpu_pixels_pass"))
     if "pm4_indexed_resolve_pixels_pass" in events:
         full_pixels = bool(re.search(r"updated_pixels left=ff000080 right=ff00ff00", durable or log))
     configuration = configparser.ConfigParser()

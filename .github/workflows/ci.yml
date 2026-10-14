@@ -22,6 +22,7 @@ jobs:
           bash scripts/clone_upstream.sh
           bash scripts/test_pm4_frontend.sh
           bash scripts/test_xenos_copy.sh
+          bash scripts/test_xenos_shader.sh
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
   switch-homebrew-build:
@@ -79,6 +80,7 @@ jobs:
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro --dry-run
           FHNX_PIPELINE_VARIANT=constants FHNX_PIPELINE_CLIENT=constants_probe bash ./scripts/build_pinyon_pipeline.sh
           FHNX_PIPELINE_VARIANT=xenos-copy FHNX_PIPELINE_CLIENT=copy_probe bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=xenos-shader FHNX_PIPELINE_CLIENT=shader_probe bash ./scripts/build_pinyon_pipeline.sh
           FHNX_PIPELINE_VARIANT=constants-msaa4 FHNX_PIPELINE_CLIENT=constants_probe FHNX_PIPELINE_DEFINES=-DFHNX_CONSTANTS_MSAA4 bash ./scripts/build_pinyon_pipeline.sh
           FHNX_PIPELINE_VARIANT=constants-atlas FHNX_PIPELINE_CLIENT=constants_probe FHNX_PIPELINE_DEFINES='-DFHNX_CONSTANTS_ATLAS -DFHNX_CONSTANTS_READ_EACH' bash ./scripts/build_pinyon_pipeline.sh
       - uses: actions/upload-artifact@v4
@@ -100,4 +102,6 @@ jobs:
             .local/pinyon-pipeline-xenos-copy/fhnx_pinyon_pipeline-xenos-copy.nro
             .local/pinyon-pipeline-constants-msaa4/fhnx_pinyon_pipeline-constants-msaa4.nro
             .local/pinyon-pipeline-constants-atlas/fhnx_pinyon_pipeline-constants-atlas.nro
+            .local/pinyon-pipeline-xenos-shader/fhnx_pinyon_pipeline-xenos-shader.nro
+            .local/pinyon-pipeline-xenos-shader/shader-bundle/
           retention-days: 14

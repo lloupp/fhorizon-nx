@@ -1,0 +1,54 @@
+{
+  "nro_sha256": "691da0f69b332d38446bf7a69d542f3b682d3b45e343e3ad04dbb59d999b4667",
+  "eden_build": "PGO",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 0,
+  "configured_gpu_accuracy": 2,
+  "gpu_accuracy_default": false,
+  "guest_started": true,
+  "last_durable_event": "shutdown",
+  "last_event": "shutdown",
+  "durable_available": true,
+  "pixel_failure": false,
+  "full_pixel_checks_seen": true,
+  "readback_marker_seen": false,
+  "shutdown": true,
+  "input_exit_verified": true,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": 69062656,
+  "captures": {
+    "after-a.png": {
+      "sha256": "5309d80fa1e86f55aef538f6ea830f0942bfaadf571fae0d1bb8dfbd0895f850",
+      "nonblack": true
+    },
+    "boot.png": {
+      "sha256": "5309d80fa1e86f55aef538f6ea830f0942bfaadf571fae0d1bb8dfbd0895f850",
+      "nonblack": true
+    }
+  },
+  "approved": true,
+  "attempt": "fhnx_pinyon_pipeline-xenos-shader-xenos-shader-high-pgo-01",
+  "capture_checks": {
+    "after-a.png": {
+      "passed": true,
+      "checks": {
+        "54": true,
+        "160": true,
+        "265": true
+      },
+      "physical_switch_verified": false
+    },
+    "boot.png": {
+      "passed": true,
+      "checks": {
+        "54": true,
+        "160": true,
+        "265": true
+      },
+      "physical_switch_verified": false
+    }
+  }
+}

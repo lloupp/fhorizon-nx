@@ -1,0 +1,15 @@
+Generated original synthetic Xenos microcode -> checked GLSL -> UAM DKSH bundle
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-xenos-shader'
+buffer_vsh.bin
+pinyon_sample.bin
+pinyon_solid.bin
+pinyon_vsh.bin
+xenos_pixel0_fsh.bin
+xenos_pixel1_fsh.bin
+built ... fhnx_pinyon_pipeline-xenos-shader.nacp
+deko_backend.cpp
+shader_probe.cpp
+upstream_ucode.cpp
+linking fhnx_pinyon_pipeline-xenos-shader.elf
+built ... fhnx_pinyon_pipeline-xenos-shader.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-xenos-shader'
