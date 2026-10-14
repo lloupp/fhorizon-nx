@@ -9,8 +9,11 @@ from pathlib import Path
 import shutil
 import subprocess
 import time
+import sys
 
 root = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(root))
+from tools.eden_attempt import summarize
 parser = argparse.ArgumentParser()
 parser.add_argument("nro", type=Path)
 parser.add_argument("eden", type=Path)
@@ -31,6 +34,7 @@ for name in ("Xvfb", "xwininfo", "xdotool", "import"):
             parser.error(f"missing dynamic library: {libraries.stdout}")
 nro = args.nro.resolve()
 binary = args.eden.resolve()
+version = subprocess.run([str(binary),"--version"],capture_output=True,text=True).stdout.strip()
 sha = hashlib.sha256(nro.read_bytes()).hexdigest()
 stamp = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
 out = root / ".local" / "stability" / f"{args.label}-{stamp}"
@@ -58,6 +62,7 @@ for attempt in range(1, args.repeats + 1):
                 scene_pixel_reference_pass=pixels,
                 approved=run.returncode == 0 and report.get("input_exit_verified", False),
                 report=report)
+    item.update(summarize(work,eden_build=binary.name,eden_version=version,script_exit=run.returncode))
     results.append(item)
     shutil.copytree(work, out / f"attempt-{attempt:02d}")
     (out / "summary.json").write_text(json.dumps(results, indent=2) + "\n")

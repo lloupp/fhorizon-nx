@@ -1,0 +1,13 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 6ba61f0..aad5f9f 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -186,6 +186,8 @@ std::vector<uint32_t> DekoBackend::readback(Image h) {
+     begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem),0,0};
+     dkCmdBufCopyImageToBuffer(commands_,&v,&rect,&copy,0);
+     dkCmdBufBarrier(commands_,DkBarrier_Full,0); submit();
++    auto cache_result=svcInvalidateProcessDataCache(CUR_PROCESS_HANDLE,reinterpret_cast<uintptr_t>(dkMemBlockGetCpuAddr(mem)),bytes);
++    require(R_SUCCEEDED(cache_result),"readback cache invalidation SVC failed");
+     std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);return pixels;
+ }
+ DkSwapchain DekoBackend::swapchain(Image a,Image b) {

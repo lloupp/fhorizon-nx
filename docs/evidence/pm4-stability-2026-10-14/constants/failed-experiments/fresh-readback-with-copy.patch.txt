@@ -1,0 +1,36 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 6ba61f0..20f2050 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -1,5 +1,6 @@
+ #include "deko_backend.hpp"
+ #include <cstring>
++#include <cstdio>
+ #include <switch.h>
+ 
+ namespace fhnx::gpu {
+@@ -176,6 +177,13 @@ void DekoBackend::copy(Image s,Image d) {
+     auto sv=view(s),dv=view(d);DkImageRect rect={0,0,0,src.desc.width,src.desc.height,1};
+     dkCmdBufCopyImage(commands_,&sv,&rect,&dv,&rect,0);
+ }
++void DekoBackend::copyRegion(Image s,Image d,CopyRegion r) {
++    recording();auto& src=images_.get(s);auto& dst=images_.get(d);
++    require(src.usage==Usage::copy_source && dst.usage==Usage::copy_dest && s.slot!=d.slot,"region copy states/feedback");
++    validateCopyRegion(src.desc,dst.desc,r);auto sv=view(s),dv=view(d);
++    DkImageRect from={r.source_x,r.source_y,0,r.width,r.height,1},to={r.dest_x,r.dest_y,0,r.width,r.height,1};
++    dkCmdBufCopyImage(commands_,&sv,&from,&dv,&to,0);
++}
+ std::vector<uint32_t> DekoBackend::readback(Image h) {
+     require(!recording_ && images_.get(h).usage==Usage::readback,"readback state");
+     auto d=images_.get(h).desc; std::vector<uint32_t> pixels(size_t(d.width)*d.height);
+@@ -186,7 +194,9 @@ std::vector<uint32_t> DekoBackend::readback(Image h) {
+     begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem),0,0};
+     dkCmdBufCopyImageToBuffer(commands_,&v,&rect,&copy,0);
+     dkCmdBufBarrier(commands_,DkBarrier_Full,0); submit();
+-    std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);return pixels;
++    std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);
++    dkMemBlockDestroy(readback_memory_);readback_memory_=nullptr;readback_capacity_=0;
++    return pixels;
+ }
+ DkSwapchain DekoBackend::swapchain(Image a,Image b) {
+     require(!recording_ && !swap_,"one swapchain, outside recording");

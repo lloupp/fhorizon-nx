@@ -1,0 +1,15 @@
+#include "uniform_snapshots.hpp"
+#include <cstdio>
+using namespace fhnx::gpu;
+static void check(bool b){require(b,"snapshot reference failed");}
+template<class F>void rejects(F f){bool yes=false;try{f();}catch(const std::runtime_error&){yes=true;}check(yes);}
+int main(){
+ UniformSnapshots ring(1024);ring.begin();check(ring.reserve(80)==0);check(ring.reserve(80)==256);check(ring.reserve(80)==512);check(ring.reserve(80)==768);
+ rejects([&]{ring.reserve(80);}); // cannot overwrite the first draw in this batch
+ ring.begin();check(ring.reserve(80)==0); // previous batch is retired
+ ring.begin();check(ring.reserve(512)==256); // persistent cursor, disjoint offset
+ rejects([&]{ring.reserve(512);}); // wrap would overlap live range [256,768)
+ ring.begin();check(ring.reserve(512)==0);
+ rejects([&]{ring.reserve(3);});rejects([&]{ring.reserve(0);});rejects([&]{ring.reserve(1028);});
+ std::puts("uniform snapshots: alignment, A/B/A disjoint ranges, wrap, active lifetime PASS");
+}

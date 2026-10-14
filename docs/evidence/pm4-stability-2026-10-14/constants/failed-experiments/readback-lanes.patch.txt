@@ -1,0 +1,34 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 6ba61f0..4ce3507 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -181,12 +181,12 @@ std::vector<uint32_t> DekoBackend::readback(Image h) {
+     auto d=images_.get(h).desc; std::vector<uint32_t> pixels(size_t(d.width)*d.height);
+     uint32_t bytes=uint32_t(pixels.size()*4);
+     if(bytes>readback_capacity_){dkQueueWaitIdle(queue_);if(readback_memory_)dkMemBlockDestroy(readback_memory_);readback_memory_=nullptr;readback_capacity_=0;
+-        readback_memory_=block(device_,bytes,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);readback_capacity_=bytes;}
+-    auto mem=readback_memory_;
+-    begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem),0,0};
++        readback_memory_=block(device_,2*align(bytes,DK_MEMBLOCK_ALIGNMENT),DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);readback_capacity_=bytes;}
++    auto mem=readback_memory_;uint32_t offset=(readback_lane_++%2)*align(bytes,DK_MEMBLOCK_ALIGNMENT);
++    begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem)+offset,0,0};
+     dkCmdBufCopyImageToBuffer(commands_,&v,&rect,&copy,0);
+     dkCmdBufBarrier(commands_,DkBarrier_Full,0); submit();
+-    std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);return pixels;
++    std::memcpy(pixels.data(),static_cast<uint8_t*>(dkMemBlockGetCpuAddr(mem))+offset,pixels.size()*4);return pixels;
+ }
+ DkSwapchain DekoBackend::swapchain(Image a,Image b) {
+     require(!recording_ && !swap_,"one swapchain, outside recording");
+diff --git a/switch/adapter/deko_backend.hpp b/switch/adapter/deko_backend.hpp
+index 77d0228..dcc53b0 100644
+--- a/switch/adapter/deko_backend.hpp
++++ b/switch/adapter/deko_backend.hpp
+@@ -20,7 +20,7 @@ class DekoBackend final : public Commands {
+     DkCmdBuf commands_{};
+     DkMemBlock command_memory_{}, descriptors_{};
+     DkMemBlock readback_memory_{};
+-    uint32_t readback_capacity_{};
++    uint32_t readback_capacity_{},readback_lane_{};
+     DkSwapchain swap_{};
+     Image swap_images_[2]{};
+     Image color_{}, depth_{}, sampled_{};

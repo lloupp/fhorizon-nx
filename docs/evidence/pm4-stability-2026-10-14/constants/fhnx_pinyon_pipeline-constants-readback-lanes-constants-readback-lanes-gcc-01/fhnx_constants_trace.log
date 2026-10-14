@@ -1,0 +1,8 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS constants_frame phase=0 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=1 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=2 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=96 pixels=FAIL
+FHNX_GRAPHICS gate_failed: constants_frame_reference_pass
+FHNX_GRAPHICS constants_probe_failed
