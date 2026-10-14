@@ -1,0 +1,30 @@
+{
+  "nro_sha256": "bc92e35435345ed6d086e0dc639ff9183344192ec5eedb76a42b8b56de2fb309",
+  "eden_build": "GCC",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 5,
+  "configured_gpu_accuracy": 1,
+  "gpu_accuracy_default": true,
+  "guest_started": true,
+  "last_durable_event": "constants_probe_failed",
+  "last_event": "constants_probe_failed",
+  "durable_available": true,
+  "pixel_failure": true,
+  "full_pixel_checks_seen": false,
+  "readback_marker_seen": true,
+  "shutdown": false,
+  "input_exit_verified": false,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": 68546560,
+  "captures": {
+    "boot.png": {
+      "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+      "nonblack": false
+    }
+  },
+  "approved": false,
+  "attempt": "fhnx_pinyon_pipeline-readback-2d-readback-2d-gcc-01"
+}

@@ -1,0 +1,543 @@
+[
+  {
+    "nro_sha256": "ee92d4d9b1eb262fd55c27b4478a4c809f16e7322cac0cab6ec7446acefedd0a",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": false,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68542464,
+    "captures": {
+      "after-a.png": {
+        "sha256": "7c4d5c80d926c017f8c03984cb3911069c5290ec69942a03183ee2a51ffd0c40",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "7c4d5c80d926c017f8c03984cb3911069c5290ec69942a03183ee2a51ffd0c40",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-atlas-clear-atlas-clear-gcc-01"
+  },
+  {
+    "nro_sha256": "fd2cbc8e6210755aee16fe4c12af29df0f60d02bf524cb26952c7474fb11ddef",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": false,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-atlas-diagnostic-atlas-diagnostic-high-gcc-01"
+  },
+  {
+    "nro_sha256": "fdb1d96b7bc06107757b38b8aac4e86cb36d9b2a6991b620f744dcf3c3f0103b",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": false,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-atlas-final-atlas-final-high-gcc-01"
+  },
+  {
+    "nro_sha256": "2e3a86d60f934d840d6ead27ebad1632c9647a00b53d9e9e3f290f6df729d19f",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 4,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "frames_submitted",
+    "last_event": "frames_submitted",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": false,
+    "shutdown": false,
+    "input_exit_verified": false,
+    "process_exit_code": -11,
+    "timeout": false,
+    "signal": "SIGSEGV",
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+        "nonblack": false
+      },
+      "boot.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      }
+    },
+    "approved": false,
+    "attempt": "fhnx_pinyon_pipeline-atlas-read-each-atlas-read-each-gcc-01",
+    "intermediate_pixel_failure": true
+  },
+  {
+    "nro_sha256": "9345aa0188585ef0cc725bca619f1001520dbe1f21a0ce6141e3f95af5831cb2",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": false,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-atlas-uniform-atlas-uniform-gcc-01"
+  },
+  {
+    "nro_sha256": "d6e6d3dd401b9180d360d46e801dc8ca2e3e4a853a218774935442a07d0ee154",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "42cc045c6070eacbd50efb8751dd57f76732bb75b5b4a277d9c966a1ff197176",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "42cc045c6070eacbd50efb8751dd57f76732bb75b5b4a277d9c966a1ff197176",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-msaa4-constants-msaa4-high-gcc-01"
+  },
+  {
+    "nro_sha256": "c9055635988102a7abac400314053977fad438c878f28506206dbe7d6a2d29c6",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-observe-constants-high-gcc-01"
+  },
+  {
+    "nro_sha256": "c9055635988102a7abac400314053977fad438c878f28506206dbe7d6a2d29c6",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-observe-constants-high-gcc-02"
+  },
+  {
+    "nro_sha256": "c9055635988102a7abac400314053977fad438c878f28506206dbe7d6a2d29c6",
+    "eden_build": "PGO",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-observe-constants-high-pgo-02"
+  },
+  {
+    "nro_sha256": "0651a867cad1c79c694695ae3ec908a139e68bf1ede9f80bd1340a6a05dd71c1",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "after-analog.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-verified-constants-verified-high-gcc-20261014T135243-01"
+  },
+  {
+    "nro_sha256": "0651a867cad1c79c694695ae3ec908a139e68bf1ede9f80bd1340a6a05dd71c1",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "after-analog.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-verified-constants-verified-high-gcc-20261014T135243-02"
+  },
+  {
+    "nro_sha256": "0651a867cad1c79c694695ae3ec908a139e68bf1ede9f80bd1340a6a05dd71c1",
+    "eden_build": "PGO",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "after-a.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-constants-verified-constants-verified-high-pgo-01"
+  },
+  {
+    "nro_sha256": "0651a867cad1c79c694695ae3ec908a139e68bf1ede9f80bd1340a6a05dd71c1",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 5,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "constants_probe_failed",
+    "last_event": "constants_probe_failed",
+    "durable_available": true,
+    "pixel_failure": true,
+    "full_pixel_checks_seen": false,
+    "readback_marker_seen": true,
+    "shutdown": false,
+    "input_exit_verified": false,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "boot.png": {
+        "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+        "nonblack": false
+      }
+    },
+    "approved": false,
+    "attempt": "fhnx_pinyon_pipeline-constants-verified-constants-verified-medium-gcc-01"
+  },
+  {
+    "nro_sha256": "f3d1ab09eb4b5b547e707e0be6cc7d377c872d49fd85ddd57660c2ba790f4969",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 0,
+    "configured_gpu_accuracy": 2,
+    "gpu_accuracy_default": false,
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "last_event": "shutdown",
+    "durable_available": true,
+    "pixel_failure": false,
+    "full_pixel_checks_seen": true,
+    "readback_marker_seen": true,
+    "shutdown": true,
+    "input_exit_verified": true,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68550656,
+    "captures": {
+      "after-a.png": {
+        "sha256": "fc5cadbe1de4eeb2a718c57f88ee3739317d9dca4e751f52dcb6e626e33da3be",
+        "nonblack": true
+      },
+      "boot.png": {
+        "sha256": "a123b3414ade835a86e71776b80810dbce707fccd6788a07d064981b07adf58e",
+        "nonblack": true
+      }
+    },
+    "approved": true,
+    "attempt": "fhnx_pinyon_pipeline-pm4-pm4-high-gcc-01"
+  },
+  {
+    "nro_sha256": "bc92e35435345ed6d086e0dc639ff9183344192ec5eedb76a42b8b56de2fb309",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 5,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "constants_probe_failed",
+    "last_event": "constants_probe_failed",
+    "durable_available": true,
+    "pixel_failure": true,
+    "full_pixel_checks_seen": false,
+    "readback_marker_seen": true,
+    "shutdown": false,
+    "input_exit_verified": false,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "boot.png": {
+        "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+        "nonblack": false
+      }
+    },
+    "approved": false,
+    "attempt": "fhnx_pinyon_pipeline-readback-2d-readback-2d-gcc-01"
+  },
+  {
+    "nro_sha256": "c4241956175f8c02875486f49d608065941fc38d87d2829d82aa52700bf90fc5",
+    "eden_build": "GCC",
+    "eden_version": "official 0.2.1",
+    "driver": "llvmpipe 25.2.8",
+    "script_exit": 5,
+    "configured_gpu_accuracy": 1,
+    "gpu_accuracy_default": true,
+    "guest_started": true,
+    "last_durable_event": "constants_probe_failed",
+    "last_event": "constants_probe_failed",
+    "durable_available": true,
+    "pixel_failure": true,
+    "full_pixel_checks_seen": false,
+    "readback_marker_seen": true,
+    "shutdown": false,
+    "input_exit_verified": false,
+    "process_exit_code": 0,
+    "timeout": false,
+    "signal": null,
+    "process_memory": 68546560,
+    "captures": {
+      "boot.png": {
+        "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+        "nonblack": false
+      }
+    },
+    "approved": false,
+    "attempt": "fhnx_pinyon_pipeline-readback-l2-readback-l2-gcc-01"
+  }
+]

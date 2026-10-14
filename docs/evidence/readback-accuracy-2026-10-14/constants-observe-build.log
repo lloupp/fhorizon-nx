@@ -1,0 +1,11 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-constants-observe'
+buffer_vsh.bin
+pinyon_sample.bin
+pinyon_solid.bin
+pinyon_vsh.bin
+constants_probe.cpp
+built ... fhnx_pinyon_pipeline-constants-observe.nacp
+deko_backend.cpp
+linking fhnx_pinyon_pipeline-constants-observe.elf
+built ... fhnx_pinyon_pipeline-constants-observe.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-constants-observe'

@@ -14,6 +14,15 @@ PROFILE="${FHNX_TEST_PROFILE:-}"
 WORK="$ROOT/.local/eden-tests/$NAME${PROFILE:+-$PROFILE}"
 mkdir -p "$WORK/config/eden" "$WORK/data/eden" "$WORK/runtime" "$WORK/captures"
 for directory in nand sdmc log load dump keys play_time; do mkdir -p "$WORK/data/eden/$directory"; done
+# Reject reused evidence rather than allowing stale durable events to approve a run.
+if [[ -f "$WORK/report.json" ]] || compgen -G "$WORK/data/eden/sdmc/*trace.log" >/dev/null;then
+    echo "Use a fresh FHNX_TEST_PROFILE; existing evidence is preserved: $WORK" >&2
+    exit 2
+fi
+if [[ -n "${FHNX_EDEN_GPU_ACCURACY:-}" ]];then
+    python3 "$ROOT/tools/eden_profile.py" --config "$WORK/config/eden/sdl2-config.ini" \
+        --gpu-accuracy "$FHNX_EDEN_GPU_ACCURACY"
+fi
 export XDG_CONFIG_HOME="$WORK/config" XDG_DATA_HOME="$WORK/data" XDG_RUNTIME_DIR="$WORK/runtime"
 # AppImage sharun needs this to expose a system Vulkan driver such as lavapipe.
 export SHARUN_ALLOW_SYS_VKICD="${SHARUN_ALLOW_SYS_VKICD:-1}"

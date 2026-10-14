@@ -42,7 +42,18 @@ int main(){log_file=fopen("sdmc:/fhnx_constants_trace.log","w");trace("boot");tr
 #else
  trace("fixture_clear_readback_no_draw_no_uniform_binding");
 #endif
- auto render=[&]{gpu.begin();surfaces.bind(target);
+ #ifdef FHNX_CONSTANTS_ATLAS
+ // Preserve each GPU result in a different cell before any CPU readback.
+ constexpr unsigned phases=12, columns=4;
+ auto atlas=gpu.create({320*columns,180*((phases+columns-1)/columns)});
+ Usage atlas_state=Usage::undefined;
+ gpu.begin();gpu.transition(atlas,atlas_state,Usage::target);atlas_state=Usage::target;
+ gpu.target(atlas);gpu.clear(0,0,1,1);gpu.submit();trace("fixture_gpu_atlas_one_final_readback");
+#else
+ constexpr unsigned phases=96;
+#endif
+ unsigned intermediate_failures=0;
+ auto render=[&](unsigned phase){gpu.begin();surfaces.bind(target);
 #ifdef FHNX_CONSTANTS_CLEAR_ONLY
   surfaces.clear(0,b.tint[1],0,1);
 #else
@@ -50,11 +61,32 @@ int main(){log_file=fopen("sdmc:/fhnx_constants_trace.log","w");trace("boot");tr
   gpu.uniform(ua);executor.issue(draws[0],pipeline);gpu.uniform(ub);executor.issue(draws[1],pipeline);gpu.uniform(ua);executor.issue(draws[2],pipeline);
 #endif
   if(msaa)surfaces.resolve(target,resolved);
-  auto key=msaa?resolved:target;surfaces.transition(surfaces.get(key),Usage::readback);gpu.submit();return gpu.readback(surfaces.get(key).image);};
+  auto key=msaa?resolved:target;surfaces.transition(surfaces.get(key),Usage::readback);gpu.submit();
+#ifdef FHNX_CONSTANTS_ATLAS
+#ifdef FHNX_CONSTANTS_READ_EACH
+  auto diagnostic=gpu.readback(surfaces.get(key).image);
+    constexpr unsigned independent_green[]={32,64,96,159,223};
+  auto pixel=diagnostic[90*320+160];
+  bool correct=(pixel&0xffff00ff)==0xff000000 && std::abs(int((pixel>>8)&255)-int(independent_green[phase%5]))<=1;
+  intermediate_failures+=!correct;
+  char observation[192];snprintf(observation,sizeof(observation),"intermediate_read phase=%u B=%08lx expected_green=%u pixels=%s",phase,(unsigned long)pixel,independent_green[phase%5],correct?"pass":"FAIL");trace(observation);
+#endif
+  gpu.begin();surfaces.transition(surfaces.get(key),Usage::copy_source);
+  gpu.transition(atlas,atlas_state,Usage::copy_dest);atlas_state=Usage::copy_dest;
+  gpu.copyRegion(surfaces.get(key).image,atlas,{0,0,(phase%columns)*320,(phase/columns)*180,320,180});gpu.submit();
+  return std::vector<uint32_t>{};
+#else
+  (void)phase;return gpu.readback(surfaces.get(key).image);
+#endif
+ };
  u64 initial_ram=0;svcGetInfo(&initial_ram,InfoType_UsedMemorySize,CUR_PROCESS_HANDLE,0);char initial_line[160];snprintf(initial_line,sizeof(initial_line),"telemetry_initial process_used=%llu images=%llu buffers=%llu",(unsigned long long)initial_ram,(unsigned long long)gpu.imageBytes(),(unsigned long long)gpu.bufferBytes());trace(initial_line);
  const unsigned reference[]={32,64,96,159,223};unsigned verified=0,mismatches=0;
- for(unsigned phase=0;phase<96;++phase){float g[]={.125f,.25f,.375f,.625f,.875f};b=constant(0,g[phase%5]);gpu.update(ub,0,sizeof(b),&b);
-  auto pixels=render();uint32_t left=pixels[90*320+54],middle=pixels[90*320+160],right=pixels[90*320+265];unsigned green=(middle>>8)&255;
+ for(unsigned phase=0;phase<phases;++phase){float g[]={.125f,.25f,.375f,.625f,.875f};b=constant(0,g[phase%5]);gpu.update(ub,0,sizeof(b),&b);
+  auto pixels=render(phase);
+#ifdef FHNX_CONSTANTS_ATLAS
+  continue;
+#endif
+  uint32_t left=pixels[90*320+54],middle=pixels[90*320+160],right=pixels[90*320+265];unsigned green=(middle>>8)&255;
   bool correct=left==0xff0000ff && right==0xff0000ff && (middle&0xffff00ff)==0xff000000 && std::abs(int(green)-int(reference[phase%5]))<=1;
 #ifdef FHNX_CONSTANTS_CLEAR_ONLY
   correct=left==middle && middle==right && (middle&0xffff00ff)==0xff000000 && std::abs(int(green)-int(reference[phase%5]))<=1;
@@ -66,11 +98,39 @@ int main(){log_file=fopen("sdmc:/fhnx_constants_trace.log","w");trace("boot");tr
    gate(false,"constants_frame_reference_pass");
 #endif
   }}
- char summary[160];snprintf(summary,sizeof(summary),"constants_sequence_summary checked=96 passed=%u mismatches=%u",verified,mismatches);trace(summary);
+#ifdef FHNX_CONSTANTS_ATLAS
+ gpu.begin();gpu.transition(atlas,atlas_state,Usage::readback);atlas_state=Usage::readback;gpu.submit();
+ auto atlas_pixels=gpu.readback(atlas);const unsigned atlas_width=columns*320;
+ for(unsigned phase=0;phase<phases;++phase){
+  unsigned base=(phase/columns)*180*atlas_width+(phase%columns)*320;
+  auto left=atlas_pixels[base+90*atlas_width+54],middle=atlas_pixels[base+90*atlas_width+160],right=atlas_pixels[base+90*atlas_width+265];
+  bool correct=left==0xff0000ff && right==0xff0000ff && (middle&0xffff00ff)==0xff000000 && std::abs(int((middle>>8)&255)-int(reference[phase%5]))<=1;
+#ifdef FHNX_CONSTANTS_CLEAR_ONLY
+  correct=left==middle && middle==right && (middle&0xffff00ff)==0xff000000 && std::abs(int((middle>>8)&255)-int(reference[phase%5]))<=1;
+#endif
+  char line[192];snprintf(line,sizeof(line),"atlas_cell phase=%u A1=%08lx B=%08lx A3=%08lx expected_B_green=%u pixels=%s",phase,(unsigned long)left,(unsigned long)middle,(unsigned long)right,reference[phase%5],correct?"pass":"FAIL");trace(line);
+  verified+=correct;mismatches+=!correct;
+ }
+ // Export in one checked write; do not silently approve a truncated artifact.
+ std::vector<uint8_t> rgb;rgb.reserve(atlas_pixels.size()*3);
+ for(auto pixel:atlas_pixels){rgb.push_back(uint8_t(pixel));rgb.push_back(uint8_t(pixel>>8));rgb.push_back(uint8_t(pixel>>16));}
+ auto file=fopen("sdmc:/fhnx_constants_atlas.ppm","wb");require(file,"atlas PPM open failed");
+ bool file_ok=fprintf(file,"P6\n%u %u\n255\n",atlas_width,180*((phases+columns-1)/columns))>0;
+ file_ok=file_ok && fwrite(rgb.data(),1,rgb.size(),file)==rgb.size();
+ file_ok=file_ok && fflush(file)==0;int close_result=fclose(file);
+ gate(file_ok && close_result==0,"atlas_ppm_export_complete");
+
+#endif
+ char summary[160];snprintf(summary,sizeof(summary),"constants_sequence_summary checked=%u passed=%u mismatches=%u",phases,verified,mismatches);trace(summary);
+#ifndef FHNX_CONSTANTS_ATLAS
  #ifdef FHNX_CONSTANTS_CLEAR_ONLY
- gate(verified==96,"readback_clear_96_frames_verified");
+ gate(verified==phases,"readback_clear_96_frames_verified");
+ #else
+ gate(verified==phases,"constants_96_frames_verified");
+ #endif
 #else
- gate(verified==96,"constants_96_frames_verified");
+ if(verified==phases)trace("constants_atlas_12_frames_verified");
+ else trace("atlas_pixels=FAIL"); // Still present actual GPU output for diagnosis.
 #endif
  // Present the actual final target with the ordinary texture shader.
  Vertex screen[]={{{-1,-1,0},{1,1,1,1},{0,1}},{{1,-1,0},{1,1,1,1},{1,1}},{{1,1,0},{1,1,1,1},{1,0}},{{-1,1,0},{1,1,1,1},{0,0}}};
@@ -79,8 +139,19 @@ int main(){log_file=fopen("sdmc:/fhnx_constants_trace.log","w");trace("boot");tr
  Image backs[]={gpu.create({960,540,1,Format::rgba8,true}),gpu.create({960,540,1,Format::rgba8,true})};Usage states[]={Usage::undefined,Usage::undefined};auto swap=gpu.swapchain(backs[0],backs[1]);
  PadState pad;padConfigureInput(1,HidNpadStyleSet_NpadStandard);padInitializeDefault(&pad);trace("resources_ready");unsigned frames=0;
  while(appletMainLoop()){padUpdate(&pad);auto down=padGetButtonsDown(&pad);if(down&HidNpadButton_A)trace("a_pressed");if(down&HidNpadButton_Plus){trace("plus_exit");break;}
-  int slot=gpu.acquire(swap);gpu.begin();gpu.transition(backs[slot],states[slot],Usage::target);gpu.target(backs[slot]);gpu.clear(0,0,0,1);gpu.vertex(svb,layout);gpu.uniform(sub);surfaces.sample(msaa?resolved:target);Draw present{vs,fs};present.indices=sib;present.count=6;gpu.draw(present);gpu.transition(backs[slot],Usage::target,Usage::present);gpu.submit();gpu.present(swap,slot,backs[slot]);states[slot]=Usage::present;if(++frames==2)trace("frames_submitted");}
+  int slot=gpu.acquire(swap);gpu.begin();gpu.transition(backs[slot],states[slot],Usage::target);gpu.target(backs[slot]);gpu.clear(0,0,0,1);gpu.vertex(svb,layout);gpu.uniform(sub);
+#ifdef FHNX_CONSTANTS_ATLAS
+  gpu.transition(atlas,atlas_state,Usage::sampled);atlas_state=Usage::sampled;gpu.sample(atlas,{Filter::nearest,Wrap::clamp});
+#else
+  surfaces.sample(msaa?resolved:target);
+#endif
+Draw present{vs,fs};present.indices=sib;present.count=6;gpu.draw(present);gpu.transition(backs[slot],Usage::target,Usage::present);gpu.submit();gpu.present(swap,slot,backs[slot]);states[slot]=Usage::present;if(++frames==2)trace("frames_submitted");}
  u64 ram=0;svcGetInfo(&ram,InfoType_UsedMemorySize,CUR_PROCESS_HANDLE,0);char line[256];snprintf(line,sizeof(line),"telemetry verified=%u frames=%u buffers=%llu images=%llu process_used=%llu",verified,frames,(unsigned long long)gpu.bufferBytes(),(unsigned long long)gpu.imageBytes(),(unsigned long long)ram);trace(line);
- gpu.destroySwapchain(swap);for(auto h:backs)gpu.destroy(h);surfaces.shutdown();gpu.destroy(white);gpu.destroy(vb);for(auto h:ib)gpu.destroy(h);gpu.destroy(ua);gpu.destroy(ub);gpu.destroy(svb);gpu.destroy(sib);gpu.destroy(sub);gpu.destroy(vs);gpu.destroy(fs);gate(gpu.bufferBytes()==0 && gpu.imageBytes()==0,"constants_resources_reclaimed");
+ gpu.destroySwapchain(swap);
+#ifdef FHNX_CONSTANTS_ATLAS
+ gpu.destroy(atlas);
+#endif
+for(auto h:backs){gpu.destroy(h);}
+ surfaces.shutdown();gpu.destroy(white);gpu.destroy(vb);for(auto h:ib)gpu.destroy(h);gpu.destroy(ua);gpu.destroy(ub);gpu.destroy(svb);gpu.destroy(sib);gpu.destroy(sub);gpu.destroy(vs);gpu.destroy(fs);gate(gpu.bufferBytes()==0 && gpu.imageBytes()==0,"constants_resources_reclaimed");gate(verified==phases && intermediate_failures==0,"constants_final_reference_pass");
  }catch(const std::exception& e){trace(e.what());trace("constants_probe_failed");if(log_file)fclose(log_file);return 2;}trace("shutdown");if(log_file)fclose(log_file);return 0;
 }

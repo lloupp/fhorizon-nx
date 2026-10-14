@@ -20,6 +20,7 @@ parser.add_argument("eden", type=Path)
 parser.add_argument("--label", required=True)
 parser.add_argument("--repeats", type=int, default=3)
 parser.add_argument("--settle", type=int, default=10)
+parser.add_argument("--gpu-accuracy", choices=("low","medium","high"))
 args = parser.parse_args()
 if not 1 <= args.repeats <= 20 or not args.label.replace("-", "").replace("_", "").isalnum():
     parser.error("invalid repeat count or label")
@@ -44,6 +45,8 @@ for attempt in range(1, args.repeats + 1):
     profile = f"{args.label}-{stamp}-{attempt:02d}"
     env = dict(os.environ, FHNX_TEST_PROFILE=profile,
                FHNX_SETTLE_SECONDS=str(args.settle), FHNX_TEST_ANALOG="1")
+    if args.gpu_accuracy:
+        env["FHNX_EDEN_GPU_ACCURACY"] = args.gpu_accuracy
     with (out / f"attempt-{attempt:02d}.log").open("wb") as log:
         run = subprocess.run(["bash", str(root / "scripts/eden_input_smoke.sh"),
                               str(nro), str(binary), "GRAPHICS"], env=env,
@@ -58,10 +61,11 @@ for attempt in range(1, args.repeats + 1):
     readback = re.search(r"scene_readback blue=(\d+) grass=(\d+)", durable)
     pixels = bool(readback and int(readback[1]) > 100 and int(readback[2]) > 1000)
     item = dict(attempt=attempt, profile=profile, script_exit=run.returncode,
-                sha256=sha, guest_started=guest, readback_marker=bool(readback),
-                scene_pixel_reference_pass=pixels,
+                sha256=sha, guest_started=guest,
                 approved=run.returncode == 0 and report.get("input_exit_verified", False),
                 report=report)
+    if readback:
+        item["scene_pixel_reference_pass"] = pixels
     item.update(summarize(work,eden_build=binary.name,eden_version=version,script_exit=run.returncode))
     results.append(item)
     shutil.copytree(work, out / f"attempt-{attempt:02d}")

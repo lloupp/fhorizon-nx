@@ -1,4 +1,5 @@
 """Read a completed isolated attempt without converting partial markers into success."""
+import configparser
 import hashlib
 import json
 from pathlib import Path
@@ -28,9 +29,13 @@ def summarize(work, *, eden_build="unknown", eden_version="unknown", script_exit
         count = sum(max(p) > 8 for p in data)
         captures[f.name] = dict(sha256=hashlib.sha256(f.read_bytes()).hexdigest(),
                                nonblack=count > image.width * image.height // 100)
-    full_pixels = any(e in events for e in ("constants_64_frames_verified", "constants_96_frames_verified", "readback_clear_96_frames_verified", "xenos_copy_all_4096_gpu_pixels_pass"))
+    full_pixels = any(e in events for e in ("constants_atlas_12_frames_verified", "constants_64_frames_verified", "constants_96_frames_verified", "readback_clear_96_frames_verified", "xenos_copy_all_4096_gpu_pixels_pass"))
     if "pm4_indexed_resolve_pixels_pass" in events:
         full_pixels = bool(re.search(r"updated_pixels left=ff000080 right=ff00ff00", durable or log))
+    configuration = configparser.ConfigParser()
+    configuration.read(work / "config/eden/sdl2-config.ini")
+    accuracy = configuration.getint('Renderer', 'gpu_accuracy', fallback=None)
+    accuracy_default = configuration.getboolean('Renderer', 'gpu_accuracy\\default', fallback=True)
     approved = bool(script_exit == 0 and report.get("input_exit_verified") and
                     report.get("emulator_process_exit_code") == 0 and not
                     report.get("emulator_process_timeout") and not signal and not failure and
@@ -38,6 +43,7 @@ def summarize(work, *, eden_build="unknown", eden_version="unknown", script_exit
                     all(c["nonblack"] for c in captures.values()))
     return dict(nro_sha256=report.get("nro_sha256"), eden_build=eden_build, eden_version=eden_version,
                 driver=driver[1].strip() if driver else None, script_exit=script_exit,
+                configured_gpu_accuracy=accuracy, gpu_accuracy_default=accuracy_default,
                 guest_started=any(e == "boot" for e in events),
                 last_durable_event=events[-1] if traces and events else None,
                 last_event=events[-1] if events else None, durable_available=bool(traces),

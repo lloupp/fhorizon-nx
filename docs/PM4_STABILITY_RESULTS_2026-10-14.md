@@ -1,5 +1,7 @@
 # PM4 constants / EDRAM stability — incremental delivery
 
+**Follow-up:** [GPU accuracy comparison](READBACK_ACCURACY_RESULTS_2026-10-14.md) verifies 96/96 changing-constant frames with explicit Eden High. The failures below are historical evidence and remain preserved.
+
 Starting commit: be0c04b0a25166805d5e22b62ff9e8e4b8e1d6f4, PR #5.
 Pinned ShiftGlue 1e8968f712824b97d4f4330c5a22389c4c8be1b5 and Pinyon
 a72a92a5f215a32875386b824b8b6f0f34e1caf9. SDK/compiler and official Eden

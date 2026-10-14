@@ -1,0 +1,351 @@
+FHNX Eden process smoke (not a game-boot test)
+[1;31m[   0.000307] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000342] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000345] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000347] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000349] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[0;37m[   0.001350] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-constants-msaa4-constants-msaa4-high-gcc-01/config/eden/sdl2-config.ini[0m
+[0;37m[   0.003379] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-constants-msaa4-constants-msaa4-high-gcc-01/config/eden/sdl2-config.ini[0m
+[1;31m[   0.106257] Common.Filesystem <Error> common/fs/file.cpp:285:Open: Failed to open the file at path=/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-constants-msaa4-constants-msaa4-high-gcc-01/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat, ec_message=No such file or directory[0m
+[1;33m[   0.106282] Service.ACC <Warning> core/hle/service/acc/profile_manager.cpp:403:ParseUserSaveFile: Failed to load profile data from save data... Generating new user 'Eden' with random UUID.[0m
+[0;37m[   0.106330] Service.ACC <Info> core/hle/service/acc/profile_manager.cpp:462:WriteUserSaveFile: Writing profiles.dat to /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-constants-msaa4-constants-msaa4-high-gcc-01/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat[0m
+[1;31m[   0.107263] Input <Error> input_common/drivers/gc_adapter.cpp:87:GCAdapter: libusb could not be initialized. failed with error = -99[0m
+[0;37m[   0.107277] Input <Info> input_common/drivers/udp_client.cpp:140:UDPClient: Udp Initialization started[0m
+[0;37m[   0.107304] Input <Info> input_common/drivers/udp_client.cpp:332:StartCommunication: Starting communication with UDP input server on 127.0.0.1:26760[0m
+[0;37m[   0.195529] Input <Info> input_common/drivers/joycon.cpp:25:Joycons: Joycon driver Initialization started[0m
+[1;31m[   0.195592] Input <Error> input_common/drivers/joycon.cpp:30:Joycons: Hidapi could not be initialized. failed with error = -1[0m
+[0;37m[   0.220236] Frontend <Info> yuzu_cmd/emu_window/emu_window_sdl2_vk.cpp:90:EmuWindow_SDL2_VK: Eden Version: Eden | v0.2.1-v0.2.1 (Vulkan)[0m
+[1;33m[   1.267817] Service.FS <Warning> core/file_sys/romfs_factory.cpp:28:RomFSFactory: Unable to read base RomFS[0m
+[0;37m[   1.267928] Core <Info> core/core.cpp:327:Load: Loading FHNX Pinyon surfaces (0000000000000000) ...[0m
+[0;37m[   2.006091] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_EXT_conservative_rasterization[0m
+[0;37m[   2.006108] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_EXT_external_memory_host[0m
+[0;37m[   2.006111] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_geometry_shader_passthrough[0m
+[0;37m[   2.006114] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_viewport_array2[0m
+[0;37m[   2.006116] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_viewport_swizzle[0m
+[0;37m[   2.596393] Render.Vulkan <Info> video_core/rendsocket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5730:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5730:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+erer_vulkan/vk_pipeline_cache.cpp:471:PipelineCache: DynamicState setting value: 2[0m
+[0;37m[   2.596688] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:221:Report: Driver: llvmpipe 25.2.8[0m
+[0;37m[   2.596693] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:222:Report: Device: llvmpipe (LLVM 20.1.2, 256 bits)[0m
+[0;37m[   2.596696] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:223:Report: Vulkan: 1.4.318[0m
+[0;37m[   2.596709] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:224:Report: Available VRAM: 7.00 GiB[0m
+[0;37m[   2.633511] Service.Audio <Info> audio_core/sink/sink_details.cpp:127:GetOutputSinkDetails: Auto-selecting the sdl2 backend[0m
+[0;37m[   2.649170] Service.Audio <Info> audio_core/sink/sink_details.cpp:127:GetOutputSinkDetails: Auto-selecting the sdl2 backend[0m
+[1;31m[   2.653700] Service <Error> core/hle/service/sockets/bsd.cpp:1051:BSD: Network isn't initialized[0m
+[1;31m[   2.653779] Service <Error> core/hle/service/sockets/bsd.cpp:1051:BSD: Network isn't initialized[0m
+[0;37m[   3.690012] Core <Info> core/game_settings.cpp:133:LoadOverrides: Applied game settings for title ID 0000000000000000 on OS 1, GPU vendor 8 (llvmpipe)[0m
+[0;37m[   3.711288] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'TimeZoneBinary' (0x010000000000080E).[0m
+[0;37m[   3.726342] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.726928] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:519:GetExternalSteadyClockSourceId: called, clock_source_id=00000000-0000-0000-0000-000000000000[0m
+[0;37m[   3.726962] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:527:SetExternalSteadyClockSourceId: called, clock_source_id=91294f03-29d8-0a4c-ce07-3b8e65f3fb62[0m
+[0;37m[   3.729070] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:536:GetUserSystemClockContext: called[0m
+[0;37m[   3.729103] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:923:GetNetworkSystemClockContext: called[0m
+[0;37m[   3.729118] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:940:IsUserSystemClockAutomaticCorrectionEnabled: called, out_automatic_correction_enabled=true[0m
+[0;37m[   3.729121] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1332:GetUserSystemClockAutomaticCorrectionUpdatedTime: called[0m
+[0;37m[   3.729125] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:897:GetDeviceTimeZoneLocationName: called[0m
+[0;37m[   3.739561] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:905:SetDeviceTimeZoneLocationName: called[0m
+[0;37m[   3.740244] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1323:SetDeviceTimeZoneLocationUpdatedTime: called[0m
+[0;37m[   3.743250] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1315:GetDeviceTimeZoneLocationUpdatedTime: called[0m
+[0;37m[   3.743981] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:544:SetUserSystemClockContext: called[0m
+[0;37m[   3.747652] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:931:SetNetworkSystemClockContext: called[0m
+[0;37m[   3.751269] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:950:SetUserSystemClockAutomaticCorrectionEnabled: called, out_automatic_correction_enabled=true[0m
+[0;37m[   3.757292] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1340:SetUserSystemClockAutomaticCorrectionUpdatedTime: called[0m
+[0;37m[   3.832232] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontStandard' (0x0100000000000811).[0m
+[0;37m[   3.834649] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.834804] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   3.837305] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.837398] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   3.837550] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.837624] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseTraditional' (0x0100000000000813).[0m
+[0;37m[   3.837699] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.837748] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontKorean' (0x0100000000000812).[0m
+[0;37m[   3.837818] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.837972] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   3.837982] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.837989] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   3.837994] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.902154] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontStandard' (0x0100000000000811).[0m
+[0;37m[   3.902252] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.902323] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   3.902784] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.902846] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   3.902973] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.903033] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseTraditional' (0x0100000000000813).[0m
+[0;37m[   3.903077] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.903128] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontKorean' (0x0100000000000812).[0m
+[0;37m[   3.904749] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.904878] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   3.904892] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.904978] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   3.904985] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   3.905236] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:664:GetVibrationMasterVolume: called, vibration_master_volume=1[0m
+[0;37m[   4.190295] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'SystemVersion' (0x0100000000000809).[0m
+[1;33m[   4.190309] Common.Filesystem <Warning> core/file_sys/system_archive/system_version.cpp:19:SystemVersion: called - Using hardcoded firmware version 'NintendoSDK Firmware for NX 22.0.0-3.0'[0m
+[0;37m[   4.190323] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[1;33m[   4.193710] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:79:GetManagerDisplayService: (STUBBED) called[0m
+[0;37m[   4.194225] Service.AM <Info> core/hle/service/am/service/window_controller.cpp:35:GetAppletResourceUserId: called[0m
+[0;37m[   4.198197] Service.AM <Info> core/hle/service/am/service/window_controller.cpp:54:AcquireForegroundRights: called[0m
+[0;37m[   4.198832] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:188:SetFocusHandlingMode: called, notify=false background=false suspend=true[0m
+[0;37m[   4.199369] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:218:SetOutOfFocusSuspendingEnabled: called, enabled=false[0m
+[1;33m[   4.200352] Service.AM <Warning> core/hle/service/am/service/application_functions.cpp:343:NotifyRunning: (STUBBED) called[0m
+[0;37m[   4.203286] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:170:SetOperationModeChangedNotification: called, enabled=true[0m
+[0;37m[   4.204618] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:179:SetPerformanceModeChangedNotification: called, enabled=true[0m
+[0;37m[   4.211267] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1389:GetTouchScreenMode: called, touch_screen_mode=1[0m
+[1;33m[   4.253915] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:66:GetRelayService: (STUBBED) called[0m
+[1;33m[   4.254490] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:72:GetSystemDisplayService: (STUBBED) called[0m
+[1;33m[   4.254632] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:79:GetManagerDisplayService: (STUBBED) called[0m
+[1;33m[   4.254784] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:86:GetIndirectDisplayTransactionService: (STUBBED) called[0m
+[0;37m[   4.255561] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:262:CreateManagedDisplayLayer: called[0m
+[1;33m[   4.267902] Service.FS <Warning> core/hle/service/filesystem/fsp/fs_i_filesystem.cpp:154:GetFileTimeStampRaw: (Partial Implementation) called. file=/fhnx_constants_trace.log[0m
+[1;33m[   4.289859] Service.NVDRV <Warning> core/hle/service/nvdrv/nvdrv_interface.cpp:158:Initialize: (STUBBED) called[0m
+[1;33m[   4.294883] Service.NVDRV <Warning> core/hle/service/nvdrv/nvdrv_interface.cpp:215:SetAruid: (STUBBED) called, pid=0X51[0m
+[1;33m[   4.371814] Service.NVDRV <Warning> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:164:SetErrorNotifier: (STUBBED) called, offset=0, size=0, mem=1[0m
+[0;37m[   4.372156] Service.NVDRV <Info> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:171:SetChannelPriority: called, priority=64[0m
+[0;37m[   4.522762] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS fixture_uniform_A_B_A
+FHNX_GRAPHICS telemetry_initial process_used=68546560 images=2297856 buffers=24576[0m
+[0;37m[   4.571254] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:719:CreateGraphicsPipeline: 0xefc18cf0fd09c716[0m
+[0;37m[   4.929783] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_frame phase=0 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=1 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=2 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=3 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=4 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=5 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=6 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=7 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=8 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=9 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=10 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=11 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=12 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=13 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass[0m
+[0;37m[   5.181726] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_frame phase=14 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=15 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=16 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=17 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=18 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=19 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=20 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=21 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=22 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=23 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=24 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=25 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=26 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=27 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass[0m
+[0;37m[   5.437375] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_frame phase=28 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=29 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=30 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=31 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=32 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=33 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=34 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=35 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=36 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=37 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=38 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=39 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=40 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=41 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=42 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=43 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass[0m
+[0;37m[   5.641090] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_frame phase=44 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=45 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=46 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=47 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=48 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=49 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=50 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=51 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=52 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=53 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=54 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=55 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=56 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=57 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=58 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=59 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=60 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=61 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=62 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=63 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=64 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=65 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=66 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=67 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=68 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=69 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass[0m
+[0;37m[   5.805373] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_frame phase=70 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=71 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=72 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=73 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=74 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=75 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=76 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=77 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=78 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=79 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=80 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=81 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=82 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=83 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=84 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=85 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=86 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=87 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=88 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=89 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=90 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=91 msaa=4 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=92 msaa=4 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=93 msaa=4 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=94 msaa=4 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=95 msaa=4 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass[0m
+[0;37m[   5.812133] Service.HID <Info> hid_core/frontend/emulated_controller.cpp:1343:SetPollingMode: Set polling mode 0, device_index=3[0m
+[0;37m[   5.822794] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:719:CreateGraphicsPipeline: 0x5793d14ee7658f12[0m
+[0;37m[   6.056584] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS constants_sequence_summary checked=96 passed=96 mismatches=0
+FHNX_GRAPHICS constants_96_frames_verified
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS frames_submitted[0m
+[1;33m[   7.665062] HW.GPU <Warning> video_core/texture_cache/image_base.cpp:135:IsSafeDownload: MSAA image downloads are not implemented[0m
+[1;33m[   7.665125] HW.GPU <Warning> video_core/texture_cache/image_base.cpp:135:IsSafeDownload: MSAA image downloads are not implemented[0m
+[0;37m[  15.724828] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS a_pressed[0m
+[0;37m[  16.989275] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS a_pressed[0m
+[0;37m[  18.255366] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS a_pressed[0m
+[1;33m[  19.417620] Service.NVDRV <Warning> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:164:SetErrorNotifier: (STUBBED) called, offset=0, size=0, mem=0[0m
+[1;33m[  19.423343] Service.NVDRV <Warning> core/hle/service/nvdrv/core/nvmap.cpp:250:UnpinHandle: Pin count imbalance detected![0m
+[0;37m[  19.427514] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:188:SetFocusHandlingMode: called, notify=true background=true suspend=false[0m
+[0;37m[  19.427555] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:218:SetOutOfFocusSuspendingEnabled: called, enabled=false[0m
+[0;37m[  19.428529] Service.VI <Info> core/hle/service/am/display_layer_manager.cpp:183:SetOverlayZIndex: called, managed_layer=1 z=0[0m
+[0;37m[  19.428924] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:664:GetVibrationMasterVolume: called, vibration_master_volume=1[0m
+[0;37m[  19.653620] Debug.Emulated <Info> core/hle/kernel/svc/svc_debug_string.cpp:53:operator(): 
+FHNX_GRAPHICS plus_exit
+FHNX_GRAPHICS telemetry verified=96 frames=603 buffers=36864 images=7213056 process_used=68546560
+FHNX_GRAPHICS constants_resources_reclaimed
+FHNX_GRAPHICS constants_final_reference_pass
+FHNX_GRAPHICS shutdown[0m
