@@ -37,7 +37,15 @@ done
 [[ -n "$WINDOW" ]] || { wait "$RUNPID"; echo "No SDL window" >&2; exit 5; }
 sleep "${FHNX_SETTLE_SECONDS:-5}"
 import -window root "$WORK/captures/boot.png"
-xdotool windowfocus --sync "$WINDOW"
+if ! xdotool windowfocus --sync "$WINDOW";then
+    set +e
+    wait "$RUNPID"
+    STATUS=$?
+    RUNPID=
+    cat "$WORK/report.json" 2>/dev/null
+    [[ "$STATUS" != 0 ]] || STATUS=5
+    exit "$STATUS"
+fi
 # Fresh SDL config: keyboard 'a' -> Switch A; 'm' -> Switch Plus.
 for attempt in 1 2 3; do
     xdotool keydown a; sleep 0.6; xdotool keyup a; sleep 0.6

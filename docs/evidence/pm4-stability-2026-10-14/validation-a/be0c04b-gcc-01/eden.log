@@ -1,0 +1,124 @@
+FHNX Eden process smoke (not a game-boot test)
+[1;31m[   0.000155] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000187] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000190] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000192] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[1;31m[   0.000194] Common.Filesystem <Error> common/fs/path_util.cpp:302:SetEdenPath: Filesystem object at new_path= is not a directory[0m
+[0;37m[   0.000660] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-pm4-be0c04b-gcc-01/config/eden/sdl2-config.ini[0m
+[0;37m[   0.002285] Config <Info> frontend_common/config.cpp:77:WriteToIni: Writing Global configuration to: /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-pm4-be0c04b-gcc-01/config/eden/sdl2-config.ini[0m
+[1;31m[   0.104384] Common.Filesystem <Error> common/fs/file.cpp:285:Open: Failed to open the file at path=/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-pm4-be0c04b-gcc-01/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat, ec_message=No such file or directory[0m
+[1;33m[   0.104407] Service.ACC <Warning> core/hle/service/acc/profile_manager.cpp:403:ParseUserSaveFile: Failed to load profile data from save data... Generating new user 'Eden' with random UUID.[0m
+[0;37m[   0.104448] Service.ACC <Info> core/hle/service/acc/profile_manager.cpp:462:WriteUserSaveFile: Writing profiles.dat to /workspace/scratch/f849f88d65fc/fhorizon-nx/.local/eden-tests/fhnx_pinyon_pipeline-pm4-be0c04b-gcc-01/data/eden/nand/system/save/8000000000000010/su/avators/profiles.dat[0m
+[1;31m[   0.104918] Input <Error> input_common/drivers/gc_adapter.cpp:87:GCAdapter: libusb could not be initialized. failed with error = -99[0m
+[0;37m[   0.104931] Input <Info> input_common/drivers/udp_client.cpp:140:UDPClient: Udp Initialization started[0m
+[0;37m[   0.104979] Input <Info> input_common/drivers/udp_client.cpp:332:StartCommunication: Starting communication with UDP input server on 127.0.0.1:26760[0m
+[0;37m[   0.106912] Input <Info> input_common/drivers/joycon.cpp:25:Joycons: Joycon driver Initialization started[0m
+[1;31m[   0.107006] Input <Error> input_common/drivers/joycon.cpp:30:Joycons: Hidapi could not be initialized. failed with error = -1[0m
+[0;37m[   0.120943] Frontend <Info> yuzu_cmd/emu_window/emu_window_sdl2_vk.cpp:90:EmuWindow_SDL2_VK: Eden Version: Eden | v0.2.1-v0.2.1 (Vulkan)[0m
+[1;33m[   0.239703] Service.FS <Warning> core/file_sys/romfs_factory.cpp:28:RomFSFactory: Unable to read base RomFS[0m
+[0;37m[   0.239784] Core <Info> core/core.cpp:327:Load: Loading FHNX Pinyon surfaces (0000000000000000) ...[0m
+[0;37m[   0.293821] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_EXT_conservative_rasterization[0m
+[0;37m[   0.293832] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_EXT_external_memory_host[0m
+[0;37m[   0.293834] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_geometry_shader_passthrough[0m
+[0;37m[   0.293836] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_viewport_array2[0m
+[0;37m[   0.293837] Render.Vulkan <Info> video_core/vulkan_common/vulkan_device.cpp:952:GetSuitability: Device doesn't support extension VK_NV_viewport_swizzle[0m
+[0;37m[   0.463791] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:471:PipelineCache: DynamicState setting value: 2[0m
+[0;37m[   0.socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+socket(): Operation not permitted
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5730:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5207:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5730:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+463844] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:221:Report: Driver: llvmpipe 25.2.8[0m
+[0;37m[   0.463861] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:222:Report: Device: llvmpipe (LLVM 20.1.2, 256 bits)[0m
+[0;37m[   0.463862] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:223:Report: Vulkan: 1.4.318[0m
+[0;37m[   0.463868] Render.Vulkan <Info> video_core/renderer_vulkan/renderer_vulkan.cpp:224:Report: Available VRAM: 7.00 GiB[0m
+[0;37m[   0.467532] Service.Audio <Info> audio_core/sink/sink_details.cpp:127:GetOutputSinkDetails: Auto-selecting the sdl2 backend[0m
+[0;37m[   0.470393] Service.Audio <Info> audio_core/sink/sink_details.cpp:127:GetOutputSinkDetails: Auto-selecting the sdl2 backend[0m
+[1;31m[   0.471246] Service <Error> core/hle/service/sockets/bsd.cpp:1051:BSD: Network isn't initialized[0m
+[1;31m[   0.471265] Service <Error> core/hle/service/sockets/bsd.cpp:1051:BSD: Network isn't initialized[0m
+[0;37m[   0.509046] Core <Info> core/game_settings.cpp:133:LoadOverrides: Applied game settings for title ID 0000000000000000 on OS 1, GPU vendor 8 (llvmpipe)[0m
+[0;37m[   0.510312] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'TimeZoneBinary' (0x010000000000080E).[0m
+[0;37m[   0.511171] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.511261] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:519:GetExternalSteadyClockSourceId: called, clock_source_id=00000000-0000-0000-0000-000000000000[0m
+[0;37m[   0.511270] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:527:SetExternalSteadyClockSourceId: called, clock_source_id=b13396ee-95b5-6196-202c-115100de22e5[0m
+[0;37m[   0.511504] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:536:GetUserSystemClockContext: called[0m
+[0;37m[   0.511517] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:923:GetNetworkSystemClockContext: called[0m
+[0;37m[   0.511525] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:940:IsUserSystemClockAutomaticCorrectionEnabled: called, out_automatic_correction_enabled=true[0m
+[0;37m[   0.511527] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1332:GetUserSystemClockAutomaticCorrectionUpdatedTime: called[0m
+[0;37m[   0.511529] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:897:GetDeviceTimeZoneLocationName: called[0m
+[0;37m[   0.514770] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:905:SetDeviceTimeZoneLocationName: called[0m
+[0;37m[   0.515007] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1323:SetDeviceTimeZoneLocationUpdatedTime: called[0m
+[0;37m[   0.515683] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1315:GetDeviceTimeZoneLocationUpdatedTime: called[0m
+[0;37m[   0.515897] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:544:SetUserSystemClockContext: called[0m
+[0;37m[   0.516154] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:931:SetNetworkSystemClockContext: called[0m
+[0;37m[   0.517793] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:950:SetUserSystemClockAutomaticCorrectionEnabled: called, out_automatic_correction_enabled=true[0m
+[0;37m[   0.518076] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1340:SetUserSystemClockAutomaticCorrectionUpdatedTime: called[0m
+[0;37m[   0.523653] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontStandard' (0x0100000000000811).[0m
+[0;37m[   0.524069] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524149] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   0.524295] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524329] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   0.524389] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524428] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseTraditional' (0x0100000000000813).[0m
+[0;37m[   0.524462] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524492] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontKorean' (0x0100000000000812).[0m
+[0;37m[   0.524525] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524561] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   0.524566] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.524570] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   0.524573] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528505] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontStandard' (0x0100000000000811).[0m
+[0;37m[   0.528547] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528580] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   0.528645] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528676] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseSimple' (0x0100000000000814).[0m
+[0;37m[   0.528719] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528755] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontChineseTraditional' (0x0100000000000813).[0m
+[0;37m[   0.528805] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528834] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontKorean' (0x0100000000000812).[0m
+[0;37m[   0.528863] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528890] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   0.528895] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.528918] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'FontNintendoExtension' (0x0100000000000810).[0m
+[0;37m[   0.528921] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[0;37m[   0.609461] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:664:GetVibrationMasterVolume: called, vibration_master_volume=1[0m
+[0;37m[   0.636373] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:79:SynthesizeSystemArchive: Synthesizing system archive 'SystemVersion' (0x0100000000000809).[0m
+[1;33m[   0.636384] Common.Filesystem <Warning> core/file_sys/system_archive/system_version.cpp:19:SystemVersion: called - Using hardcoded firmware version 'NintendoSDK Firmware for NX 22.0.0-3.0'[0m
+[0;37m[   0.636395] Service.FS <Info> core/file_sys/system_archive/system_archive.cpp:83:SynthesizeSystemArchive:     - System archive generation successful![0m
+[1;33m[   0.637825] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:79:GetManagerDisplayService: (STUBBED) called[0m
+[0;37m[   0.638226] Service.AM <Info> core/hle/service/am/service/window_controller.cpp:35:GetAppletResourceUserId: called[0m
+[0;37m[   0.638877] Service.AM <Info> core/hle/service/am/service/window_controller.cpp:54:AcquireForegroundRights: called[0m
+[0;37m[   0.639053] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:188:SetFocusHandlingMode: called, notify=false background=false suspend=true[0m
+[0;37m[   0.639234] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:218:SetOutOfFocusSuspendingEnabled: called, enabled=false[0m
+[1;33m[   0.639363] Service.AM <Warning> core/hle/service/am/service/application_functions.cpp:343:NotifyRunning: (STUBBED) called[0m
+[0;37m[   0.639600] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:170:SetOperationModeChangedNotification: called, enabled=true[0m
+[0;37m[   0.639638] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:179:SetPerformanceModeChangedNotification: called, enabled=true[0m
+[0;37m[   0.640022] Service.SET <Info> core/hle/service/set/system_settings_server.cpp:1389:GetTouchScreenMode: called, touch_screen_mode=1[0m
+[1;33m[   0.648747] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:66:GetRelayService: (STUBBED) called[0m
+[1;33m[   0.648887] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:72:GetSystemDisplayService: (STUBBED) called[0m
+[1;33m[   0.648921] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:79:GetManagerDisplayService: (STUBBED) called[0m
+[1;33m[   0.648989] Service.VI <Warning> core/hle/service/vi/application_display_service.cpp:86:GetIndirectDisplayTransactionService: (STUBBED) called[0m
+[0;37m[   0.649284] Service.AM <Info> core/hle/service/am/service/self_controller.cpp:262:CreateManagedDisplayLayer: called[0m
+[1;33m[   0.658236] Service.FS <Warning> core/hle/service/filesystem/fsp/fs_i_filesystem.cpp:154:GetFileTimeStampRaw: (Partial Implementation) called. file=/fhnx_pm4_trace.log[0m
+[1;33m[   0.666170] Service.NVDRV <Warning> core/hle/service/nvdrv/nvdrv_interface.cpp:158:Initialize: (STUBBED) called[0m
+[1;33m[   0.666645] Service.NVDRV <Warning> core/hle/service/nvdrv/nvdrv_interface.cpp:215:SetAruid: (STUBBED) called, pid=0X51[0m
+[1;33m[   0.674172] Service.NVDRV <Warning> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:164:SetErrorNotifier: (STUBBED) called, offset=0, size=0, mem=1[0m
+[0;37m[   0.674248] Service.NVDRV <Info> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:171:SetChannelPriority: called, priority=64[0m
+[0;37m[   0.782507] Render.Vulkan <Info> video_core/renderer_vulkan/vk_pipeline_cache.cpp:719:CreateGraphicsPipeline: 0xefc18cf0fd09c716[0m
+[1;33m[   0.907591] Service.NVDRV <Warning> core/hle/service/nvdrv/devices/nvhost_gpu.cpp:164:SetErrorN

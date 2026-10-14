@@ -1,0 +1,50 @@
+[
+  {
+    "label": "be0c04b-gcc-01",
+    "nro_sha256": "f3d1ab09eb4b5b547e707e0be6cc7d377c872d49fd85ddd57660c2ba790f4969",
+    "eden": "0.2.1 GCC Standard",
+    "driver": "llvmpipe 25.2.8",
+    "guest_started": true,
+    "last_durable_event": "inflight_cpu_update_destroy_rejected",
+    "readback_pass": false,
+    "constant_update_pass": false,
+    "guest_failed": false,
+    "timeout": true,
+    "process_exit_code": null,
+    "input_exit_verified": false,
+    "approved": false,
+    "process_memory": null
+  },
+  {
+    "label": "be0c04b-pgo-01",
+    "nro_sha256": "f3d1ab09eb4b5b547e707e0be6cc7d377c872d49fd85ddd57660c2ba790f4969",
+    "eden": "0.2.1 Clang PGO",
+    "driver": "llvmpipe 25.2.8",
+    "guest_started": true,
+    "last_durable_event": "shutdown",
+    "readback_pass": true,
+    "constant_update_pass": true,
+    "guest_failed": false,
+    "timeout": false,
+    "process_exit_code": 0,
+    "input_exit_verified": true,
+    "approved": true,
+    "process_memory": 68550656
+  },
+  {
+    "label": "be0c04b-gcc-02",
+    "nro_sha256": "f3d1ab09eb4b5b547e707e0be6cc7d377c872d49fd85ddd57660c2ba790f4969",
+    "eden": "0.2.1 GCC Standard",
+    "driver": "llvmpipe 25.2.8",
+    "guest_started": true,
+    "last_durable_event": "pm4_probe_failed",
+    "readback_pass": true,
+    "constant_update_pass": false,
+    "guest_failed": true,
+    "timeout": false,
+    "process_exit_code": 0,
+    "input_exit_verified": false,
+    "approved": false,
+    "process_memory": null
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "left_half_red_boot": true,
+    "left_full_red_after_a": true,
+    "right_green_stable": true,
+    "background_stable": true
+  },
+  "passed": true,
+  "physical_switch_verified": false
+}
