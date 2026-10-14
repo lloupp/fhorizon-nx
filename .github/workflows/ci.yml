@@ -6,7 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Python tests (synthetic data only)
-        run: python3 -m unittest discover -s tests -v
+        run: |
+          python3 -m venv .local/ci-python
+          .local/ci-python/bin/pip install "Pillow>=10,<14"
+          .local/ci-python/bin/python -m unittest discover -s tests -v
       - name: CMake smoke tests (no game)
         run: |
           cmake -S . -B .local/ci-build -DCMAKE_BUILD_TYPE=Release
@@ -18,6 +21,7 @@ jobs:
         run: |
           bash scripts/clone_upstream.sh
           bash scripts/test_pm4_frontend.sh
+          bash scripts/test_xenos_copy.sh
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
   switch-homebrew-build:
@@ -73,6 +77,8 @@ jobs:
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro --dry-run
           FHNX_PIPELINE_VARIANT=pm4 FHNX_PIPELINE_CLIENT=pm4_probe bash ./scripts/build_pinyon_pipeline.sh
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro --dry-run
+          FHNX_PIPELINE_VARIANT=constants FHNX_PIPELINE_CLIENT=constants_probe bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=xenos-copy FHNX_PIPELINE_CLIENT=copy_probe bash ./scripts/build_pinyon_pipeline.sh
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -88,4 +94,6 @@ jobs:
             .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
             .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro
             .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro
+            .local/pinyon-pipeline-constants/fhnx_pinyon_pipeline-constants.nro
+            .local/pinyon-pipeline-xenos-copy/fhnx_pinyon_pipeline-xenos-copy.nro
           retention-days: 14

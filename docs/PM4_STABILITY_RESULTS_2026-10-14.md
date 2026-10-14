@@ -33,16 +33,84 @@ Official package SHA256: GCC
 PGO 7a28bf988b0648831989722bdbaa90ab31371b403808199813e0ea7c8b25ba6d.
 All attempts are [preserved individually](evidence/pm4-stability-2026-10-14/validation-a/).
 
-## Pending increments
+## B — controlled constants and reduced readback reproducer (unresolved)
 
-B: controlled A/B/A indexed PM4 fixture with 64 frame readbacks, no depth test,
-separate from the 3D demonstration. Compilation has completed; guest execution
-is in progress. No speculative constant/cache correction is accepted.
-C: real COPY-mode register / vertex-fetch derivation and bounded transfers are
-not yet implemented in this checkpoint. Native resolve alone is not COPY.
-D: retain timeouts, guest pixel failures and emulator signals separately.
-E: deferred until the preceding contracts are sufficiently stable.
+The indexed PM4 fixture binds A / B / A, changes B each frame, and reads all
+three positions. The same baseline NRO (86a58e7bf10721b85b07be9b2d3638f50f0e8370ee55883063cbd9d6a07a5c0c)
+failed its second update on both official GCC and PGO: expected green 128,
+read green 64. A CPU slow-memory configuration also failed. The asynchronous
+GPU-disabled experiment copied an absolute SDMC path: it is retained but
+excluded from an isolated-profile cohort.
 
-The existing be0c04b CI passed both jobs (38553900731); this evidence/runner
-checkpoint's CI is pending. No game traces, commercial assets or hardware
-claims. Main and previous PR history remain intact.
+Distinct UBO snapshots, command cache flush, readback lanes, uncached staging,
+process cache flush, fresh readback allocation and command-memory rotation did
+not eliminate the mismatch. Failed patches are archived as experiments, not
+accepted runtime fixes. Process cache invalidation is unimplemented in the
+inspected official Eden service implementation. There is no proven fix.
+
+The smaller clear-only fixture alternates GPU clear and readback with no draw
+or uniform bind in its GPU loop; it also diverged. Therefore this failure cannot
+be attributed exclusively to dkCmdBufPushConstants. The 96-frame observation
+run recorded **4 correct and 92 incorrect frames**, NRO
+c9055635988102a7abac400314053977fad438c878f28506206dbe7d6a2d29c6.
+Guest failure with Eden exit 0 remains a failed test. Resource queue-error guards
+make queue failures explicit, but did not fix stale pixels. Root cause remains
+between guest command/readback lifetime, emulator memory visibility and host
+GPU behavior; no physical Switch comparison is available.
+
+[Individual logs, summaries, failures and patches](evidence/pm4-stability-2026-10-14/constants/)
+are preserved. Older attempts without RAM telemetry report null, not an estimate.
+
+## C — bounded genuine COPY frontend
+
+Implemented real pinned SDK register unions/enums and PM4 DRAW_INDX auto-index
+rectangle-list COPY mode: RB_COPY_CONTROL, DEST_BASE/INFO/PITCH, SURFACE_INFO,
+COLOR_INFO, VF0 with 8-in-32 vertex endianness, and the scissor/pixel-center
+contract. Derives Fh1SurfaceKey and a native image-copy region, validates actual
+backend destination metadata, rejects feedback/overlapping EDRAM ownership,
+uninitialized states, unsupported formats, MSAA/conversion/clear flags, invalid
+pitch/address, fractional or unaligned vertices and out-of-bounds regions.
+
+The supported fixture copies [8,40) x [8,40) from an existing RGBA8 128x96
+surface into a 64x64 RGBA8 destination. Source is a GPU clear (64,128,191,255),
+not a shader gradient or a Forza command stream. Native dkCmdBufCopyImage copies
+1024 pixels; readback verifies all 4096 destination pixels including untouched
+(64,32,128,255). GPU readback is then CPU-packed into a bounded synthetic guest
+span using the actual upstream GetTiledOffset2D function; all untouched bytes
+remain 0x5a. This is not GPU tiled DMA or a mapped ShiftGlue arena.
+
+Final COPY NRO SHA256:
+33f95861312ddb23e02722bf21602e3cfea1773256f3da602e0f37effc47016d.
+GCC and PGO independent executions both completed with fresh captures, every
+pixel/tiled assertion, A x3, Plus, zero resource counters, shutdown and exit 0.
+Observed process memory 68,554,752 bytes; images 5,062,656; buffers 12,288.
+The earlier shader-gradient source failed before COPY and is retained separately.
+The preceding clear variant also completed on GCC/PGO, but its captures do not
+approve the final binary. EQUAL 0x26 rejection is exercised on ARM64 in this probe.
+
+[Fresh COPY captures, GPU PPM, synthetic tiled bytes (hex), hashes and logs](evidence/pm4-stability-2026-10-14/copy/).
+This subset does not implement arbitrary clamping, tiling conversions, MSAA COPY,
+EDRAM ownership transfers, general formats or general game shader execution.
+
+## D — stability classification
+
+Attempts were sequential; each summary carries NRO hash, Eden build, driver,
+guest boot, last durable event, pixel/readback result, shutdown, exit, timeout,
+signal, RAM and screenshot hashes. The summary rejects partial pass markers,
+black captures and guest failures even when the host process exits 0.
+No new SIGSEGV/SIGABRT was observed in these completed probes; one exact-be
+GCC attempt timed out. No crash root cause or long-duration stability is claimed.
+The prior 3D one-in-five result is unchanged and separate from this PM4 cohort.
+
+## Validation and remaining blockers
+
+28 Python tests passed. PM4 and COPY contracts passed ASan+UBSan. Constants and
+COPY NROs compiled with devkitA64/libnx/deko3d/UAM. CI is recorded in the PR when
+both jobs complete; it does not stand in for Eden. SDK BSD notices are preserved
+in the generated tiling overlay. Pinyon/SDK pins remain unchanged.
+
+E is deferred because changing-constant/readback correctness is still blocked.
+The next technical priority is an independent readback visibility/lifetime
+reproducer and a physical Switch comparison, followed by a limited verified
+Xenos-to-UAM shader path. No automatic general Xenos/SPIR-V-to-DKSH conversion,
+commercial game commands, gameplay or Switch hardware execution is claimed.
