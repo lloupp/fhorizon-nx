@@ -1,0 +1,7 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS xenos_copy_real_registers_vf0_plan_pass
+FHNX_GRAPHICS pm4_equal_depth_contract_rejected
+FHNX_GRAPHICS copy_partial_alignment_rejected
+FHNX_GRAPHICS copy_overlapping_edram_owner_rejected
+FHNX_GRAPHICS COPY source GPU stripe reference mismatch
+FHNX_GRAPHICS copy_probe_failed

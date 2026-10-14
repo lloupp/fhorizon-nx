@@ -1,0 +1,28 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS fixture_clear_readback_no_draw_no_uniform_binding
+FHNX_GRAPHICS fixture_gpu_atlas_one_final_readback
+FHNX_GRAPHICS telemetry_initial process_used=68542464 images=3936256 buffers=24576
+FHNX_GRAPHICS atlas_cell phase=0 A1=ff002000 B=ff002000 A3=ff002000 expected_B_green=32 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=1 A1=ff004000 B=ff004000 A3=ff004000 expected_B_green=64 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=2 A1=ff006000 B=ff006000 A3=ff006000 expected_B_green=96 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=3 A1=ff009f00 B=ff009f00 A3=ff009f00 expected_B_green=159 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=4 A1=ff00df00 B=ff00df00 A3=ff00df00 expected_B_green=223 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=5 A1=ff002000 B=ff002000 A3=ff002000 expected_B_green=32 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=6 A1=ff004000 B=ff004000 A3=ff004000 expected_B_green=64 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=7 A1=ff006000 B=ff006000 A3=ff006000 expected_B_green=96 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=8 A1=ff009f00 B=ff009f00 A3=ff009f00 expected_B_green=159 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=9 A1=ff00df00 B=ff00df00 A3=ff00df00 expected_B_green=223 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=10 A1=ff002000 B=ff002000 A3=ff002000 expected_B_green=32 pixels=pass
+FHNX_GRAPHICS atlas_cell phase=11 A1=ff004000 B=ff004000 A3=ff004000 expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_sequence_summary checked=12 passed=12 mismatches=0
+FHNX_GRAPHICS constants_atlas_12_frames_verified
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS frames_submitted
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS plus_exit
+FHNX_GRAPHICS telemetry verified=12 frames=678 buffers=36864 images=8851456 process_used=68542464
+FHNX_GRAPHICS constants_resources_reclaimed
+FHNX_GRAPHICS constants_final_reference_pass
+FHNX_GRAPHICS shutdown

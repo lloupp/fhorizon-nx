@@ -1,0 +1,7 @@
+{
+  "gpu_accuracy": "1",
+  "gpu_accuracy\\default": "true",
+  "dma_accuracy": "0",
+  "sync_memory_operations": "false",
+  "use_asynchronous_gpu_emulation": "true"
+}

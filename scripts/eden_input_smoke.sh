@@ -14,6 +14,15 @@ PROFILE="${FHNX_TEST_PROFILE:-}"
 WORK="$ROOT/.local/eden-tests/$NAME${PROFILE:+-$PROFILE}"
 mkdir -p "$WORK/config/eden" "$WORK/data/eden" "$WORK/runtime" "$WORK/captures"
 for directory in nand sdmc log load dump keys play_time; do mkdir -p "$WORK/data/eden/$directory"; done
+# Reject reused evidence rather than allowing stale durable events to approve a run.
+if [[ -f "$WORK/report.json" ]] || compgen -G "$WORK/data/eden/sdmc/*trace.log" >/dev/null;then
+    echo "Use a fresh FHNX_TEST_PROFILE; existing evidence is preserved: $WORK" >&2
+    exit 2
+fi
+if [[ -n "${FHNX_EDEN_GPU_ACCURACY:-}" ]];then
+    python3 "$ROOT/tools/eden_profile.py" --config "$WORK/config/eden/sdl2-config.ini" \
+        --gpu-accuracy "$FHNX_EDEN_GPU_ACCURACY"
+fi
 export XDG_CONFIG_HOME="$WORK/config" XDG_DATA_HOME="$WORK/data" XDG_RUNTIME_DIR="$WORK/runtime"
 # AppImage sharun needs this to expose a system Vulkan driver such as lavapipe.
 export SHARUN_ALLOW_SYS_VKICD="${SHARUN_ALLOW_SYS_VKICD:-1}"
@@ -37,7 +46,15 @@ done
 [[ -n "$WINDOW" ]] || { wait "$RUNPID"; echo "No SDL window" >&2; exit 5; }
 sleep "${FHNX_SETTLE_SECONDS:-5}"
 import -window root "$WORK/captures/boot.png"
-xdotool windowfocus --sync "$WINDOW"
+if ! xdotool windowfocus --sync "$WINDOW";then
+    set +e
+    wait "$RUNPID"
+    STATUS=$?
+    RUNPID=
+    cat "$WORK/report.json" 2>/dev/null
+    [[ "$STATUS" != 0 ]] || STATUS=5
+    exit "$STATUS"
+fi
 # Fresh SDL config: keyboard 'a' -> Switch A; 'm' -> Switch Plus.
 for attempt in 1 2 3; do
     xdotool keydown a; sleep 0.6; xdotool keyup a; sleep 0.6

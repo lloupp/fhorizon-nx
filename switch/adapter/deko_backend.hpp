@@ -36,6 +36,7 @@ public:
     DekoBackend& operator=(const DekoBackend&) = delete;
     Image create(ImageDesc) override;
     void destroy(Image) override;
+    ImageDesc imageDesc(Image h) const override {return images_.get(h).desc;}
     Shader shader(const void*, uint32_t) override;
     void begin() override;
     void transition(Image, Usage, Usage) override;
@@ -52,6 +53,7 @@ public:
     void draw(const Draw&) override;
     void resolve(Image, Image) override;
     void copy(Image, Image) override;
+    void copyRegion(Image,Image,CopyRegion) override;
     void submit() override;
     std::vector<uint32_t> readback(Image);
     DkSwapchain swapchain(Image, Image);

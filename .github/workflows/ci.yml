@@ -6,7 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Python tests (synthetic data only)
-        run: python3 -m unittest discover -s tests -v
+        run: |
+          python3 -m venv .local/ci-python
+          .local/ci-python/bin/pip install "Pillow>=10,<14"
+          .local/ci-python/bin/python -m unittest discover -s tests -v
       - name: CMake smoke tests (no game)
         run: |
           cmake -S . -B .local/ci-build -DCMAKE_BUILD_TYPE=Release
@@ -14,6 +17,12 @@ jobs:
           ctest --test-dir .local/ci-build --output-on-failure
       - name: Reproduce macro lifetime bug and verify correction (ASan)
         run: ./scripts/test_macro_rebase.sh
+      - name: Pinned PM4 wire contract (ASan and UBSan)
+        run: |
+          bash scripts/clone_upstream.sh
+          bash scripts/test_pm4_frontend.sh
+          bash scripts/test_xenos_copy.sh
+          bash scripts/test_xenos_shader.sh
       - name: Publication audit
         run: python3 tools/fhnx.py audit .
   switch-homebrew-build:
@@ -67,6 +76,13 @@ jobs:
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro --dry-run
           FHNX_PIPELINE_VARIANT=scene FHNX_PIPELINE_CLIENT=demo bash ./scripts/build_pinyon_pipeline.sh
           python3 scripts/test_eden.py --nro .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro --dry-run
+          FHNX_PIPELINE_VARIANT=pm4 FHNX_PIPELINE_CLIENT=pm4_probe bash ./scripts/build_pinyon_pipeline.sh
+          python3 scripts/test_eden.py --nro .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro --dry-run
+          FHNX_PIPELINE_VARIANT=constants FHNX_PIPELINE_CLIENT=constants_probe bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=xenos-copy FHNX_PIPELINE_CLIENT=copy_probe bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=xenos-shader FHNX_PIPELINE_CLIENT=shader_probe bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=constants-msaa4 FHNX_PIPELINE_CLIENT=constants_probe FHNX_PIPELINE_DEFINES=-DFHNX_CONSTANTS_MSAA4 bash ./scripts/build_pinyon_pipeline.sh
+          FHNX_PIPELINE_VARIANT=constants-atlas FHNX_PIPELINE_CLIENT=constants_probe FHNX_PIPELINE_DEFINES='-DFHNX_CONSTANTS_ATLAS -DFHNX_CONSTANTS_READ_EACH' bash ./scripts/build_pinyon_pipeline.sh
       - uses: actions/upload-artifact@v4
         with:
           name: independent-deko3d-nros
@@ -78,7 +94,14 @@ jobs:
             .local/horizon-memory/fhnx_horizon_memory.nro
             .local/horizon-layout/fhnx_horizon_layout.nro
             .local/switch-vmx/fhnx_vmx.nro
+            .local/pinyon-pipeline-pm4/fhnx_pinyon_pipeline-pm4.nro
             .local/pinyon-pipeline/fhnx_pinyon_pipeline.nro
             .local/pinyon-pipeline-buffers/fhnx_pinyon_pipeline-buffers.nro
             .local/pinyon-pipeline-scene/fhnx_pinyon_pipeline-scene.nro
+            .local/pinyon-pipeline-constants/fhnx_pinyon_pipeline-constants.nro
+            .local/pinyon-pipeline-xenos-copy/fhnx_pinyon_pipeline-xenos-copy.nro
+            .local/pinyon-pipeline-constants-msaa4/fhnx_pinyon_pipeline-constants-msaa4.nro
+            .local/pinyon-pipeline-constants-atlas/fhnx_pinyon_pipeline-constants-atlas.nro
+            .local/pinyon-pipeline-xenos-shader/fhnx_pinyon_pipeline-xenos-shader.nro
+            .local/pinyon-pipeline-xenos-shader/shader-bundle/
           retention-days: 14

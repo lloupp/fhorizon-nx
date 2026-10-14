@@ -1,0 +1,7 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS telemetry_initial process_used=68542464 images=659456 buffers=24576
+FHNX_GRAPHICS constants_frame phase=0 msaa=1 A1=ff002000 B=ff002000 A3=ff002000 expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=1 msaa=1 A1=ff002000 B=ff002000 A3=ff002000 expected_B_green=64 pixels=FAIL
+FHNX_GRAPHICS gate_failed: constants_frame_reference_pass
+FHNX_GRAPHICS constants_probe_failed

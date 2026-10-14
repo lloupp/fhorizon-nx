@@ -1,0 +1,18 @@
+make: Entering directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-atlas-uniform'
+buffer_vsh.bin
+pinyon_sample.bin
+pinyon_solid.bin
+pinyon_vsh.bin
+built ... fhnx_pinyon_pipeline-atlas-uniform.nacp
+constants_probe.cpp
+deko_backend.cpp
+/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-atlas-uniform/source/constants_probe.cpp: In function 'int main()':
+/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-atlas-uniform/source/constants_probe.cpp:141:1: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  141 | for(auto h:backs)gpu.destroy(h);surfaces.shutdown();gpu.destroy(white);gpu.destroy(vb);for(auto h:ib)gpu.destroy(h);gpu.destroy(ua);gpu.destroy(ub);gpu.destroy(svb);gpu.destroy(sib);gpu.destroy(sub);gpu.destroy(vs);gpu.destroy(fs);gate(gpu.bufferBytes()==0 && gpu.imageBytes()==0,"constants_resources_reclaimed");gate(verified==phases,"constants_final_reference_pass");
+      | ^~~
+/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-atlas-uniform/source/constants_probe.cpp:141:33: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  141 | for(auto h:backs)gpu.destroy(h);surfaces.shutdown();gpu.destroy(white);gpu.destroy(vb);for(auto h:ib)gpu.destroy(h);gpu.destroy(ua);gpu.destroy(ub);gpu.destroy(svb);gpu.destroy(sib);gpu.destroy(sub);gpu.destroy(vs);gpu.destroy(fs);gate(gpu.bufferBytes()==0 && gpu.imageBytes()==0,"constants_resources_reclaimed");gate(verified==phases,"constants_final_reference_pass");
+      |                                 ^~~~~~~~
+linking fhnx_pinyon_pipeline-atlas-uniform.elf
+built ... fhnx_pinyon_pipeline-atlas-uniform.nro
+make: Leaving directory '/workspace/scratch/f849f88d65fc/fhorizon-nx/.local/pinyon-pipeline-atlas-uniform'

@@ -1,0 +1,27 @@
+{
+  "nro_sha256": "fd54aeedd6caa403939de782259f5a8b3c9d99e89262cc153c3c6961b309fc9d",
+  "eden_build": "GCC",
+  "eden_version": "0.2.1 official",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 5,
+  "guest_started": true,
+  "last_durable_event": "constants_probe_failed",
+  "last_event": "constants_probe_failed",
+  "durable_available": true,
+  "pixel_failure": true,
+  "full_pixel_checks_seen": false,
+  "readback_marker_seen": true,
+  "shutdown": false,
+  "input_exit_verified": false,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": null,
+  "captures": {
+    "boot.png": {
+      "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+      "nonblack": false
+    }
+  },
+  "approved": false
+}

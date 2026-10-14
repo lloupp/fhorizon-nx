@@ -1,0 +1,35 @@
+{
+  "nro_sha256": "2e3a86d60f934d840d6ead27ebad1632c9647a00b53d9e9e3f290f6df729d19f",
+  "eden_build": "GCC",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 4,
+  "configured_gpu_accuracy": 1,
+  "gpu_accuracy_default": true,
+  "guest_started": true,
+  "last_durable_event": "frames_submitted",
+  "last_event": "frames_submitted",
+  "durable_available": true,
+  "pixel_failure": false,
+  "full_pixel_checks_seen": true,
+  "readback_marker_seen": false,
+  "shutdown": false,
+  "input_exit_verified": false,
+  "process_exit_code": -11,
+  "timeout": false,
+  "signal": "SIGSEGV",
+  "process_memory": 68546560,
+  "captures": {
+    "after-a.png": {
+      "sha256": "5cf9f17946604597012f4742c5354f20df56e0d94de7ff50c84ced7e7b1da67c",
+      "nonblack": false
+    },
+    "boot.png": {
+      "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+      "nonblack": true
+    }
+  },
+  "approved": false,
+  "attempt": "fhnx_pinyon_pipeline-atlas-read-each-atlas-read-each-gcc-01",
+  "intermediate_pixel_failure": true
+}

@@ -1,0 +1,34 @@
+{
+  "nro_sha256": "0651a867cad1c79c694695ae3ec908a139e68bf1ede9f80bd1340a6a05dd71c1",
+  "eden_build": "PGO",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 0,
+  "configured_gpu_accuracy": 2,
+  "gpu_accuracy_default": false,
+  "guest_started": true,
+  "last_durable_event": "shutdown",
+  "last_event": "shutdown",
+  "durable_available": true,
+  "pixel_failure": false,
+  "full_pixel_checks_seen": true,
+  "readback_marker_seen": true,
+  "shutdown": true,
+  "input_exit_verified": true,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": 68546560,
+  "captures": {
+    "after-a.png": {
+      "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+      "nonblack": true
+    },
+    "boot.png": {
+      "sha256": "bdbc0fe54f1507b3e7c9e6452803dcc4f49589984bbb5ab48f3a99e4a4987d41",
+      "nonblack": true
+    }
+  },
+  "approved": true,
+  "attempt": "fhnx_pinyon_pipeline-constants-verified-constants-verified-high-pgo-01"
+}

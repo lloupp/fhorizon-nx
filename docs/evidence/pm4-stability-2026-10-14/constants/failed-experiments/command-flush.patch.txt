@@ -1,0 +1,15 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 6ba61f0..31ed87d 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -166,7 +166,9 @@ void DekoBackend::resolve(Image s, Image d) {
+ }
+ void DekoBackend::submit() {
+     require(recording_,"submit without begin");
+-    dkQueueSubmitCommands(queue_,dkCmdBufFinishList(commands_)); dkQueueWaitIdle(queue_); recording_=false;
++    auto list=dkCmdBufFinishList(commands_);
++    armDCacheFlush(dkMemBlockGetCpuAddr(command_memory_),256*1024);
++    dkQueueSubmitCommands(queue_,list); dkQueueWaitIdle(queue_); recording_=false;
+ }
+ void DekoBackend::copy(Image s,Image d) {
+     recording(); auto& src=images_.get(s);auto& dst=images_.get(d);

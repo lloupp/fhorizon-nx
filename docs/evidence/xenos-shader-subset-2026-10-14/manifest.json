@@ -1,0 +1,19 @@
+{
+  "pinyon_commit": "a72a92a5f215a32875386b824b8b6f0f34e1caf9",
+  "shiftglue_commit": "1e8968f712824b97d4f4330c5a22389c4c8be1b5",
+  "stage": "pixel",
+  "constant_binding": 1,
+  "constant_count": 4,
+  "programs": [
+    {
+      "xenos_pixel0.ucode.be": "aa308efa69465bb81f907737ef0a725d7d29b4ca6b0078a20dc76ce11fb869ae",
+      "xenos_pixel0_fsh.glsl": "d821a9b452c2bea71b5a43e5d6817a4a2d42d352e1d7fd2d4e68da17b2e61462",
+      "xenos_pixel0_fsh.bin": "e905318df2992dea6c2429b386b9d68866c6b351b29593d7d4d91b1abbceadc9"
+    },
+    {
+      "xenos_pixel1.ucode.be": "302bf61443523ab5913cfb0c1d362f96e180e66cc43d708987d32cdd4dab313a",
+      "xenos_pixel1_fsh.glsl": "bba54b85fab5c7a392ac467fb01630709153ba727a171f68a7189f04c74c233a",
+      "xenos_pixel1_fsh.bin": "3c4dbe2f67c91143b41dd0c969fdb792b26f1c0214799a070f609fcf702e6800"
+    }
+  ]
+}

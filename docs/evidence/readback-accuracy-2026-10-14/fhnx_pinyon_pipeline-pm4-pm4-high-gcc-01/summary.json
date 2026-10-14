@@ -1,0 +1,34 @@
+{
+  "nro_sha256": "f3d1ab09eb4b5b547e707e0be6cc7d377c872d49fd85ddd57660c2ba790f4969",
+  "eden_build": "GCC",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 0,
+  "configured_gpu_accuracy": 2,
+  "gpu_accuracy_default": false,
+  "guest_started": true,
+  "last_durable_event": "shutdown",
+  "last_event": "shutdown",
+  "durable_available": true,
+  "pixel_failure": false,
+  "full_pixel_checks_seen": true,
+  "readback_marker_seen": true,
+  "shutdown": true,
+  "input_exit_verified": true,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": 68550656,
+  "captures": {
+    "after-a.png": {
+      "sha256": "fc5cadbe1de4eeb2a718c57f88ee3739317d9dca4e751f52dcb6e626e33da3be",
+      "nonblack": true
+    },
+    "boot.png": {
+      "sha256": "a123b3414ade835a86e71776b80810dbce707fccd6788a07d064981b07adf58e",
+      "nonblack": true
+    }
+  },
+  "approved": true,
+  "attempt": "fhnx_pinyon_pipeline-pm4-pm4-high-gcc-01"
+}

@@ -1,0 +1,23 @@
+#pragma once
+#include "commands.hpp"
+#include <vector>
+namespace fhnx::gpu {
+// Queue-idle batch boundaries release all old snapshots. Within a batch no
+// destination range may be reused, including when the persistent cursor wraps.
+class UniformSnapshots {
+    struct Range{uint32_t begin,end;};
+    uint32_t capacity_,cursor_{};
+    std::vector<Range> active_;
+public:
+    explicit UniformSnapshots(uint32_t capacity):capacity_(capacity){require(capacity && capacity%256==0,"uniform arena alignment");active_.reserve(128);}
+    void begin(){active_.clear();}
+    uint32_t reserve(uint32_t bytes){
+        require(bytes && bytes%4==0 && bytes<=capacity_,"uniform snapshot size");
+        uint32_t padded=(bytes+255)&~255u;
+        uint32_t offset=cursor_<=capacity_-padded?cursor_:0;
+        require(active_.size()<128,"uniform snapshot batch budget");
+        for(auto r:active_)require(offset+padded<=r.begin || offset>=r.end,"uniform arena would overwrite active snapshot");
+        active_.push_back({offset,offset+padded});cursor_=offset+padded;return offset;
+    }
+};
+}

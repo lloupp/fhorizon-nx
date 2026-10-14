@@ -1,0 +1,7 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS scene_shaders_ready
+FHNX_GRAPHICS scene_buffers_ready
+FHNX_GRAPHICS scene_surfaces_ready
+FHNX_GRAPHICS scene_readback blue=348 grass=17547 corner=ff24140a center=ff1f6017
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS frames_submitted

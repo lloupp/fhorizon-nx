@@ -1,0 +1,34 @@
+{
+  "nro_sha256": "fd2cbc8e6210755aee16fe4c12af29df0f60d02bf524cb26952c7474fb11ddef",
+  "eden_build": "GCC",
+  "eden_version": "official 0.2.1",
+  "driver": "llvmpipe 25.2.8",
+  "script_exit": 0,
+  "configured_gpu_accuracy": 2,
+  "gpu_accuracy_default": false,
+  "guest_started": true,
+  "last_durable_event": "shutdown",
+  "last_event": "shutdown",
+  "durable_available": true,
+  "pixel_failure": false,
+  "full_pixel_checks_seen": true,
+  "readback_marker_seen": false,
+  "shutdown": true,
+  "input_exit_verified": true,
+  "process_exit_code": 0,
+  "timeout": false,
+  "signal": null,
+  "process_memory": 68546560,
+  "captures": {
+    "after-a.png": {
+      "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+      "nonblack": true
+    },
+    "boot.png": {
+      "sha256": "b8d5a0ac0b8404ea453d6cd3b003e050ad66cd17e6955ef9c80512a16c92ef46",
+      "nonblack": true
+    }
+  },
+  "approved": true,
+  "attempt": "fhnx_pinyon_pipeline-atlas-diagnostic-atlas-diagnostic-high-gcc-01"
+}

@@ -78,6 +78,7 @@ Shader DekoBackend::shader(const void* data, uint32_t bytes) {
 void DekoBackend::recording() { require(recording_ && ++command_count_ <= 128,"bounded command batch"); }
 DkImageView DekoBackend::view(Image h) { images_.get(h); DkImageView v; dkImageViewDefaults(&v,&resources_[h.slot].image); return v; }
 void DekoBackend::begin() {
+    require(!dkQueueIsInErrorState(queue_),"deko queue in error before begin");
     require(!recording_,"nested begin"); dkQueueWaitIdle(queue_); dkCmdBufClear(commands_);
     dkCmdBufAddMemory(commands_,command_memory_,0,256*1024);
     color_={}; depth_={}; sampled_={}; vertex_buffer_={};vertex_count_=0;descriptor_cursor_=0;command_count_=0; recording_=true;
@@ -138,6 +139,8 @@ void DekoBackend::draw(const Draw& d) {
     DkColorWriteState write; dkColorWriteStateDefaults(&write); if(!d.color_write) dkColorWriteStateSetMask(&write,0,0);
     dkCmdBufBindColorWriteState(commands_,&write);
     DkDepthStencilState ds; dkDepthStencilStateDefaults(&ds);
+    require(d.depth_compare==DepthCompare::native_default || d.depth_compare==DepthCompare::less,"unsupported depth compare");
+    if(d.depth_compare==DepthCompare::less)ds.depthCompareOp=DkCompareOp_Less;
     ds.depthTestEnable=d.depth_test; ds.depthWriteEnable=d.depth_write;
     ds.stencilTestEnable=d.stencil!=Stencil::disabled;
     if(d.stencil==Stencil::equal) {
@@ -165,6 +168,7 @@ void DekoBackend::resolve(Image s, Image d) {
 void DekoBackend::submit() {
     require(recording_,"submit without begin");
     dkQueueSubmitCommands(queue_,dkCmdBufFinishList(commands_)); dkQueueWaitIdle(queue_); recording_=false;
+    require(!dkQueueIsInErrorState(queue_),"deko queue in error after submit/wait");
 }
 void DekoBackend::copy(Image s,Image d) {
     recording(); auto& src=images_.get(s);auto& dst=images_.get(d);
@@ -173,6 +177,13 @@ void DekoBackend::copy(Image s,Image d) {
     require(src.desc.width==dst.desc.width && src.desc.height==dst.desc.height && s.slot!=d.slot,"copy dimensions/feedback");
     auto sv=view(s),dv=view(d);DkImageRect rect={0,0,0,src.desc.width,src.desc.height,1};
     dkCmdBufCopyImage(commands_,&sv,&rect,&dv,&rect,0);
+}
+void DekoBackend::copyRegion(Image s,Image d,CopyRegion r) {
+    recording();auto& src=images_.get(s);auto& dst=images_.get(d);
+    require(src.usage==Usage::copy_source && dst.usage==Usage::copy_dest && s.slot!=d.slot,"region copy states/feedback");
+    validateCopyRegion(src.desc,dst.desc,r);auto sv=view(s),dv=view(d);
+    DkImageRect from={r.source_x,r.source_y,0,r.width,r.height,1},to={r.dest_x,r.dest_y,0,r.width,r.height,1};
+    dkCmdBufCopyImage(commands_,&sv,&from,&dv,&to,0);
 }
 std::vector<uint32_t> DekoBackend::readback(Image h) {
     require(!recording_ && images_.get(h).usage==Usage::readback,"readback state");
@@ -184,7 +195,8 @@ std::vector<uint32_t> DekoBackend::readback(Image h) {
     begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem),0,0};
     dkCmdBufCopyImageToBuffer(commands_,&v,&rect,&copy,0);
     dkCmdBufBarrier(commands_,DkBarrier_Full,0); submit();
-    std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);return pixels;
+    std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);
+    return pixels;
 }
 DkSwapchain DekoBackend::swapchain(Image a,Image b) {
     require(!recording_ && !swap_,"one swapchain, outside recording");

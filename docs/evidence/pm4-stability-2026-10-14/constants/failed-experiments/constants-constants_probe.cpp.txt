@@ -1,0 +1,61 @@
+#include "deko_backend.hpp"
+#include "pm4_executor.hpp"
+#include "pm4_fixture.hpp"
+#include <switch.h>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include "buffer_vsh_bin.h"
+#include "pinyon_sample_bin.h"
+using namespace fhnx::gpu;using namespace rex::graphics;
+extern "C" {u32 __nx_heap_size=64*1024*1024;}
+static FILE* log_file;
+static void trace(const char* s){char b[320];int n=snprintf(b,sizeof(b),"FHNX_GRAPHICS %s\n",s);svcOutputDebugString(b,n);if(log_file){fwrite(b,1,n,log_file);fflush(log_file);}}
+static void gate(bool b,const char* s){if(!b)throw std::runtime_error(std::string("gate_failed: ")+s);trace(s);}
+struct Vertex{float p[3],color[4],uv[2];};
+struct alignas(16) Constants{float matrix[16],tint[4];};
+static Constants constant(float r,float g){Constants c{};for(int i=0;i<4;++i)c.matrix[i*5]=1;c.tint[0]=r;c.tint[1]=g;c.tint[3]=1;return c;}
+int main(){log_file=fopen("sdmc:/fhnx_constants_trace.log","w");trace("boot");try{
+ DekoBackend gpu(16*1024*1024);PinyonSurfaces surfaces(gpu,4*1024*1024);
+ auto vs=gpu.shader(buffer_vsh_bin,buffer_vsh_bin_size),fs=gpu.shader(pinyon_sample_bin,pinyon_sample_bin_size);
+ Vertex vertices[12]{};for(unsigned q=0;q<3;++q){float center=float(q-0)*.66f-.66f;
+  float x[]={center-.22f,center+.22f,center+.22f,center-.22f},y[]={-.5f,-.5f,.5f,.5f};
+  for(unsigned i=0;i<4;++i){auto& v=vertices[q*4+i];v.p[0]=x[i];v.p[1]=y[i];v.p[2]=.2f;for(float& f:v.color)f=1;}}
+ auto vb=gpu.buffer(BufferKind::vertex,sizeof(vertices),vertices);Buffer ib[3];
+ Pm4Frontend frontend;std::vector<Pm4Frontend::IndexedDraw> draws;Pm4DrawExecutor executor(surfaces);
+#ifdef FHNX_CONSTANTS_MSAA4
+ constexpr unsigned msaa=2;
+#else
+ constexpr unsigned msaa=0;
+#endif
+ for(unsigned q=0;q<3;++q){uint16_t indices[]={uint16_t(q*4),uint16_t(q*4+1),uint16_t(q*4+2),uint16_t(q*4),uint16_t(q*4+2),uint16_t(q*4+3)};
+  ib[q]=gpu.buffer(BufferKind::index16,sizeof(indices),indices);auto bytes=indexedPm4Fixture(320,180,0x1000+q*0x100,6,msaa);
+  std::memset(bytes.data()+36,0,4);auto d=frontend.decode(bytes);draws.push_back(d[0]);executor.bindIndices(d[0].address,ib[q],sizeof(indices),xenos::Endian::k8in16);}
+ executor.prepare(draws);auto target=draws[0].color;
+ auto resolved=Fh1SurfaceKey::Color(1536,Fh1PitchTiles(320,0),0,xenos::ColorRenderTargetFormat::k_8_8_8_8,false);
+ if(msaa)surfaces.acquire(resolved,320,180);
+ auto white=gpu.create({8,8});uint32_t texture[64];for(auto& p:texture)p=0xffffffff;gpu.uploadRGBA8(white,texture,sizeof(texture));
+ auto a=constant(1,0),b=constant(0,.25f);auto ua=gpu.buffer(BufferKind::uniform,sizeof(a),&a),ub=gpu.buffer(BufferKind::uniform,sizeof(b),&b);
+ VertexLayout layout{sizeof(Vertex),3,{{{0,3},{12,4},{28,2}}}};Draw pipeline{vs,fs};
+ auto render=[&]{gpu.begin();surfaces.bind(target);surfaces.clear(.025f,.06f,.12f,1);gpu.vertex(vb,layout);gpu.sample(white);
+  gpu.uniform(ua);executor.issue(draws[0],pipeline);gpu.uniform(ub);executor.issue(draws[1],pipeline);gpu.uniform(ua);executor.issue(draws[2],pipeline);
+  if(msaa)surfaces.resolve(target,resolved);auto key=msaa?resolved:target;surfaces.transition(surfaces.get(key),Usage::readback);gpu.submit();return gpu.readback(surfaces.get(key).image);};
+ const unsigned reference[]={64,128,191,64};unsigned verified=0;
+ for(unsigned phase=0;phase<64;++phase){float g[]={.25f,.5f,.75f,.25f};b=constant(0,g[phase%4]);gpu.update(ub,0,sizeof(b),&b);
+  auto pixels=render();uint32_t left=pixels[90*320+54],middle=pixels[90*320+160],right=pixels[90*320+265];unsigned green=(middle>>8)&255;
+  bool correct=left==0xff0000ff && right==0xff0000ff && (middle&0xffff00ff)==0xff000000 && std::abs(int(green)-int(reference[phase%4]))<=1;
+  char line[256];snprintf(line,sizeof(line),"constants_frame phase=%u msaa=%u A1=%08lx B=%08lx A3=%08lx expected_B_green=%u pixels=%s",phase,1u<<msaa,(unsigned long)left,(unsigned long)middle,(unsigned long)right,reference[phase%4],correct?"pass":"FAIL");trace(line);
+  gate(correct,"constants_frame_reference_pass");++verified;}
+ gate(verified==64,"constants_64_frames_verified");
+ // Present the actual final target with the ordinary texture shader.
+ Vertex screen[]={{{-1,-1,0},{1,1,1,1},{0,1}},{{1,-1,0},{1,1,1,1},{1,1}},{{1,1,0},{1,1,1,1},{1,0}},{{-1,1,0},{1,1,1,1},{0,0}}};
+ uint16_t screen_indices[]={0,1,2,0,2,3};auto svb=gpu.buffer(BufferKind::vertex,sizeof(screen),screen),sib=gpu.buffer(BufferKind::index16,sizeof(screen_indices),screen_indices);
+ Constants id{};for(unsigned i=0;i<4;++i)id.matrix[i*5]=1;for(float& f:id.tint)f=1;auto sub=gpu.buffer(BufferKind::uniform,sizeof(id),&id);
+ Image backs[]={gpu.create({960,540,1,Format::rgba8,true}),gpu.create({960,540,1,Format::rgba8,true})};Usage states[]={Usage::undefined,Usage::undefined};auto swap=gpu.swapchain(backs[0],backs[1]);
+ PadState pad;padConfigureInput(1,HidNpadStyleSet_NpadStandard);padInitializeDefault(&pad);trace("resources_ready");unsigned frames=0;
+ while(appletMainLoop()){padUpdate(&pad);auto down=padGetButtonsDown(&pad);if(down&HidNpadButton_A)trace("a_pressed");if(down&HidNpadButton_Plus){trace("plus_exit");break;}
+  int slot=gpu.acquire(swap);gpu.begin();gpu.transition(backs[slot],states[slot],Usage::target);gpu.target(backs[slot]);gpu.clear(0,0,0,1);gpu.vertex(svb,layout);gpu.uniform(sub);surfaces.sample(msaa?resolved:target);Draw present{vs,fs};present.indices=sib;present.count=6;gpu.draw(present);gpu.transition(backs[slot],Usage::target,Usage::present);gpu.submit();gpu.present(swap,slot,backs[slot]);states[slot]=Usage::present;if(++frames==2)trace("frames_submitted");}
+ u64 ram=0;svcGetInfo(&ram,InfoType_UsedMemorySize,CUR_PROCESS_HANDLE,0);char line[256];snprintf(line,sizeof(line),"telemetry verified=%u frames=%u buffers=%llu images=%llu process_used=%llu",verified,frames,(unsigned long long)gpu.bufferBytes(),(unsigned long long)gpu.imageBytes(),(unsigned long long)ram);trace(line);
+ gpu.destroySwapchain(swap);for(auto h:backs)gpu.destroy(h);surfaces.shutdown();gpu.destroy(white);gpu.destroy(vb);for(auto h:ib)gpu.destroy(h);gpu.destroy(ua);gpu.destroy(ub);gpu.destroy(svb);gpu.destroy(sib);gpu.destroy(sub);gpu.destroy(vs);gpu.destroy(fs);gate(gpu.bufferBytes()==0 && gpu.imageBytes()==0,"constants_resources_reclaimed");
+ }catch(const std::exception& e){trace(e.what());trace("constants_probe_failed");if(log_file)fclose(log_file);return 2;}trace("shutdown");if(log_file)fclose(log_file);return 0;
+}

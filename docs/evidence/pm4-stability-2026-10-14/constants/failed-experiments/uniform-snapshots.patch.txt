@@ -1,0 +1,118 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 6ba61f0..b3aba85 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -16,9 +16,11 @@ DekoBackend::DekoBackend(uint64_t budget) : images_(budget) {
+         queue_=dkQueueCreate(&qm); require(queue_,"deko queue");
+         command_memory_=block(device_,256*1024,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);
+         descriptors_=block(device_,DK_MEMBLOCK_ALIGNMENT,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);
++        constant_memory_=block(device_,64*1024,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);
+         DkCmdBufMaker cm; dkCmdBufMakerDefaults(&cm,device_); commands_=dkCmdBufCreate(&cm); require(commands_,"deko commands");
+     } catch (...) {
+         if(commands_) dkCmdBufDestroy(commands_);
++        if(constant_memory_) dkMemBlockDestroy(constant_memory_);
+         if(descriptors_) dkMemBlockDestroy(descriptors_);
+         if(command_memory_) dkMemBlockDestroy(command_memory_);
+         if(queue_) dkQueueDestroy(queue_);
+@@ -33,6 +35,7 @@ DekoBackend::~DekoBackend() {
+     for(auto& p:programs_) if(p.memory) dkMemBlockDestroy(p.memory);
+     for(auto& b:buffers_) if(b.memory) dkMemBlockDestroy(b.memory);
+     if(readback_memory_)dkMemBlockDestroy(readback_memory_);
++    dkMemBlockDestroy(constant_memory_);
+     for(auto& r:resources_) if(r.memory) dkMemBlockDestroy(r.memory);
+     dkMemBlockDestroy(descriptors_); dkMemBlockDestroy(command_memory_);
+     dkQueueDestroy(queue_); dkDeviceDestroy(device_);
+@@ -79,6 +82,7 @@ void DekoBackend::recording() { require(recording_ && ++command_count_ <= 128,"b
+ DkImageView DekoBackend::view(Image h) { images_.get(h); DkImageView v; dkImageViewDefaults(&v,&resources_[h.slot].image); return v; }
+ void DekoBackend::begin() {
+     require(!recording_,"nested begin"); dkQueueWaitIdle(queue_); dkCmdBufClear(commands_);
++    constant_snapshots_.begin();
+     dkCmdBufAddMemory(commands_,command_memory_,0,256*1024);
+     color_={}; depth_={}; sampled_={}; vertex_buffer_={};vertex_count_=0;descriptor_cursor_=0;command_count_=0; recording_=true;
+ }
+@@ -209,13 +213,16 @@ Buffer DekoBackend::buffer(BufferKind kind,uint32_t size,const void* data) {
+     require(!recording_ && size && size<=4*1024*1024,"buffer size/state");
+     require(kind==BufferKind::vertex || kind==BufferKind::index16 || kind==BufferKind::uniform,"buffer kind");
+     require(kind!=BufferKind::index16 || size%2==0,"index alignment");
+-    require(kind!=BufferKind::uniform || size<=65536,"uniform size");
++    require(kind!=BufferKind::uniform || (size<=65536 && size%4==0),"uniform size/alignment");
+     uint32_t padded=align(size,DK_MEMBLOCK_ALIGNMENT);
+     require(padded<=8*1024*1024-buffer_bytes_,"buffer budget exceeded");
++    std::vector<uint8_t> constants;
++    if(kind==BufferKind::uniform){constants.resize(size);if(data)std::memcpy(constants.data(),data,size);}
+     for(uint32_t i=0;i<buffers_.size();++i)if(!buffers_[i].memory){
+         auto& b=buffers_[i];b.memory=block(device_,padded,DkMemBlockFlags_CpuUncached|DkMemBlockFlags_GpuCached);b.size=size;b.kind=kind;
+         std::memset(dkMemBlockGetCpuAddr(b.memory),0,padded);
+         if(data)std::memcpy(dkMemBlockGetCpuAddr(b.memory),data,size);
++        b.constants=std::move(constants);
+         buffer_bytes_+=padded;return {i,b.generation};
+     }
+     throw std::runtime_error("buffer slots exhausted");
+@@ -223,11 +230,14 @@ Buffer DekoBackend::buffer(BufferKind kind,uint32_t size,const void* data) {
+ void DekoBackend::update(Buffer h,uint32_t offset,uint32_t bytes,const void* data) {
+     require(!recording_ && data,"buffer update during recording/null source");auto& b=storage(h);
+     require(offset<=b.size && bytes<=b.size-offset,"buffer update bounds");
+-    dkQueueWaitIdle(queue_);std::memcpy(static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+offset,data,bytes);
++    dkQueueWaitIdle(queue_);
++    if(b.kind==BufferKind::uniform)std::memcpy(b.constants.data()+offset,data,bytes);
++    else std::memcpy(static_cast<uint8_t*>(dkMemBlockGetCpuAddr(b.memory))+offset,data,bytes);
+ }
+ void DekoBackend::destroy(Buffer h) {
+     require(!recording_,"buffer destroy during recording");auto& b=storage(h);dkQueueWaitIdle(queue_);
+     dkMemBlockDestroy(b.memory);buffer_bytes_-=align(b.size,DK_MEMBLOCK_ALIGNMENT);b.memory=nullptr;++b.generation;
++    std::vector<uint8_t>().swap(b.constants);
+ }
+ void DekoBackend::destroy(Shader h) {
+     require(!recording_ && h.slot<programs_.size(),"shader destroy state");auto& p=programs_[h.slot];
+@@ -246,12 +256,17 @@ void DekoBackend::vertex(Buffer h,const VertexLayout& layout) {
+ }
+ void DekoBackend::uniform(Buffer h,uint32_t binding) {
+     recording();auto& b=storage(h);require(b.kind==BufferKind::uniform && binding<8,"uniform binding");
+-    // Snapshot constants into the GPU command stream. Their backing allocation
+-    // is reused only after submit/wait, and each bind records its own values.
+-    dkCmdBufPushConstants(commands_,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT),0,b.size,dkMemBlockGetCpuAddr(b.memory));
++    // Immutable CPU payload, distinct GPU destination for every bind, including
++    // A/B/A of the same handle. No GPU-written backing store is read by the CPU.
++    require(b.constants.size()==b.size,"uniform shadow size");
++    auto address=dkMemBlockGetGpuAddr(constant_memory_)+constant_snapshots_.reserve(b.size);
++    auto padded=align(b.size,DK_UNIFORM_BUF_ALIGNMENT);
++    // deko's inline constant write limit is 0x7FFC, smaller than a 64 KiB UBO.
++    for(uint32_t offset=0;offset<b.size;){uint32_t chunk=std::min<uint32_t>(b.size-offset,0x7ffc);
++        dkCmdBufPushConstants(commands_,address,padded,offset,chunk,b.constants.data()+offset);offset+=chunk;}
+     dkCmdBufBarrier(commands_,DkBarrier_Full,DkInvalidateFlags_Shader);
+-    dkCmdBufBindUniformBuffer(commands_,DkStage_Vertex,binding,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
+-    dkCmdBufBindUniformBuffer(commands_,DkStage_Fragment,binding,dkMemBlockGetGpuAddr(b.memory),align(b.size,DK_UNIFORM_BUF_ALIGNMENT));
++    dkCmdBufBindUniformBuffer(commands_,DkStage_Vertex,binding,address,padded);
++    dkCmdBufBindUniformBuffer(commands_,DkStage_Fragment,binding,address,padded);
+ }
+ void DekoBackend::uploadRGBA8(Image h,const void* data,uint32_t bytes) {
+     require(!recording_ && data,"upload state/data");auto d=images_.get(h).desc;
+diff --git a/switch/adapter/deko_backend.hpp b/switch/adapter/deko_backend.hpp
+index 77d0228..04781fd 100644
+--- a/switch/adapter/deko_backend.hpp
++++ b/switch/adapter/deko_backend.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "commands.hpp"
++#include "uniform_snapshots.hpp"
+ #include <deko3d.h>
+ #include <vector>
+ 
+@@ -7,7 +8,7 @@ namespace fhnx::gpu {
+ class DekoBackend final : public Commands {
+     struct Resource { DkImage image{}; DkMemBlock memory{}; };
+     struct Program { DkShader shader{}; DkMemBlock memory{}; DkStage stage{}; uint32_t generation{1}; };
+-    struct Storage {DkMemBlock memory{};uint32_t size{},generation{1};BufferKind kind{};};
++    struct Storage {DkMemBlock memory{};uint32_t size{},generation{1};BufferKind kind{};std::vector<uint8_t> constants;};
+     Images images_;
+     std::array<Resource, Images::capacity> resources_{};
+     std::vector<Program> programs_;
+@@ -19,6 +20,8 @@ class DekoBackend final : public Commands {
+     DkQueue queue_{};
+     DkCmdBuf commands_{};
+     DkMemBlock command_memory_{}, descriptors_{};
++    DkMemBlock constant_memory_{};
++    UniformSnapshots constant_snapshots_{64*1024};
+     DkMemBlock readback_memory_{};
+     uint32_t readback_capacity_{};
+     DkSwapchain swap_{};

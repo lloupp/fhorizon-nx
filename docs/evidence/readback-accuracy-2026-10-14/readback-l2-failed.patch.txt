@@ -1,0 +1,18 @@
+diff --git a/switch/adapter/deko_backend.cpp b/switch/adapter/deko_backend.cpp
+index 4a939de..12c1609 100644
+--- a/switch/adapter/deko_backend.cpp
++++ b/switch/adapter/deko_backend.cpp
+@@ -194,7 +194,12 @@ std::vector<uint32_t> DekoBackend::readback(Image h) {
+     auto mem=readback_memory_;
+     begin(); auto v=view(h); DkImageRect rect={0,0,0,d.width,d.height,1}; DkCopyBuf copy={dkMemBlockGetGpuAddr(mem),0,0};
+     dkCmdBufCopyImageToBuffer(commands_,&v,&rect,&copy,0);
+-    dkCmdBufBarrier(commands_,DkBarrier_Full,0); submit();
++    #ifdef FHNX_READBACK_L2_EXPERIMENT
++    dkCmdBufBarrier(commands_,DkBarrier_Full,DkInvalidateFlags_L2Cache);
++#else
++    dkCmdBufBarrier(commands_,DkBarrier_Full,0);
++#endif
++    submit();
+     std::memcpy(pixels.data(),dkMemBlockGetCpuAddr(mem),pixels.size()*4);
+     return pixels;
+ }

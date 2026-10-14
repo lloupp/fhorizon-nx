@@ -1,0 +1,207 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS fixture_uniform_A_B_A
+FHNX_GRAPHICS telemetry_initial process_used=68546560 images=659456 buffers=24576
+FHNX_GRAPHICS constants_frame phase=0 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=1 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=2 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=3 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=4 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=5 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=6 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=7 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=8 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=9 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=10 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=11 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=12 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=13 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=14 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=15 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=16 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=17 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=18 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=19 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=20 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=21 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=22 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=23 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=24 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=25 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=26 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=27 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=28 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=29 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=30 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=31 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=32 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=33 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=34 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=35 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=36 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=37 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=38 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=39 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=40 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=41 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=42 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=43 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=44 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=45 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=46 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=47 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=48 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=49 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=50 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=51 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=52 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=53 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=54 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=55 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=56 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=57 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=58 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=59 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=60 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=61 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=62 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=63 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=64 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=65 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=66 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=67 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=68 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=69 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=70 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=71 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=72 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=73 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=74 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=75 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=76 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=77 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=78 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=79 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=80 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=81 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=82 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=83 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=84 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=85 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=86 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=87 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=88 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=89 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=90 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=91 msaa=1 A1=ff0000ff B=ff004000 A3=ff0000ff expected_B_green=64 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=92 msaa=1 A1=ff0000ff B=ff006000 A3=ff0000ff expected_B_green=96 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=93 msaa=1 A1=ff0000ff B=ff009f00 A3=ff0000ff expected_B_green=159 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=94 msaa=1 A1=ff0000ff B=ff00df00 A3=ff0000ff expected_B_green=223 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_frame phase=95 msaa=1 A1=ff0000ff B=ff002000 A3=ff0000ff expected_B_green=32 pixels=pass
+FHNX_GRAPHICS constants_frame_reference_pass
+FHNX_GRAPHICS constants_sequence_summary checked=96 passed=96 mismatches=0
+FHNX_GRAPHICS constants_96_frames_verified
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS frames_submitted
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS plus_exit
+FHNX_GRAPHICS telemetry verified=96 frames=582 buffers=36864 images=5574656 process_used=68546560
+FHNX_GRAPHICS constants_resources_reclaimed
+FHNX_GRAPHICS constants_final_reference_pass
+FHNX_GRAPHICS shutdown

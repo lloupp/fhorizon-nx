@@ -8,12 +8,14 @@ namespace fhnx::gpu {
 enum class Format { rgba8, z24s8 };
 enum class Usage { undefined, target, sampled, resolve_source, resolve_dest, readback, present, copy_source, copy_dest };
 enum class Stencil { disabled, replace, equal };
+enum class DepthCompare { native_default, less };
 struct ImageDesc {
     uint32_t width{}, height{}, samples{1};
     Format format{Format::rgba8};
     bool present{};
 };
 struct Image { uint32_t slot{UINT32_MAX}, generation{}; };
+struct CopyRegion {uint32_t source_x{},source_y{},dest_x{},dest_y{},width{},height{};};
 struct Shader { uint32_t slot{UINT32_MAX}, generation{1}; };
 enum class BufferKind {vertex, index16, uniform};
 struct Buffer {uint32_t slot{UINT32_MAX},generation{};};
@@ -30,8 +32,14 @@ struct Draw {
     uint8_t reference{1};
     Buffer indices{};
     int32_t vertex_offset{};
+    DepthCompare depth_compare{DepthCompare::native_default};
 };
 inline void require(bool ok, const char* why) { if (!ok) throw std::runtime_error(why); }
+inline void validateCopyRegion(ImageDesc s,ImageDesc d,CopyRegion r) {
+    require(s.format==Format::rgba8 && d.format==Format::rgba8 && s.samples==1 && d.samples==1,"region copy format/samples");
+    require(r.width && r.height && r.source_x<=s.width && r.source_y<=s.height && r.dest_x<=d.width && r.dest_y<=d.height &&
+            r.width<=s.width-r.source_x && r.height<=s.height-r.source_y && r.width<=d.width-r.dest_x && r.height<=d.height-r.dest_y,"region copy bounds");
+}
 
 // Shared validation, also run on host. Destruction invalidates all old handles.
 class Images {
@@ -59,6 +67,10 @@ public:
     Entry& get(Image h) {
         require(h.slot < capacity, "image slot"); auto& e=entries[h.slot];
         require(e.live && e.generation == h.generation, "stale image handle"); return e;
+    }
+    const Entry& get(Image h) const {
+        require(h.slot < capacity, "image slot");auto& e=entries[h.slot];
+        require(e.live && e.generation==h.generation,"stale image handle");return e;
     }
     void erase(Image h) { auto& e=get(h); used-=e.bytes; e.live=false; ++e.generation; }
     void transition(Image h, Usage expected, Usage next) {
@@ -89,6 +101,7 @@ public:
     virtual ~Commands() = default;
     virtual Image create(ImageDesc) = 0;
     virtual void destroy(Image) = 0;
+    virtual ImageDesc imageDesc(Image) const {throw std::runtime_error("image metadata unsupported by backend");}
     // DKSH for Switch; shader conversion from Xenos/SPIR-V is a separate boundary.
     virtual Shader shader(const void*, uint32_t) = 0;
     virtual void begin() = 0;
@@ -106,6 +119,7 @@ public:
     virtual void draw(const Draw&) = 0;
     virtual void resolve(Image source, Image dest) = 0;
     virtual void copy(Image source, Image dest) = 0;
+    virtual void copyRegion(Image,Image,CopyRegion){throw std::runtime_error("region copy unsupported by backend");}
     virtual uint64_t imageBytes() const = 0;
     // Submit + wait before command storage/resource reuse in this first bounded backend.
     virtual void submit() = 0;

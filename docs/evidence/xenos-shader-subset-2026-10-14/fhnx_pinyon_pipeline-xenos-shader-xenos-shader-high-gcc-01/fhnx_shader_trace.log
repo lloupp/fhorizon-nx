@@ -1,0 +1,111 @@
+FHNX_GRAPHICS boot
+FHNX_GRAPHICS xenos_microcode_glsl_bundle_identity_pass
+FHNX_GRAPHICS xenos_unsupported_mad_rejected
+FHNX_GRAPHICS xenos_unimplemented_vertex_shader_rejected
+FHNX_GRAPHICS xenos_relative_constants_rejected
+FHNX_GRAPHICS xenos_shader_pixel frame=0 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=0 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=0 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=1 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=1 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=1 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=2 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=2 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=2 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=3 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=3 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=3 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=4 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=4 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=4 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=5 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=5 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=5 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=6 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=6 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=6 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=7 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=7 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=7 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=8 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=8 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=8 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=9 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=9 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=9 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=10 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=10 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=10 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=11 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=11 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=11 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=12 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=12 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=12 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=13 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=13 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=13 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=14 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=14 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=14 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=15 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=15 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=15 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=16 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=16 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=16 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=17 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=17 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=17 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=18 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=18 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=18 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=19 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=19 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=19 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=20 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=20 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=20 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=21 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=21 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=21 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=22 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=22 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=22 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=23 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=23 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=23 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=24 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=24 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=24 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=25 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=25 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=25 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=26 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=26 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=26 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=27 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=27 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=27 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=28 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=28 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=28 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=29 draw=0 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=29 draw=1 program=1 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=29 draw=2 program=0 actual=ffffff00 expected=ffffff00 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=30 draw=0 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=30 draw=1 program=1 actual=ff406060 expected=ff406060 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=30 draw=2 program=0 actual=ff40409f expected=ff40409f pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=31 draw=0 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=31 draw=1 program=1 actual=ff304040 expected=ff304040 pixels=pass
+FHNX_GRAPHICS xenos_shader_pixel frame=31 draw=2 program=0 actual=ff302080 expected=ff302080 pixels=pass
+FHNX_GRAPHICS xenos_shader_32_frames_verified
+FHNX_GRAPHICS resources_ready
+FHNX_GRAPHICS frames_submitted
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS a_pressed
+FHNX_GRAPHICS plus_exit
+FHNX_GRAPHICS telemetry process_used=69062656 images=5570560 buffers=32768 frames=73 shader_frames=32
+FHNX_GRAPHICS xenos_shader_resources_reclaimed
+FHNX_GRAPHICS shutdown
